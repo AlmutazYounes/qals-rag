@@ -1,0 +1,130 @@
+{
+  "scifact": {
+    "LangChain Recursive 500c": {
+      "ndcg": 0.6883,
+      "recall": 0.7888,
+      "tokens": 239.6
+    },
+    "LangChain Recursive 1000c": {
+      "ndcg": 0.6715,
+      "recall": 0.7866,
+      "tokens": 382.7
+    },
+    "LangChain ParentDocument": {
+      "ndcg": 0.6843,
+      "recall": 0.8107,
+      "tokens": 1145.2
+    },
+    "BM25": {
+      "ndcg": 0.6995,
+      "recall": 0.8232,
+      "tokens": 1142.7
+    },
+    "LangChain Hybrid RRF": {
+      "ndcg": 0.7234,
+      "recall": 0.8754,
+      "tokens": 1134.6
+    },
+    "QALS B=150": {
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 136.1,
+      "covered": 0.5733
+    },
+    "conformal": {
+      "alpha=0.2": {
+        "B_hat": 2000,
+        "mean_B_star": 776.4,
+        "coverage": 0.8733,
+        "target": 0.8,
+        "metrics": {
+          "ndcg": 0.6955,
+          "recall": 0.8184,
+          "ndcg_packed": 0.6955,
+          "recall_packed": 0.8184,
+          "tokens": 1903.1
+        }
+      },
+      "alpha=0.1": {
+        "B_hat": 2000,
+        "mean_B_star": 776.4,
+        "coverage": 0.8733,
+        "target": 0.9,
+        "metrics": {
+          "ndcg": 0.6955,
+          "recall": 0.8184,
+          "ndcg_packed": 0.6955,
+          "recall_packed": 0.8184,
+          "tokens": 1903.1
+        }
+      }
+    },
+    "ablations": {}
+  },
+  "nfcorpus": {
+    "LangChain Recursive 500c": {
+      "ndcg": 0.3185,
+      "recall": 0.1544,
+      "tokens": 198.1
+    },
+    "LangChain Recursive 1000c": {
+      "ndcg": 0.3156,
+      "recall": 0.1624,
+      "tokens": 281.4
+    },
+    "LangChain ParentDocument": {
+      "ndcg": 0.3479,
+      "recall": 0.1736,
+      "tokens": 1206.7
+    },
+    "BM25": {
+      "ndcg": 0.3403,
+      "recall": 0.1758,
+      "tokens": 1180.0
+    },
+    "LangChain Hybrid RRF": {
+      "ndcg": 0.369,
+      "recall": 0.1841,
+      "tokens": 1182.6
+    },
+    "QALS B=150": {
+      "ndcg": 0.375,
+      "recall": 0.1815,
+      "ndcg_packed": 0.1629,
+      "recall_packed": 0.0716,
+      "tokens": 138.2,
+      "covered": 0.53
+    },
+    "conformal": {
+      "alpha=0.2": {
+        "B_hat": 1484,
+        "mean_B_star": 657.7,
+        "coverage": 0.75,
+        "target": 0.8,
+        "metrics": {
+          "ndcg": 0.375,
+          "recall": 0.1815,
+          "ndcg_packed": 0.375,
+          "recall_packed": 0.1815,
+          "tokens": 1367.7
+        }
+      },
+      "alpha=0.1": {
+        "B_hat": 2000,
+        "mean_B_star": 657.7,
+        "coverage": 0.77,
+        "target": 0.9,
+        "metrics": {
+          "ndcg": 0.375,
+          "recall": 0.1815,
+          "ndcg_packed": 0.375,
+          "recall_packed": 0.1815,
+          "tokens": 1751.4
+        }
+      }
+    },
+    "ablations": {}
+  }
+}
