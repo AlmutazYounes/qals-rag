@@ -47,36 +47,17 @@ class QALSRetriever:
         self.doc_sentences: List[List[Dict[str, Any]]] = []
         self.is_indexed: bool = False
 
-    def index_documents(self, documents: List[Dict[str, Any]], show_progress: bool = False):
+    def index_documents(self, documents: List[Dict[str, Any]], show_progress: bool = False, batch_size: int = 256):
         """
-        Indexes a list of documents:
-        documents: list of dicts with 'id', 'text', and optional 'title'
+        Indexes documents via high-speed batched encoding.
         """
-        self.doc_ids = []
-        self.doc_titles = []
-        self.doc_texts = []
-        coarse_list = []
-        self.doc_sentence_vectors = []
-        self.doc_sentences = []
-
-        total = len(documents)
-        for idx, doc in enumerate(documents):
-            doc_id = str(doc.get("id", doc.get("_id", f"doc_{idx}")))
-            title = doc.get("title", "")
-            text = doc.get("text", "")
-
-            enc_res = self.encoder.encode_document(doc_id, title, text)
-            self.doc_ids.append(doc_id)
-            self.doc_titles.append(title)
-            self.doc_texts.append(text)
-            coarse_list.append(enc_res["doc_vector"])
-            self.doc_sentence_vectors.append(enc_res["sentence_vectors"])
-            self.doc_sentences.append(enc_res["sentences"])
-
-            if show_progress and (idx + 1) % 100 == 0:
-                print(f"Indexed {idx + 1}/{total} documents...")
-
-        self.coarse_vectors = np.array(coarse_list, dtype=np.float32)
+        enc_res = self.encoder.encode_corpus_batch(documents, batch_size=batch_size)
+        self.doc_ids = enc_res["doc_ids"]
+        self.doc_titles = enc_res["doc_titles"]
+        self.doc_texts = enc_res["doc_texts"]
+        self.coarse_vectors = enc_res["coarse_vectors"]
+        self.doc_sentence_vectors = enc_res["doc_sentence_vectors"]
+        self.doc_sentences = enc_res["doc_sentences"]
         self.is_indexed = True
 
     def retrieve(

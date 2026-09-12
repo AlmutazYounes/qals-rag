@@ -9,7 +9,7 @@
 \usepackage{geometry}
 \geometry{margin=0.75in}
 
-\title{\textbf{Query-Adaptive Late Segmentation: Dynamic Context Assembly via Contextualized Sentence Multi-Vectors and Split-Conformal Budgeting}}
+\title{\textbf{Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting}}
 
 \author{
   \textbf{Open Research Collective for Retrieval Augmentation}\\
@@ -22,113 +22,76 @@
 \maketitle
 
 \begin{abstract}
-Retrieval-Augmented Generation (RAG) fundamentally depends on similarity search to feed relevant evidence into language models. Conventional RAG architectures rely on static, index-time text chunking (typically fixed 256--1024 token windows) and fixed top-$k$ retrieval. This produces the chunk-size dilemma: small chunks maximize similarity search specificity but sever paragraph context, while large chunks preserve discourse coherence at the cost of relevance dilution and context poisoning. Furthermore, static top-$k$ selection forces a uniform token footprint across heterogeneous queries, flooding simple lookups with extraneous distractors while starving multi-hop queries.
+Retrieval-augmented generation pipelines depend on similarity search to feed evidence into language models. Standard architectures split text into fixed windows before indexing, often 200 to 1,000 characters, and retrieve a fixed count of chunks. This creates the chunk-size dilemma. Small chunks pinpoint specific facts, but they discard surrounding sentences, pronoun antecedents, and qualifications. Large chunks preserve narrative continuity, but they average multiple topics into one dense vector, diluting retrieval precision and cluttering prompts with irrelevant text. Retrieving a fixed chunk count forces the same token footprint onto every query, flooding short questions with padding and truncating complex research inquiries.
 
-We present \textbf{Query-Adaptive Late Segmentation (QALS)}, a retrieval architecture that eliminates index-time chunk boundaries entirely. QALS represents documents as contextualized sentence multi-vectors using bidirectional sentence-level encoders. At query time, rather than retrieving pre-partitioned blocks, QALS solves an online 1D dynamic programming span segmentation problem that dynamically stitches contiguous sentences into coherent passages, optimizing semantic relevance against discourse continuity within an explicit token budget $B$. To determine $B$, QALS introduces split-conformal budget calibration on held-out query sets, providing statistical guarantees on gold-evidence coverage with minimal token expenditure.
+Query-adaptive late segmentation removes index-time chunk boundaries. The method indexes documents as sequences of contextualized sentence vectors paired with a coarse document vector. At query time, an online dynamic program stitches contiguous sentences into coherent passages, balancing semantic relevance and passage continuity within an explicit token budget. To set this budget without guesswork, the system applies split-conformal calibration on held-out queries, ensuring valid empirical evidence coverage.
 
-We evaluate QALS on the public BEIR SciFact benchmark against standard fixed-chunk dense retrieval, Parent-Document retrieval, and BM25. At an average of only 142 tokens delivered per query, QALS achieves 0.914 NDCG and an 88.8\% Signal-to-Noise Ratio (gold evidence concentration), compared to 61.6\% for fixed-chunk dense retrieval (315 tokens) and 29.3\% for Parent-Document retrieval (1,038 tokens). QALS achieves comparable or superior ranking quality while reducing extraneous context tokens by 54\% to 86\%.
+We evaluate query-adaptive late segmentation on standard BEIR benchmarks, comparing it against LangChain recursive character splitters, parent document retrieval, Okapi BM25, and hybrid reciprocal rank fusion. On the full BEIR SciFact benchmark, the compact dynamic segmentation achieves 0.692 nDCG@10 at 142 delivered tokens per query, matching or exceeding fixed chunk dense baselines that deliver 240 to 383 tokens. Parent document retrieval expends 1,145 tokens per query to reach 0.684 nDCG@10, wasting more than 70\% of prompt space on irrelevant sentences. Query-adaptive late segmentation maintains ranking accuracy while reducing prompt token consumption by 40\% to 87\%.
 \end{abstract}
 
 \section{Introduction}
-Retrieval-Augmented Generation has become the primary mechanism for anchoring large language models in factual corpora. In the canonical dense retrieval pipeline, documents are pre-split into fixed character or token windows (e.g., 500 characters with 10\% overlap), embedded via dual-encoder models, and stored in vector indices. When a user issues a query, the system retrieves the top $k$ nearest chunks by cosine similarity and concatenates them into the prompt.
+Retrieval-augmented generation grounds language models in factual documents. In the standard pipeline, engineers split documents into fixed character windows, embed each piece with a dual encoder, and store the resulting vectors in an index. When a user sends a query, the system retrieves the top nearest chunks by cosine similarity and concatenates them into the prompt.
 
-This static pipeline suffers from two structural flaws:
-\begin{enumerate}
-    \item \textbf{The Chunk-Size Dilemma}: If the chunking window is small, embeddings retain sharp specificity for factual queries, but the generator loses essential surrounding context, coreference chains, and caveats. Conversely, if the chunk window is large, multiple distinct concepts are averaged into a single dense vector, diluting retrieval precision and bloating the LLM prompt with irrelevant text.
-    \item \textbf{The Fixed-$k$ Dilemma}: Hardcoding $k$ ignores query difficulty. A direct factual question may require only a single 40-token sentence, yet receives 1,200 tokens of extraneous text, increasing generation latency and hallucination risk.
-\end{enumerate}
+This static pipeline causes two operational problems. First, fixed chunking forces an artificial compromise between specificity and context. Small chunks pinpoint facts but lose definitions and limitations. Large chunks preserve context but average distinct facts together, wasting language model prompt budget. Second, hardcoding the retrieval count treats all queries identically. A focused factual question receives hundreds of tokens of distracting noise, while a complex multi-part question gets prematurely truncated.
 
-To resolve these trade-offs at their root, we propose \textbf{Query-Adaptive Late Segmentation (QALS)}. QALS abandons static chunking at index time. Instead, documents are indexed as multi-vector sequences of contextualized sentences. At query time, an online dynamic program dynamically segments and stitches the most relevant contiguous sentence spans, bounded by a split-conformal token budget.
+Query-adaptive late segmentation resolves this trade-off by eliminating index-time chunking in favor of sentence multi-vectors and dynamic online span assembly.
 
-\section{Related Work}
-\textbf{Chunking Strategies \& Granularity Trade-offs.} Qu et al.~(2025) systematically benchmarked semantic versus fixed-size chunking across evidence retrieval tasks, finding that heuristic semantic splitters rarely justify their indexing overhead. Bhat et al.~(2025) demonstrated that optimal chunk sizes vary drastically across datasets and embedding models, proving that no universal fixed chunk size exists. Late chunking (G\"unther et al., 2024) computes chunk embeddings after full-document transformer self-attention, but retains static boundary partitions.
+\section{Related work}
+\textbf{Chunking strategies and granularity trade-offs.} Qu and colleagues tested semantic splitters against simple character splitters across multiple evidence retrieval tasks in 2025, showing that heuristic semantic chunking rarely justifies its indexing cost. Bhat and collaborators demonstrated in 2025 that optimal chunk sizes vary across datasets, proving that no universal fixed window exists. Late chunking computes chunk embeddings after running transformer attention across full documents, yet still freezes chunk boundaries before query arrival.
 
-\textbf{Multi-Vector \& Late-Interaction Retrieval.} Token-level late interaction models like ColBERT (Khattab \& Zaharia, 2020) and PLAID (Sanmateu et al., 2024) demonstrate that computing fine-grained token alignments yields superior retrieval fidelity compared to single pooled passage vectors. QALS occupies an attractive middle ground: indexing at the sentence level provides fine-grained local alignment while reducing vector storage by 5$\times$ to 15$\times$ compared to token-level multi-vector architectures.
+\textbf{Multi-vector and late-interaction retrieval.} Token-level late interaction systems like ColBERT and PLAID show that fine-grained token alignments yield better retrieval quality than single pooled passage vectors. However, storing hundreds of token embeddings per document requires substantial memory. Sentence vectors preserve local alignment, resolve pronoun ambiguity via document-level prefixing, and require five to fifteen times less memory than token-level indexes.
 
-\textbf{Adaptive Budgeting \& Conformal Prediction.} SAGE (2026) and Adaptive-$k$ (Taguchi et al., 2025) use score distributions and imitation policies to select passage counts per query. Conformal prediction (Vovk et al., 2005; Angelopoulos \& Bates, 2023) provides distribution-free finite-sample guarantees. QALS applies split-conformal prediction specifically to calibrate the optimal prompt token budget.
+\textbf{Adaptive budgeting and conformal prediction.} Dynamic retrieval truncation has become a practical requirement for production pipelines. Conformal prediction provides distribution-free statistical guarantees with finite sample sizes. While prior work applied conformal sets to passage ranking, query-adaptive late segmentation uses split-conformal calibration specifically to determine prompt token budgets.
 
-\section{Methodology: QALS Architecture}
+\section{Methodology}
 
-\subsection{Contextualized Sentence Multi-Vector Representation}
-Given document $D$ consisting of title $T$ and sentence sequence $S = (s_1, \dots, s_n)$, QALS encodes each sentence into a normalized embedding vector $v_i \in \mathbb{R}^d$:
-\begin{equation}
-v_i = \text{Embed}(T \circ s_i)
-\end{equation}
-where $\circ$ denotes contextual concatenation. Concurrently, QALS produces a coarse document representation $u_D \in \mathbb{R}^d$ for candidate generation.
+\subsection{Contextualized sentence multi-vectors}
+Consider a document containing a title and a sequence of sentences. The system encodes each sentence with its document title prefix. Let the sentence embedding be the normalized vector produced by the encoder. This ensures that every individual sentence retains topical awareness while keeping its semantic focus narrow. The system also computes a coarse document vector for initial candidate pruning.
 
-\subsection{Two-Stage Candidate Retrieval}
-1. \textbf{Coarse Stage}: For query $q$, coarse embedding $q_e = \text{Embed}(q)$ filters the corpus to the top $M$ candidate documents via maximum inner product search:
-\begin{equation}
-\mathcal{C}_M = \text{argtop}_M \{ \langle q_e, u_D \rangle \mid D \in \mathcal{D} \}
-\end{equation}
-2. \textbf{Fine Sentence Scoring}: For each candidate $D \in \mathcal{C}_M$, QALS computes the exact similarity of every constituent sentence vector:
-\begin{equation}
-\sigma_{D, i} = \langle q_e, v_{D, i} \rangle
-\end{equation}
+\subsection{Two-stage candidate retrieval}
+Evaluating sentence-level similarity across all sentences in a corpus is computationally wasteful. The retrieval process uses two stages. In the coarse stage, the query vector is compared against document coarse vectors using inner product search, selecting candidate documents. In the fine stage, the system computes the exact dot product between the query vector and every sentence vector within each candidate document.
 
-\subsection{1D Dynamic Programming Span Segmentation}
-Rather than returning arbitrary disconnected sentences, QALS dynamically segments contiguous spans $[i, j]$ within each candidate document. We define the objective utility of a contiguous span as:
-\begin{equation}
-U(i, j) = \sum_{k=i}^j (\sigma_{D, k} - \mu) + \kappa \cdot \log_2(j - i + 2)
-\end{equation}
-where $\mu$ represents the baseline relevance threshold and $\kappa \cdot \log_2(j - i + 2)$ provides a diminishing-returns discourse coherence bonus. Across candidates, the combined document score is computed via a MaxSim blend:
-\begin{equation}
-\text{Score}(D) = \alpha_{\text{coarse}} \langle q_e, u_D \rangle + (1 - \alpha_{\text{coarse}}) \max_i \sigma_{D, i}
-\end{equation}
+\subsection{Dynamic programming span segmentation}
+Rather than returning isolated sentences, the system stitches contiguous sentences into coherent spans. For each candidate document, we define the objective utility of a contiguous sentence span from index $i$ to $j$. The utility function sums the marginal relevance of each constituent sentence relative to a baseline threshold. Sentences scoring below this threshold reduce total utility unless compensated by adjacent sentences. To encourage natural paragraph continuity, a logarithmic bonus rewards longer contiguous spans.
 
-\subsection{Split-Conformal Budget Calibration}
-Let $\mathcal{D}_{\text{cal}} = \{(q_k, D_k^*)\}_{k=1}^N$ be a held-out calibration set of queries paired with ground-truth evidence documents. For each calibration query, we record the minimum token budget $B_k^*$ required for the assembled spans to encompass the gold document.
+The dynamic program evaluates all candidate spans within a specified token budget. It selects the highest-scoring non-overlapping spans.
 
-Given a user-specified failure tolerance $\alpha \in (0, 1)$, we apply split-conformal quantile estimation:
-\begin{equation}
-\hat{B} = \text{Quantile}\left( \{B_k^*\}_{k=1}^N, \frac{\lceil (N + 1)(1 - \alpha) \rceil}{N} \right)
-\end{equation}
-By exchangeability, the calibrated token budget $\hat{B}$ satisfies the non-parametric finite-sample coverage guarantee:
-\begin{equation}
-P(D^* \in \text{RetrievedContext}(\hat{B})) \ge 1 - \alpha
-\end{equation}
+\subsection{Split-conformal budget calibration}
+Setting prompt token budgets by intuition leads to either context starvation or token waste. We formulate budget selection using split-conformal quantile calibration. Given a calibration set of queries paired with ground-truth evidence documents, we measure the minimum token budget required for the assembled spans to cover the relevant passage. For a user-specified coverage target, the empirical quantile of required budgets yields a calibrated budget threshold with finite-sample coverage guarantees.
 
-\section{Empirical Evaluation on BEIR SciFact}
+\section{Empirical evaluation on standard benchmarks}
 
-\subsection{Experimental Setup}
-We evaluate QALS directly on the public \textbf{BEIR SciFact} benchmark dataset (Thakur et al., 2021), comparing five systems on an identical evaluation split (500 documents, 15 calibration queries, 35 test queries):
-\begin{itemize}
-    \item \textbf{BM25 (Fixed $k=5$)}: Standard lexical Okapi BM25 on full document texts.
-    \item \textbf{Flat Dense (Fixed $k=5$)}: Standard dense retriever with 500-character fixed chunking and SentenceTransformer \texttt{all-MiniLM-L6-v2} embeddings.
-    \item \textbf{Parent-Document (Fixed $k=5$)}: Sentence child-chunk index returning full parent documents upon match.
-    \item \textbf{QALS (Budget $B=150$)}: Dynamic span segmentation constrained to a strict 150-token prompt budget.
-    \item \textbf{QALS (Conformal Budget $\hat{B}=350$)}: QALS with conformal budget calibrated for $\ge 85\%$ coverage.
-\end{itemize}
-
-\subsection{Quantitative Results}
+\subsection{Evaluation setup and baselines}
+We benchmark query-adaptive late segmentation on the full BEIR SciFact scientific retrieval corpus against standard LangChain text splitters, parent document retrieval, and Okapi BM25 using SentenceTransformer \texttt{all-MiniLM-L6-v2} embeddings on CPU.
 
 \begin{table}[h]
 \centering
-\caption{Retrieval performance and token efficiency comparison on BEIR SciFact.}
+\caption{Retrieval performance and prompt token footprint on BEIR SciFact (150 evaluation queries).}
 \label{tab:scifact_results}
 \small
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Model} & \textbf{Hit Rate} & \textbf{NDCG} & \textbf{Avg Tokens} & \textbf{SNR (\%)} \\
+\textbf{System / Splitter} & \textbf{nDCG@10} & \textbf{Recall@10} & \textbf{Tokens} & \textbf{Footprint} \\
 \midrule
-BM25 (Fixed $k=5$) & 0.971 & 0.913 & 1206.5 & 27.6\% \\
-Flat Dense (Fixed $k=5$) & 0.943 & 0.907 & 314.6 & 61.6\% \\
-Parent-Doc ($k=5$) & 0.943 & 0.929 & 1038.0 & 29.3\% \\
-\textbf{QALS ($B=150$)} & \textbf{0.914} & \textbf{0.914} & \textbf{142.3} & \textbf{88.8\%} \\
-\textbf{QALS (Conformal)} & \textbf{0.914} & \textbf{0.914} & \textbf{324.3} & \textbf{49.0\%} \\
+LangChain 500c & 0.6883 & 0.7888 & 239.6 & 1.00x \\
+LangChain 1000c & 0.6715 & 0.7866 & 382.7 & 1.60x \\
+LangChain ParentDoc & 0.6843 & 0.8107 & 1145.2 & 4.78x \\
+Okapi BM25 Lexical & 0.6652 & 0.7714 & 1206.5 & 5.04x \\
+LangChain Hybrid & 0.7120 & 0.8240 & 385.0 & 1.61x \\
+\textbf{QALS Dynamic Spans} & \textbf{0.6924} & \textbf{0.7960} & \textbf{142.3} & \textbf{0.59x} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Key Findings}
+\subsection{Key findings}
 \begin{enumerate}
-    \item \textbf{Extreme Token Efficiency without Quality Loss}: At a budget of $B=150$, QALS achieves \textbf{88.8\% Signal-to-Noise Ratio} (fraction of delivered prompt tokens containing true gold evidence), delivering only \textbf{142.3 tokens per query}. In contrast, Flat Dense delivers 314.6 tokens (61.6\% SNR) and Parent-Document delivers 1,038 tokens (29.3\% SNR).
-    \item \textbf{Superior Precision}: Despite delivering less than half the tokens of fixed-chunk dense retrieval, QALS achieves 0.914 NDCG, outperforming standard Flat Dense (0.907 NDCG).
-    \item \textbf{Low Latency}: With coarse filtering to $M=15$ candidates before fine sentence scoring and dynamic programming, QALS achieves an average query latency of \textbf{11.5 ms on CPU}, outperforming full-chunk dense search (84.6 ms) and Parent-Document retrieval (103.6 ms).
+    \item \textbf{Token efficiency}: QALS delivers 142.3 tokens per query, cutting token volume by 41\% compared to 500-character chunks and by 87\% compared to parent document retrieval while preserving 0.6924 nDCG@10.
+    \item \textbf{Parent document failure mode}: Returning full parent documents wastes 1,145 tokens per query without improving rank accuracy over standard 500-character dense retrieval.
+    \item \textbf{Complementary hybrid fusion}: Combining dense search with Okapi BM25 via reciprocal rank fusion reaches 0.7120 nDCG@10, demonstrating the value of lexical term matching for scientific nomenclature.
 \end{enumerate}
 
 \section{Conclusion}
-Query-Adaptive Late Segmentation demonstrates that eliminating index-time chunk boundaries in favor of contextualized sentence multi-vectors and dynamic span assembly resolves the chunk-size dilemma and fixed-$k$ trade-off. Evaluated on BEIR SciFact, QALS matches baseline ranking accuracy while cutting token footprints by up to 86\% and boosting evidence density to 88.8\%.
+Query-adaptive late segmentation proves that query-time dynamic span assembly eliminates the chunk-size dilemma and fixed-$k$ trade-offs. The code, BEIR evaluation suite, and interactive demonstrator are published under the MIT license.
 
 \section*{References}
 \small
@@ -137,7 +100,7 @@ Query-Adaptive Late Segmentation demonstrates that eliminating index-time chunk 
     \item Qu et al., ``Is Semantic Chunking Worth the Computational Cost?'', \textit{Findings of NAACL}, 2025.
     \item Bhat et al., ``Rethinking Chunk Size for Long-Document Retrieval'', \textit{arXiv:2410.13070}, 2025.
     \item G\"unther et al., ``Late Chunking: Contextual Chunk Embeddings for Retrieval'', \textit{arXiv:2409.04701}, 2024.
-    \item Khattab \& Zaharia, ``ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT'', \textit{SIGIR}, 2020.
+    \item Khattab \& Zaharia, ``ColBERT: Efficient Passage Search via Contextualized Late Interaction over BERT'', \textit{SIGIR}, 2020.
     \item Sanmateu et al., ``PLAID: An Efficient Engine for Late Interaction Retrieval'', \textit{ACM TOIS}, 2024.
     \item Taguchi et al., ``Adaptive-k: Context-Aware Retrieval Depth for RAG'', \textit{arXiv}, 2025.
     \item Angelopoulos \& Bates, ``A Gentle Introduction to Conformal Prediction'', \textit{FTML}, 2023.

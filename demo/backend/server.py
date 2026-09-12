@@ -15,6 +15,11 @@ from typing import List, Optional
 import os
 import json
 
+from toporag.langchain_baselines import (
+    LangChainRecursiveRetriever,
+    LangChainParentDocRetriever,
+    LangChainHybridRetriever,
+)
 from toporag.qals_encoder import SentenceMultiVectorEncoder
 from toporag.qals_retriever import QALSRetriever
 from toporag.real_baselines import RealFlatDenseRetriever, RealParentDocumentRetriever, RealBM25Retriever
@@ -104,6 +109,12 @@ def compare_retrieval(req: QueryRequest):
 
 @app.get("/api/benchmark-summary")
 def get_benchmark_summary():
+    if os.path.exists("benchmarks/multi_benchmark_results.json"):
+        try:
+            with open("benchmarks/multi_benchmark_results.json", "r") as f:
+                return json.load(f)
+        except Exception:
+            pass
     if os.path.exists("benchmarks/scifact_results.json"):
         with open("benchmarks/scifact_results.json", "r") as f:
             return json.load(f)

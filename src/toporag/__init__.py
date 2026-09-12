@@ -13,8 +13,13 @@ from toporag.qals_dp import SpanSegmenterDP
 from toporag.conformal import ConformalBudgetCalibrator
 from toporag.qals_retriever import QALSRetriever
 from toporag.real_baselines import RealFlatDenseRetriever, RealParentDocumentRetriever, RealBM25Retriever
+from toporag.langchain_baselines import (
+    LangChainRecursiveRetriever,
+    LangChainParentDocRetriever,
+    LangChainHybridRetriever,
+)
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __all__ = [
     "HashFeatureEmbedder",
     "DenseEmbedder",
@@ -32,4 +37,7 @@ __all__ = [
     "RealFlatDenseRetriever",
     "RealParentDocumentRetriever",
     "RealBM25Retriever",
+    "LangChainRecursiveRetriever",
+    "LangChainParentDocRetriever",
+    "LangChainHybridRetriever",
 ]
