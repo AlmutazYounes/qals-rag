@@ -45,7 +45,7 @@ class NumberedCanvas(canvas.Canvas):
         if self._pageNumber > 1:
             self.drawString(
                 54, 746,
-                "Author 1 & Author 2 / Information Processing & Management (Preprint)"
+                "M. Bani Younes & M. Younes / Information Processing & Management (Preprint)"
             )
             self.setStrokeColor(colors.HexColor("#cbd5e1"))
             self.setLineWidth(0.5)
@@ -321,18 +321,18 @@ def build_pdf():
         title_style
     ))
 
-    # Authors (Two Placeholders)
-    authors_text = "<b>Author 1 [Placeholder Author One]</b><sup>a</sup>, <b>Author 2 [Placeholder Author Two]</b><sup>b,*</sup>"
+    # Authors
+    authors_text = "<b>Mohammad Bani Younes</b><sup>a</sup>, <b>Mutaz Younes</b><sup>b,*</sup>"
     story.append(Paragraph(authors_text, author_name_style))
 
     affiliations_text = (
-        "<sup>a</sup> Department of Computer Science, University [Placeholder Institution A], Country<br/>"
-        "Email: author.one@institution.edu<br/>"
-        "<sup>b</sup> Department of Information Systems, University [Placeholder Institution B], Country<br/>"
-        "Email: author.two@institution.edu"
+        "<sup>a</sup> Faculty of Information and Technology, Ajloun National University, Jordan<br/>"
+        "Email: mohamed.banyyounes@anu.edu.jo<br/>"
+        "<sup>b</sup> Independent Researcher, Albany, New York, USA<br/>"
+        "Email: mutazyounes@gmail.com"
     )
     story.append(Paragraph(affiliations_text, affiliation_style))
-    story.append(Paragraph("<sup>*</sup> Corresponding author. Tel.: +1-000-000-0000.", meta_note_style))
+    story.append(Paragraph("<sup>*</sup> Corresponding author.", meta_note_style))
 
     # Highlights (Elsevier Mandatory Requirement: 3-5 bullets, max 85 chars per bullet)
     story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#94a3b8"), spaceAfter=6))
@@ -630,8 +630,8 @@ def build_pdf():
     story.append(Spacer(1, 4))
     story.append(Paragraph("CRediT authorship contribution statement", h1_style))
     story.append(Paragraph(
-        "<b>Author 1 [Placeholder Author One]:</b> Conceptualization, Methodology, Software, Validation, Investigation, Writing - original draft.<br/>"
-        "<b>Author 2 [Placeholder Author Two]:</b> Supervision, Formal analysis, Writing - review & editing, Project administration, Funding acquisition.",
+        "<b>Mohammad Bani Younes:</b> Conceptualization, Methodology, Software, Validation, Investigation, Writing - original draft.<br/>"
+        "<b>Mutaz Younes:</b> Supervision, Formal analysis, Writing - review & editing, Project administration, Funding acquisition.",
         body_style
     ))
 

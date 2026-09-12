@@ -1,12 +1,12 @@
 # Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting
 
-**Author 1 [Placeholder Author One]**  
-Department of Computer Science, University [Placeholder Institution A]  
-Email: author.one@institution.edu  
+**Mohammad Bani Younes**  
+Faculty of Information and Technology, Ajloun National University, Jordan  
+Email: mohamed.banyyounes@anu.edu.jo  
 
-**Author 2 [Placeholder Author Two]** *(Corresponding Author)*  
-Department of Information Systems, University [Placeholder Institution B]  
-Email: author.two@institution.edu  
+**Mutaz Younes** *(Corresponding Author)*  
+Independent Researcher, Albany, New York, USA  
+Email: mutazyounes@gmail.com  
 
 ---
 
@@ -142,8 +142,8 @@ Query-adaptive late segmentation demonstrates that eliminating index-time chunk 
 ---
 
 ## CRediT authorship contribution statement
-- **Author 1 [Placeholder Author One]:** Conceptualization, Methodology, Software, Validation, Investigation, Writing - Original Draft.
-- **Author 2 [Placeholder Author Two]:** Supervision, Formal analysis, Writing - Review & Editing, Project administration, Funding acquisition.
+- **Mohammad Bani Younes:** Conceptualization, Methodology, Software, Validation, Investigation, Writing - Original Draft.
+- **Mutaz Younes:** Supervision, Formal analysis, Writing - Review & Editing, Project administration, Funding acquisition.
 
 ## Declaration of competing interest
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
