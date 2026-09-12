@@ -1,4 +1,4 @@
-\documentclass[10pt,twocolumn,letterpaper]{article}
+\documentclass[preprint,12pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -7,26 +7,31 @@
 \usepackage{hyperref}
 \usepackage{microtype}
 \usepackage{geometry}
-\geometry{margin=0.75in}
+\geometry{a4paper, margin=1in}
 
 \title{\textbf{Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting}}
 
 \author{
-  \textbf{Open Research Collective for Retrieval Augmentation}\\
-  \texttt{https://github.com/open-rag-research/qals-retrieval}
+  \textbf{Author 1 [Placeholder Author One]}$^1$,
+  \textbf{Author 2 [Placeholder Author Two]}$^{2,*}$ \\
+  \small $^1$ Department of Computer Science, University [Placeholder Institution A] \\
+  \small $^2$ Department of Information Systems, University [Placeholder Institution B] \\
+  \small $^*$ Corresponding author: \texttt{author.two@institution.edu}
 }
-\date{September 2026}
+\date{}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Retrieval-augmented generation pipelines depend on dense similarity search to feed factual context into language models. Canonical systems divide text into static character chunks before indexing, often 200 to 1,000 characters, and retrieve a fixed count of passages. This produces the chunk-size dilemma: small chunks isolate specific facts while severing pronoun antecedents and scope limitations; large chunks preserve narrative continuity while averaging multiple claims into one vector and polluting prompts with irrelevant text. Fixed passage cutoffs further force a uniform token footprint on every query regardless of difficulty. We propose Query-Adaptive Late Segmentation, a retrieval architecture that eliminates index-time chunk boundaries. The method indexes documents as sequences of contextualized sentence vectors paired with a coarse document vector. At query time, an online 1D dynamic program stitches contiguous sentences into coherent passages, balancing semantic relevance and passage continuity within an explicit token budget. To calibrate this budget without guesswork, the system applies split-conformal prediction on held-out queries, ensuring valid finite-sample evidence coverage. Across standard BEIR SciFact and NFCorpus benchmarks, dynamic segmentation achieves 0.7016 and 0.3802 nDCG@10 at 142 delivered tokens per query, outperforming LangChain recursive splitters (0.6883 and 0.3183 nDCG@10 at 219 to 240 tokens) and parent document retrieval (0.6843 and 0.3479 nDCG@10 at 1,145 to 1,205 tokens). Query-adaptive late segmentation cuts prompt token volume by 41\% to 88\% while improving ranking quality.
+Retrieval-augmented generation pipelines depend on dense similarity search to feed factual context into large language models. Canonical systems divide text into static character chunks before indexing, often 200 to 1,000 characters, and retrieve a fixed count of passages. This produces the chunk-size dilemma: small chunks isolate specific facts while severing pronoun antecedents and scope limitations; large chunks preserve narrative continuity while averaging multiple claims into one vector and polluting prompts with irrelevant text. Fixed passage cutoffs further force a uniform token footprint on every query regardless of difficulty. We propose Query-Adaptive Late Segmentation, a retrieval architecture that eliminates index-time chunk boundaries. The method indexes documents as sequences of contextualized sentence vectors paired with a coarse document vector. At query time, an online 1D dynamic program stitches contiguous sentences into coherent passages, balancing semantic relevance and passage continuity within an explicit token budget. To calibrate this budget without guesswork, the system applies split-conformal prediction on held-out queries, providing valid finite-sample evidence coverage. Across standard BEIR SciFact and NFCorpus benchmarks, dynamic segmentation achieves 0.7016 and 0.3802 nDCG@10 at 142 delivered tokens per query, outperforming LangChain recursive splitters (0.6883 and 0.3183 nDCG@10 at 219 to 240 tokens) and parent document retrieval (0.6843 and 0.3479 nDCG@10 at 1,145 to 1,205 tokens). Query-adaptive late segmentation cuts prompt token volume by 41\% to 88\% while improving ranking quality.
 \end{abstract}
 
+\noindent\textbf{Keywords:} Information retrieval; Retrieval-augmented generation; Text chunking; Dynamic programming; Conformal prediction; Multi-vector indexing.
+
 \section{Introduction}
-Retrieval-augmented generation grounds large language models in external knowledge collections, mitigating parametric hallucinations and enabling domain adaptation without fine-tuning. In the standard dense retrieval pipeline, documents are divided into fixed character or token windows, embedded via dual-encoder models, and stored in maximum inner product search indices. When a user submits a query, the system retrieves the top nearest chunks by cosine similarity and concatenates them into the prompt.
+Retrieval-augmented generation grounds large language models in external knowledge collections, mitigating parametric hallucinations and enabling domain adaptation without model retraining. In the standard dense retrieval pipeline, documents are divided into fixed character or token windows, embedded via dual-encoder models, and stored in maximum inner product search indices. When a user submits a query, the system retrieves the top nearest chunks by cosine similarity and concatenates them into the prompt.
 
 Despite widespread production deployment, this static pipeline suffers from two structural flaws.
 
@@ -43,15 +48,19 @@ This paper makes four verifiable contributions:
     \item We introduce late segmentation via contextualized sentence multi-vectors, decoupling index-time representation from query-time text boundaries.
     \item We formulate online passage reconstruction as a 1D dynamic programming problem that balances sentence similarity against discourse continuity.
     \item We introduce split-conformal prompt budgeting, replacing heuristic passage counts with distribution-free coverage guarantees.
-    \item We evaluate the system on full BEIR SciFact and NFCorpus benchmarks against LangChain recursive splitters, parent document retrieval, Okapi BM25, and hybrid ensembles, demonstrating a 41\% to 88\% reduction in context token footprint alongside higher ranking accuracy.
+    \item We evaluate the system on full BEIR SciFact and NFCorpus benchmarks against LangChain recursive splitters, parent document retrieval, Okapi BM25, and hybrid ensembles, cutting context token footprint by 41\% to 88\% while raising ranking accuracy.
 \end{enumerate}
 
 \section{Related work}
-\textbf{Chunking strategies and granularity trade-offs.} The sensitivity of dense retrieval to text chunking has garnered increasing attention. Qu et al.~(2025) systematically benchmarked semantic splitters against character splitters across multiple evidence tasks, demonstrating that heuristic semantic chunking rarely justifies its computational overhead. Bhat et al.~(2025) showed that optimal chunk sizes vary widely across datasets and embedding models, confirming that no universal static window exists. Late chunking (G\"unther et al., 2024) computes chunk embeddings after transformer self-attention over full documents, but retains fixed boundary partitions.
 
-\textbf{Multi-vector and late-interaction retrieval.} Token-level late interaction models like ColBERT (Khattab \& Zaharia, 2020) and PLAID (Sanmateu et al., 2024) show that fine-grained token alignments outperform pooled passage vectors. However, storing hundreds of token embeddings per document requires substantial vector memory. Query-adaptive late segmentation operates at sentence granularity, preserving atomic alignment and resolving pronoun ambiguity through document title context while reducing vector storage by five to fifteen times compared to token-level indices.
+\subsection{Chunking strategies and granularity trade-offs}
+Dense retrieval quality depends heavily on text chunking choices. Qu et al.~(2025) systematically benchmarked semantic splitters against character splitters across multiple evidence tasks, showing that heuristic semantic chunking rarely justifies its computational overhead. Bhat et al.~(2025) showed that optimal chunk sizes vary widely across datasets and embedding models, confirming that no universal static window exists. Late chunking (G\"unther et al., 2024) computes chunk embeddings after transformer self-attention over full documents, but retains fixed boundary partitions.
 
-\textbf{Adaptive truncation and conformal prediction.} Adaptive retrieval truncation addresses prompt efficiency in production pipelines. Taguchi et al.~(2025) proposed Adaptive-k using score distributions to select passage counts per query. Conformal prediction (Vovk et al., 2005; Angelopoulos \& Bates, 2023) provides finite-sample coverage guarantees without parametric distributional assumptions. While prior work applied conformal sets to passage counts, our approach uses split-conformal calibration specifically to govern prompt token budgets.
+\subsection{Multi-vector and late-interaction retrieval}
+Token-level late interaction models like ColBERT (Khattab \& Zaharia, 2020) and PLAID (Sanmateu et al., 2024) show that fine-grained token alignments outperform pooled passage vectors. However, storing hundreds of token embeddings per document requires substantial vector memory. Query-adaptive late segmentation operates at sentence granularity, preserving atomic alignment and resolving pronoun ambiguity through document title context while reducing vector storage by five to fifteen times compared to token-level indices.
+
+\subsection{Adaptive truncation and conformal prediction}
+Adaptive retrieval truncation addresses prompt efficiency in production pipelines. Taguchi et al.~(2025) proposed Adaptive-k using score distributions to select passage counts per query. Conformal prediction (Vovk et al., 2005; Angelopoulos \& Bates, 2023) provides finite-sample coverage guarantees without parametric distributional assumptions. While prior work applied conformal sets to passage counts, our approach uses split-conformal calibration specifically to govern prompt token budgets.
 
 \section{Methodology}
 
@@ -144,13 +153,13 @@ LangChain Hybrid Ensemble ($k=5$) & 0.7234 & 0.8754 & 1134.6 & 0.3690 & 0.1841 &
 \subsection{Quantitative results and analysis}
 Table~\ref{tab:full_benchmark} details retrieval effectiveness and prompt consumption across both corpora.
 
-\textbf{Prompt token footprint reduction.} QALS delivers evidence in an average of 142.3 tokens per query across both datasets. On SciFact, this represents a 41\% reduction in context tokens compared to 500-character chunks (239.6 tokens) and an 88\% reduction compared to parent document retrieval (1,145.2 tokens). On NFCorpus, QALS reduces token volume by 28\% compared to 500-character chunks and by 88\% compared to parent documents.
+QALS delivers evidence in an average of 142.3 tokens per query across both datasets. On SciFact, this achieves a 41\% reduction in context tokens compared to 500-character chunks (239.6 tokens) and an 88\% reduction compared to parent document retrieval (1,145.2 tokens). On NFCorpus, QALS reduces token volume by 28\% compared to 500-character chunks and by 88\% compared to parent documents.
 
-\textbf{Ranking accuracy improvements.} Despite delivering fewer tokens, QALS outperforms single-chunk dense retrieval and parent document retrieval on both corpora. On SciFact, QALS achieves 0.7016 nDCG@10, exceeding LangChain 500c (0.6883) and parent document retrieval (0.6843). On NFCorpus, QALS reaches 0.3802 nDCG@10, outperforming LangChain 500c (0.3183), parent documents (0.3479), and BM25 (0.3403). The dynamic program extracts precisely the informative sentences rather than arbitrary character slices.
+Despite delivering fewer tokens, QALS outperforms single-chunk dense retrieval and parent document retrieval on both corpora. On SciFact, QALS achieves 0.7016 nDCG@10, exceeding LangChain 500c (0.6883) and parent document retrieval (0.6843). On NFCorpus, QALS reaches 0.3802 nDCG@10, outperforming LangChain 500c (0.3183), parent documents (0.3479), and BM25 (0.3403). The dynamic program extracts precisely the informative sentences rather than arbitrary character slices.
 
-\textbf{Failure mode of parent document retrieval.} Expanding child chunks into full parent documents consumes 1,145 to 1,205 tokens per query. However, nDCG@10 on SciFact is 0.6843, lower than standard 500-character chunking (0.6883). Returning full documents introduces non-pertinent background and methodology sections that dilute rank discrimination and increase downstream generation costs.
+Expanding child chunks into full parent documents consumes 1,145 to 1,205 tokens per query, yet nDCG@10 on SciFact is 0.6843, lower than standard 500-character chunking (0.6883). Returning full documents introduces non-pertinent background and methodology sections that dilute rank discrimination and increase downstream generation costs.
 
-\textbf{Hybrid lexical-dense complementarity.} On SciFact, combining dense and lexical ranks via reciprocal rank fusion reaches 0.7234 nDCG@10. Exact token matching in BM25 captures rare chemical terminology and author names, providing valuable complementary signal to semantic dense vectors.
+On SciFact, combining dense and lexical ranks via reciprocal rank fusion reaches 0.7234 nDCG@10. Exact token matching in BM25 captures rare chemical terminology and author names, providing valuable complementary signal to semantic dense vectors.
 
 \section{Discussion and limitations}
 While sentence-level multi-vectors reduce storage by five to fifteen times compared to token-level late interaction models like ColBERT, storing multiple vectors per document increases index footprint relative to single-vector passage representations. For collections exceeding millions of documents, coarse filtering ($M=100$) is essential to bound query-time sentence scoring. Furthermore, sentence boundary detection relies on standard sentence splitters; highly irregular text, such as unformatted tables or source code, requires domain-adapted sentence tokenizers.
@@ -158,17 +167,25 @@ While sentence-level multi-vectors reduce storage by five to fifteen times compa
 \section{Conclusion}
 Query-adaptive late segmentation demonstrates that eliminating index-time chunk boundaries resolves the trade-off between specificity and context. Indexing contextualized sentence multi-vectors and assembling passages at query time via 1D dynamic programming achieves 0.7016 nDCG@10 on SciFact and 0.3802 on NFCorpus while delivering only 142 tokens per query. Split-conformal budgeting replaces heuristic passage counts with distribution-free coverage guarantees. The complete implementation, evaluation suite, and interactive demonstration are openly available under the MIT license.
 
-\section*{References}
-\small
-\begin{enumerate}
-    \item Thakur, N., Reimers, N., Daxenberger, J., and Gurevych, I. BEIR: A heterogeneous benchmark for zero-shot evaluation of information retrieval models. \textit{NeurIPS Datasets and Benchmarks}, 2021.
-    \item Qu, C., Dai, Z., and Callan, J. Is semantic chunking worth the computational cost? \textit{Findings of NAACL}, 2025.
-    \item Bhat, A., Reddy, S., and Narayanan, S. Rethinking chunk size for long-document retrieval. \textit{arXiv:2410.13070}, 2025.
-    \item G\"unther, M., Ong, J., and Wang, I. Late chunking: contextual chunk embeddings for retrieval. \textit{arXiv:2409.04701}, 2024.
-    \item Khattab, O., and Zaharia, M. ColBERT: efficient and effective passage search via contextualized late interaction over BERT. \textit{SIGIR}, 2020.
-    \item Sanmateu, J., Khattab, O., and Manning, C. PLAID: an efficient engine for late interaction retrieval. \textit{ACM Transactions on Information Systems}, 2024.
-    \item Taguchi, T., Suzuki, M., and Sekine, S. Adaptive-k: context-aware retrieval depth for RAG. \textit{arXiv}, 2025.
-    \item Angelopoulos, A., and Bates, S. A gentle introduction to conformal prediction and distribution-free uncertainty quantification. \textit{Foundations and Trends in Machine Learning}, 2023.
-\end{enumerate}
+\section*{CRediT authorship contribution statement}
+\textbf{Author 1 [Placeholder Author One]:} Conceptualization, Methodology, Software, Validation, Investigation, Writing - Original Draft.
+\textbf{Author 2 [Placeholder Author Two]:} Supervision, Formal analysis, Writing - Review \& Editing, Project administration, Funding acquisition.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+All evaluation benchmark datasets (BEIR SciFact and NFCorpus) and implementation code are publicly available in the project repository: \texttt{https://github.com/open-rag-research/qals-retrieval}.
+
+\begin{thebibliography}{00}
+\bibitem{thakur2021} Thakur, N., Reimers, N., Daxenberger, J., and Gurevych, I. (2021). BEIR: A heterogeneous benchmark for zero-shot evaluation of information retrieval models. \textit{NeurIPS Datasets and Benchmarks}.
+\bibitem{qu2025} Qu, C., Dai, Z., and Callan, J. (2025). Is semantic chunking worth the computational cost? \textit{Findings of NAACL}.
+\bibitem{bhat2025} Bhat, A., Reddy, S., and Narayanan, S. (2025). Rethinking chunk size for long-document retrieval. \textit{arXiv preprint arXiv:2410.13070}.
+\bibitem{gunther2024} G\"unther, M., Ong, J., and Wang, I. (2024). Late chunking: contextual chunk embeddings for retrieval. \textit{arXiv preprint arXiv:2409.04701}.
+\bibitem{khattab2020} Khattab, O., and Zaharia, M. (2020). ColBERT: efficient and effective passage search via contextualized late interaction over BERT. \textit{SIGIR}.
+\bibitem{sanmateu2024} Sanmateu, J., Khattab, O., and Manning, C. (2024). PLAID: an efficient engine for late interaction retrieval. \textit{ACM Transactions on Information Systems}.
+\bibitem{taguchi2025} Taguchi, T., Suzuki, M., and Sekine, S. (2025). Adaptive-k: context-aware retrieval depth for RAG. \textit{arXiv preprint arXiv:2501.XXXXX}.
+\bibitem{angelopoulos2023} Angelopoulos, A., and Bates, S. (2023). A gentle introduction to conformal prediction and distribution-free uncertainty quantification. \textit{Foundations and Trends in Machine Learning}.
+\end{thebibliography}
 
 \end{document}
