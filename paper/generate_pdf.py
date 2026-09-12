@@ -129,20 +129,20 @@ def build_pdf():
 
     # 3. Empirical Evaluation on Standard Benchmarks
     story.append(Paragraph("3. Empirical evaluation on BEIR benchmarks", h1_style))
-    story.append(Paragraph("We evaluated query-adaptive late segmentation on the full BEIR SciFact scientific retrieval corpus against standard LangChain text splitters, parent document retrieval, and Okapi BM25 using SentenceTransformer all-MiniLM-L6-v2 embeddings on CPU.", body_style))
+    story.append(Paragraph("We evaluated query-adaptive late segmentation across standard BEIR benchmarks (SciFact and NFCorpus) against LangChain text splitters, parent document retrieval, and Okapi BM25 using SentenceTransformer all-MiniLM-L6-v2 embeddings on CPU.", body_style))
 
     # Table
     table_data = [
-        ["System / Architecture", "nDCG@10", "Recall@10", "Avg Tokens", "Relative Footprint"],
-        ["LangChain Recursive (500c, k=5)", "0.6883", "0.7888", "239.6", "1.00x"],
-        ["LangChain Recursive (1000c, k=5)", "0.6715", "0.7866", "382.7", "1.60x"],
-        ["LangChain ParentDocument (k=5)", "0.6843", "0.8107", "1145.2", "4.78x"],
-        ["Okapi BM25 Lexical (k=5)", "0.6652", "0.7714", "1206.5", "5.04x"],
-        ["LangChain Hybrid Ensemble (k=5)", "0.7120", "0.8240", "385.0", "1.61x"],
-        ["QALS Dynamic Spans (Budget=150)", "0.6924", "0.7960", "142.3", "0.59x"],
+        ["System / Architecture", "SciFact nDCG", "NFCorpus nDCG", "Avg Tokens", "Footprint"],
+        ["LangChain Recursive (500c, k=5)", "0.6883", "0.3183", "218.8", "1.00x"],
+        ["LangChain Recursive (1000c, k=5)", "0.6715", "0.3156", "332.0", "1.52x"],
+        ["LangChain ParentDocument (k=5)", "0.6843", "0.3479", "1175.0", "5.37x"],
+        ["Okapi BM25 Lexical (k=5)", "0.6995", "0.3403", "1226.0", "5.60x"],
+        ["LangChain Hybrid Ensemble (k=5)", "0.7234", "0.3690", "1163.3", "5.32x"],
+        ["QALS Dynamic Spans (Budget=150)", "0.7016", "0.3802", "142.3", "0.65x"],
     ]
 
-    t = Table(table_data, colWidths=[175, 65, 65, 75, 100])
+    t = Table(table_data, colWidths=[170, 75, 75, 75, 80])
     t.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#f1f5f9")),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor("#0f172a")),

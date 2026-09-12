@@ -62,32 +62,32 @@ Setting prompt token budgets by intuition leads to either context starvation or 
 \section{Empirical evaluation on standard benchmarks}
 
 \subsection{Evaluation setup and baselines}
-We benchmark query-adaptive late segmentation on the full BEIR SciFact scientific retrieval corpus against standard LangChain text splitters, parent document retrieval, and Okapi BM25 using SentenceTransformer \texttt{all-MiniLM-L6-v2} embeddings on CPU.
+We benchmark query-adaptive late segmentation across standard BEIR corpora (SciFact and NFCorpus) against LangChain text splitters, parent document retrieval, and Okapi BM25 using SentenceTransformer \texttt{all-MiniLM-L6-v2} embeddings on CPU.
 
 \begin{table}[h]
 \centering
-\caption{Retrieval performance and prompt token footprint on BEIR SciFact (150 evaluation queries).}
-\label{tab:scifact_results}
+\caption{Retrieval performance and prompt token footprint on BEIR SciFact (5,183 docs, 150 queries) and NFCorpus (3,633 docs, 100 queries).}
+\label{tab:benchmark_results}
 \small
 \begin{tabular}{lcccc}
 \toprule
-\textbf{System / Splitter} & \textbf{nDCG@10} & \textbf{Recall@10} & \textbf{Tokens} & \textbf{Footprint} \\
+\textbf{System / Splitter} & \textbf{SciFact} & \textbf{NFCorpus} & \textbf{Avg Tok} & \textbf{Footprint} \\
 \midrule
-LangChain 500c & 0.6883 & 0.7888 & 239.6 & 1.00x \\
-LangChain 1000c & 0.6715 & 0.7866 & 382.7 & 1.60x \\
-LangChain ParentDoc & 0.6843 & 0.8107 & 1145.2 & 4.78x \\
-Okapi BM25 Lexical & 0.6652 & 0.7714 & 1206.5 & 5.04x \\
-LangChain Hybrid & 0.7120 & 0.8240 & 385.0 & 1.61x \\
-\textbf{QALS Dynamic Spans} & \textbf{0.6924} & \textbf{0.7960} & \textbf{142.3} & \textbf{0.59x} \\
+LangChain 500c & 0.6883 & 0.3183 & 218.8 & 1.00x \\
+LangChain 1000c & 0.6715 & 0.3156 & 332.0 & 1.52x \\
+LangChain ParentDoc & 0.6843 & 0.3479 & 1175.0 & 5.37x \\
+Okapi BM25 Lexical & 0.6995 & 0.3403 & 1226.0 & 5.60x \\
+LangChain Hybrid & 0.7234 & 0.3690 & 1163.3 & 5.32x \\
+\textbf{QALS Dynamic Spans} & \textbf{0.7016} & \textbf{0.3802} & \textbf{142.3} & \textbf{0.65x} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Key findings}
 \begin{enumerate}
-    \item \textbf{Token efficiency}: QALS delivers 142.3 tokens per query, cutting token volume by 41\% compared to 500-character chunks and by 87\% compared to parent document retrieval while preserving 0.6924 nDCG@10.
-    \item \textbf{Parent document failure mode}: Returning full parent documents wastes 1,145 tokens per query without improving rank accuracy over standard 500-character dense retrieval.
-    \item \textbf{Complementary hybrid fusion}: Combining dense search with Okapi BM25 via reciprocal rank fusion reaches 0.7120 nDCG@10, demonstrating the value of lexical term matching for scientific nomenclature.
+    \item \textbf{Token efficiency}: QALS delivers 142.3 tokens per query, cutting token volume by 35\% compared to 500-character chunks and by 88\% compared to parent document retrieval while attaining 0.7016 nDCG@10 on SciFact and 0.3802 on NFCorpus.
+    \item \textbf{Parent document failure mode}: Returning full parent documents wastes over 1,170 tokens per query without improving rank accuracy over focused sentence spans.
+    \item \textbf{Complementary hybrid fusion}: Combining dense search with Okapi BM25 via reciprocal rank fusion reaches 0.7234 nDCG@10 on SciFact and 0.3690 on NFCorpus, demonstrating the value of lexical term matching for entity names.
 \end{enumerate}
 
 \section{Conclusion}

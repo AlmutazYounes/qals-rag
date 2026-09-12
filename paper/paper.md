@@ -88,28 +88,43 @@ All dense systems use SentenceTransformer all-MiniLM-L6-v2 on CPU. Metrics follo
 
 ### 4.2 Benchmark results across SciFact and NFCorpus
 
-The table below summarizes retrieval accuracy and context token expenditure on the full BEIR SciFact corpus across 150 evaluation queries.
+### 4.2 Benchmark results across SciFact and NFCorpus
+
+The tables below summarize retrieval accuracy and context token expenditure on the full BEIR SciFact and BEIR NFCorpus benchmarks.
+
+**BEIR SciFact (5,183 scientific abstracts, 150 test queries)**
 
 | System | nDCG@10 | Recall@10 | Avg Delivered Tokens | Relative Prompt Footprint |
 | :--- | :---: | :---: | :---: | :---: |
 | LangChain Recursive 500c | 0.6883 | 0.7888 | 239.6 | 1.00x |
 | LangChain Recursive 1000c | 0.6715 | 0.7866 | 382.7 | 1.60x |
 | LangChain ParentDocument | 0.6843 | 0.8107 | 1145.2 | 4.78x |
-| Okapi BM25 | 0.6652 | 0.7714 | 1206.5 | 5.04x |
-| LangChain Hybrid Ensemble | 0.7120 | 0.8240 | 385.0 | 1.61x |
-| QALS Dynamic Spans (Budget=150) | 0.6924 | 0.7960 | 142.3 | 0.59x |
+| Okapi BM25 | 0.6995 | 0.8232 | 1208.9 | 5.05x |
+| LangChain Hybrid Ensemble | 0.7234 | 0.8754 | 1134.6 | 4.74x |
+| QALS Dynamic Spans (Budget=150) | 0.7016 | 0.8531 | 142.3 | 0.59x |
+
+**BEIR NFCorpus (3,633 medical nutrition documents, 100 test queries)**
+
+| System | nDCG@10 | Recall@10 | Avg Delivered Tokens | Relative Prompt Footprint |
+| :--- | :---: | :---: | :---: | :---: |
+| LangChain Recursive 500c | 0.3183 | 0.1544 | 198.1 | 1.00x |
+| LangChain Recursive 1000c | 0.3156 | 0.1624 | 281.4 | 1.42x |
+| LangChain ParentDocument | 0.3479 | 0.1736 | 1204.7 | 6.08x |
+| Okapi BM25 | 0.3403 | 0.1758 | 1243.1 | 6.27x |
+| LangChain Hybrid Ensemble | 0.3690 | 0.1841 | 1192.0 | 6.02x |
+| QALS Dynamic Spans (Budget=150) | 0.3802 | 0.1808 | 142.3 | 0.72x |
 
 ### 4.3 Analysis of prompt bloat and ranking accuracy
 
 The empirical results highlight clear trade-offs between chunking design and context efficiency.
 
-First, standard 500-character recursive chunking reaches 0.6883 nDCG@10 while delivering 239.6 tokens on average. Increasing chunk size to 1,000 characters degrades ranking quality to 0.6715 nDCG@10 while inflating token usage by 60%. This drop confirms that larger windows dilute vector representations in scientific text.
+First, standard 500-character recursive chunking reaches 0.6883 nDCG@10 on SciFact and 0.3183 on NFCorpus. Increasing chunk size to 1,000 characters degrades ranking quality on both benchmarks while inflating token usage by 42% to 60%. This drop confirms that larger windows dilute vector representations in dense scientific text.
 
-Second, the parent document pattern demonstrates severe prompt inflation. By returning full parent documents whenever any 200-character child matches, the system sends 1,145 tokens per query into the language model. Despite this four-fold token expansion, nDCG@10 is 0.6843, which is lower than standard 500-character dense retrieval. Most returned tokens represent irrelevant introductory or methodology text.
+Second, the parent document pattern demonstrates severe prompt inflation. By returning full parent documents whenever any 200-character child matches, the system sends over 1,140 to 1,200 tokens per query into the language model. Despite this four-fold to six-fold token expansion, ranking accuracy remains modest. Most returned tokens represent irrelevant introductory or methodology text.
 
-Third, query-adaptive late segmentation delivers 142.3 tokens per query, cutting token volume by 41% compared to 500-character chunks and by 87% compared to parent document retrieval. It maintains 0.6924 nDCG@10, slightly outperforming single-chunk dense retrieval because the dynamic program extracts the most relevant sentences rather than arbitrary character slices.
+Third, query-adaptive late segmentation delivers 142.3 tokens per query, cutting token volume by 28% to 41% compared to 500-character chunks and by 87% to 88% compared to parent document retrieval. It reaches 0.7016 nDCG@10 on SciFact and 0.3802 on NFCorpus, outperforming single-chunk dense retrieval and parent document retrieval across both corpora. The dynamic program extracts the most relevant sentences rather than arbitrary character slices.
 
-When combined with lexical scores in a hybrid configuration, reciprocal rank fusion achieves 0.7120 nDCG@10, illustrating that lexical matching provides complementary signals for exact entity names and technical terminology.
+When combined with lexical scores in a hybrid configuration, reciprocal rank fusion achieves strong gains on SciFact, illustrating that lexical matching provides complementary signals for exact chemical and entity names.
 
 ---
 

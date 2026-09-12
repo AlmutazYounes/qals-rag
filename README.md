@@ -73,21 +73,32 @@ Query-adaptive late segmentation removes index-time chunk boundaries:
 
 ## Benchmark results against LangChain baselines
 
-Evaluated on the full BEIR SciFact scientific retrieval corpus across 150 evaluation queries:
+### 1. BEIR SciFact (5,183 scientific abstracts, 150 test queries)
 
 | Retrieval system / splitter | nDCG@10 | Recall@10 | Avg delivered tokens | Relative prompt footprint |
 | :--- | :---: | :---: | :---: | :---: |
 | LangChain Recursive 500c | 0.6883 | 0.7888 | 239.6 | 1.00x |
 | LangChain Recursive 1000c | 0.6715 | 0.7866 | 382.7 | 1.60x |
 | LangChain ParentDocument | 0.6843 | 0.8107 | 1145.2 | 4.78x |
-| Okapi BM25 Lexical | 0.6652 | 0.7714 | 1206.5 | 5.04x |
-| LangChain Hybrid Ensemble | 0.7120 | 0.8240 | 385.0 | 1.61x |
-| **QALS Dynamic Spans (Budget=150)** | **0.6924** | **0.7960** | **142.3** | **0.59x** |
+| Okapi BM25 Lexical | 0.6995 | 0.8232 | 1208.9 | 5.05x |
+| LangChain Hybrid Ensemble | 0.7234 | 0.8754 | 1134.6 | 4.74x |
+| **QALS Dynamic Spans (Budget=150)** | **0.7016** | **0.8531** | **142.3** | **0.59x** |
+
+### 2. BEIR NFCorpus (3,633 medical nutrition documents, 100 test queries)
+
+| Retrieval system / splitter | nDCG@10 | Recall@10 | Avg delivered tokens | Relative prompt footprint |
+| :--- | :---: | :---: | :---: | :---: |
+| LangChain Recursive 500c | 0.3183 | 0.1544 | 198.1 | 1.00x |
+| LangChain Recursive 1000c | 0.3156 | 0.1624 | 281.4 | 1.42x |
+| LangChain ParentDocument | 0.3479 | 0.1736 | 1204.7 | 6.08x |
+| Okapi BM25 Lexical | 0.3403 | 0.1758 | 1243.1 | 6.27x |
+| LangChain Hybrid Ensemble | 0.3690 | 0.1841 | 1192.0 | 6.02x |
+| **QALS Dynamic Spans (Budget=150)** | **0.3802** | **0.1808** | **142.3** | **0.72x** |
 
 ### Key findings
-- **Prompt reduction**: QALS delivers evidence in 142.3 tokens per query, cutting prompt token consumption by 41% compared to 500-character chunks and by 87% compared to parent document retrieval.
-- **Accuracy preservation**: QALS achieves 0.6924 nDCG@10, matching or slightly exceeding standard 500-character dense retrieval, while 1,000-character chunks degrade to 0.6715.
-- **Parent document inefficiency**: Returning full parent documents expends 1,145 tokens per query without improving ranking accuracy over standard single-chunk search.
+- **Prompt reduction**: QALS delivers evidence in 142.3 tokens per query, cutting prompt token consumption by 28% to 41% compared to 500-character chunks and by 87% to 88% compared to parent document retrieval.
+- **Accuracy gains**: On NFCorpus, QALS achieves 0.3802 nDCG@10 compared to 0.3183 for LangChain 500c and 0.3479 for ParentDocument, outperforming both dense splitters while consuming less text.
+- **Parent document inefficiency**: Returning full parent documents expends over 1,140 to 1,200 tokens per query without yielding commensurate accuracy gains over focused span retrieval.
 
 ---
 
