@@ -6,7 +6,7 @@
 [![Paper PDF](https://img.shields.io/badge/Paper-PDF%20Available-emerald.svg)](paper/qals_research_paper.pdf)
 
 > **Paper title:** *Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting*  
-> **Authors:** Open Research Collective for Retrieval Augmentation, September 2026
+> **Authors:** Mohammad Bani Younes (Ajloun National University) and Mutaz Younes (Independent Researcher), September 2026
 
 ---
 
@@ -258,10 +258,10 @@ $$P\left(D^* \in \text{RetrievedContext}(\hat{B})\right) \ge 1 - \alpha$$
 ## Citation
 
 ```bibtex
-@article{qals2026,
+@article{younes2026qals,
   title={Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting},
-  author={Open Research Collective for Retrieval Augmentation},
-  journal={arXiv preprint arXiv:2609.XXXXX},
+  author={Bani Younes, Mohammad and Younes, Mutaz},
+  journal={Information Processing \& Management (Preprint)},
   year={2026}
 }
 ```
