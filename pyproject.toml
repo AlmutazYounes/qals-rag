@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qals"
-version = "0.2.0"
+version = "0.3.0"
 description = "Query-Adaptive Late Segmentation for Retrieval-Augmented Generation"
 authors = [
     { name = "Mohammad Bani Younes", email = "mohamed.banyyounes@anu.edu.jo" },
@@ -26,7 +26,8 @@ dependencies = [
 [project.optional-dependencies]
 dense = [
     "sentence-transformers>=2.2.0",
-    "torch>=2.0.0"
+    "torch>=2.0.0",
+    "langchain-text-splitters>=0.3.0",
 ]
 
 [tool.setuptools.packages.find]

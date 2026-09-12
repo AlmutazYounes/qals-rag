@@ -29,8 +29,8 @@ class QALSRetriever:
         encoder: Optional[SentenceMultiVectorEncoder] = None,
         segmenter: Optional[SpanSegmenterDP] = None,
         calibrator: Optional[ConformalBudgetCalibrator] = None,
-        default_token_budget: int = 250,
-        coarse_top_m: int = 15,
+        default_token_budget: int = 150,
+        coarse_top_m: int = 100,
     ):
         self.encoder = encoder or SentenceMultiVectorEncoder()
         self.segmenter = segmenter or SpanSegmenterDP()
@@ -77,7 +77,12 @@ class QALSRetriever:
         if not self.is_indexed or self.coarse_vectors is None:
             raise ValueError("QALS index is empty. Call index_documents() first.")
 
-        budget = token_budget or self.default_token_budget
+        if token_budget is not None:
+            budget = token_budget
+        elif self.calibrator.is_calibrated:
+            budget = int(self.calibrator.calibrated_budget)
+        else:
+            budget = self.default_token_budget
         m = coarse_m or self.coarse_top_m
         m = min(m, len(self.doc_ids))
 
@@ -99,7 +104,7 @@ class QALSRetriever:
             spans = self.segmenter.find_optimal_spans(
                 sentences,
                 sent_scores,
-                token_budget=min(budget, 180),
+                token_budget=budget,
                 max_spans=2,
             )
 

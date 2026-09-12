@@ -6,9 +6,16 @@ __pycache__/
 .pytest_cache/
 agent-tools/
 .venv/
+venv/
 env/
 dist/
 build/
 *.egg-info/
 *.log
 benchmarks/*.log
+paper/submission/*.aux
+paper/submission/*.log
+paper/submission/*.out
+paper/submission/*.xdv
+paper/submission/*.spl
+paper/submission/__pycache__/
