@@ -68,12 +68,10 @@ Evaluated across the full official BEIR SciFact (5,183 documents) and BEIR NFCor
 
 ## 5. Repository File Map
 
-- `paper/`
-  - `paper.md`: Full manuscript in Markdown formatted for Elsevier *Information Processing & Management*.
-  - `paper/paper.tex`: Complete LaTeX article matching Elsevier submission standards.
-  - `paper/generate_pdf.py`: ReportLab publication PDF generator with two-column/clean layout, running headers/footers, and figures.
-  - `paper/qals_research_paper.pdf`: Compiled 4-page publication PDF with exact authors, affiliations, highlights, tables, and figures.
-  - `paper/figures/benchmark_summary.png`: Dual-panel high-resolution comparison chart.
+- `paper/submission/`: Elsevier IP&M package. Blinded `manuscript.tex`, `references.bib`, title page, highlights, cover letter, competing-interest Word files, and `HOW_TO_SUBMIT.md` for the $0 subscription route.
+- `paper/paper.md` and `paper/paper.tex`: earlier short drafts. The submission text is `paper/submission/manuscript.tex`.
+- `benchmarks/run_ipm_benchmark.py`: Honest eval. Ranking at k=10 for every system. Prompt tokens measured, not hardcoded. Conformal budgets fit on BEIR train queries.
+- `LICENSE`: MIT.
 - `src/toporag/`
   - `qals_encoder.py`: Contextualized sentence multi-vector encoder (`SentenceMultiVectorEncoder`).
   - `qals_dp.py`: Dynamic programming span segmentation with discourse continuity bonus.

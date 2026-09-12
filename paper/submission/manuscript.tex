@@ -1,0 +1,249 @@
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\journal{Information Processing \& Management}
+
+% Filled by paper/submission/fill_numbers.py after benchmarks/ipm_benchmark_results.json exists.
+\newcommand{\ScifactQalsNdcg}{0.6955}
+\newcommand{\ScifactQalsRec}{0.8184}
+\newcommand{\ScifactQalsTok}{136.1}
+\newcommand{\ScifactLcNdcg}{0.6883}
+\newcommand{\ScifactLcTok}{239.6}
+\newcommand{\ScifactParentNdcg}{0.6843}
+\newcommand{\ScifactParentTok}{1145.2}
+\newcommand{\ScifactHybridNdcg}{0.7234}
+\newcommand{\ScifactHybridTok}{1134.6}
+\newcommand{\ScifactBmNdcg}{0.6995}
+\newcommand{\ScifactBmTok}{1142.7}
+\newcommand{\ScifactLclongNdcg}{0.6715}
+\newcommand{\ScifactLclongTok}{382.7}
+\newcommand{\NfQalsNdcg}{0.3750}
+\newcommand{\NfQalsRec}{0.1815}
+\newcommand{\NfQalsTok}{138.2}
+\newcommand{\NfLcNdcg}{0.3185}
+\newcommand{\NfLcTok}{198.1}
+\newcommand{\NfParentNdcg}{0.3479}
+\newcommand{\NfParentTok}{1206.7}
+\newcommand{\NfHybridNdcg}{0.3690}
+\newcommand{\NfHybridTok}{1182.6}
+\newcommand{\NfBmNdcg}{0.3403}
+\newcommand{\NfBmTok}{1180.0}
+\newcommand{\NfLclongNdcg}{0.3156}
+\newcommand{\NfLclongTok}{281.4}
+\newcommand{\ConfBhatA}{2000}
+\newcommand{\ConfCovA}{0.873}
+\newcommand{\ConfBhatB}{2000}
+\newcommand{\ConfCovB}{0.873}
+
+\begin{document}
+\begin{frontmatter}
+\title{Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting}
+\author{Anonymous authors}
+\address{Details omitted for double-anonymized review}
+\begin{abstract}
+Retrieval-augmented generation fetches text, then conditions a language model on that text \citep{lewis2020retrieval,karpukhin2020dense}. Most pipelines cut documents into static character windows, embed those windows, and concatenate a fixed number of hits. The cut is made before the query exists. Small windows keep dual-encoder vectors specific and drop antecedents. Large windows and parent-document expansion keep surrounding sentences and inflate the prompt. This paper specifies query-adaptive late segmentation, QALS. The index stores one title-contextualized sentence vector per sentence and one coarse document vector. At query time a 1D segmentation program enumerates contiguous sentence intervals and selects an optimal set of at most two non-overlapping spans under a token budget \(B\). Documents are ranked by \(\mathrm{Score}(D)=0.4\) times coarse similarity plus \(0.6\) times the best sentence similarity. nDCG@10 is document ranking at cutoff 10 for every system. Baselines concatenate five retrieved units. QALS packs spans under \(B=150\) whitespace words. Split-conformal prediction sets \(B\) from the token depth at which a gold document first appears on training queries. On BEIR SciFact and NFCorpus, with all-MiniLM-L6-v2 on CPU, hybrid reciprocal-rank fusion of dense 500-character retrieval and BM25 is a strong SciFact ranker while charging full-document prompts. QALS is a Pareto point. Ranking stays competitive at a much smaller prompt. The study is retrieval-only.
+\end{abstract}
+\begin{keyword}
+dense retrieval \sep passage segmentation \sep prompt budgeting \sep conformal prediction \sep BEIR
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+A retrieval-augmented generator fetches text, then conditions a language model on that text \citep{lewis2020retrieval}. The retrieval half is usually a dual encoder over passages \citep{karpukhin2020dense}, a lexical ranker such as BM25 \citep{robertson2009probabilistic}, or a blend of the two. What counts as a passage is decided early. Corpora are split into character windows, often a few hundred to a thousand characters, with a small overlap. Each window becomes one vector. At query time the system returns a fixed number of windows and concatenates them.
+
+That design hard-wires two decisions that ought to depend on the query. Dual encoders pool tokens into one vector per indexed unit. A short slice can match a specific claim, and the surrounding discourse is gone. Pronouns lose antecedents, and hedge clauses sit in the neighbouring slice. A long slice or a full document mixes several claims, the vector is less specific, and the prompt inherits sentences the query never needed. \citet{qu2025semantic} measured semantic splitters against cheaper character splitters and found that extra index-time linguistics often fails to pay for itself. \citet{bhat2025rethinking} showed that useful window sizes move with the corpus and the encoder. There is no single static width that is right for SciFact abstracts and for longer medical articles at once.
+
+A fixed top-\(k\) concatenates \(k\) units on every query. Easy factual queries then carry padding. Harder queries are clipped at the same \(k\). \citet{taguchi2025efficient} select \(k\) from score distributions. Adaptive-RAG style routers send some questions to heavier retrieval \citep{jeong2024adaptive}. Compression systems such as RECOMP rewrite retrieved text down to a shorter string \citep{xu2024recomp}. Those methods still start from units whose boundaries were frozen at index time. \citet{liu2024lost} showed that language models use long concatenated contexts unevenly, with middle evidence underused. A shorter, query-matched prompt is a retrieval problem as well as a generation problem. This paper stays on the retrieval side of that line.
+
+Late chunking runs transformer attention over a longer document, then pools at predetermined cuts \citep{gunther2024late}. Dense X indexes propositions \citep{chen2024dense}. RAPTOR builds a tree of summaries \citep{sarthi2024raptor}. ColBERT, ColBERTv2, and PLAID store a vector per token and score MaxSim alignments \citep{khattab2020colbert,santhanam2022colbertv2,santhanam2022plaid}. Those models are the right comparison class for fine-grained scoring. We do not evaluate against them. Sentence-level multi-vectors sit between a pooled passage vector and a token lattice. That is a modelling choice, stated as a limitation in Section~\ref{sec:limits}.
+
+QALS is not a learned assembler. Offline, each document is a title \(T\) and a sentence sequence, with each sentence encoded under a title prefix and a coarse document vector stored for candidate generation. Online, a two-stage retriever takes the top \(M\) documents by coarse similarity, scores every sentence, and ranks documents by a fixed blend of coarse similarity and the best sentence similarity. A 1D segmentation program then enumerates contiguous sentence intervals whose whitespace length is at most \(B\) and selects an optimal set of at most two non-overlapping intervals. A greedy packer walks the ranked list and inserts spans until \(B\) is spent.
+
+Baselines concatenate the first five retrieved units. For recursive character splitters those units are chunks. For BM25, parent-document retrieval, and hybrid fusion those units are full documents. nDCG@10 and Recall@10 are computed on unique parent document identifiers at cutoff 10 for every system, including QALS. Ranking quality is never inferred from concatenation length.
+
+The budget \(B\) can be set by hand. We also calibrate it. Split conformal prediction, in the line of \citet{vovk2005algorithmic}, \citet{lei2018distribution}, and \citet{angelopoulos2023conformal}, turns held-out nonconformity scores into a finite-sample quantile. TRAQ and CONFLARE apply conformal ideas to retrieval-augmented answering \citep{li2024traq,rouzrokh2024conflare}. Here the nonconformity score is a token depth. For each training query we walk the ranked, span-packed document list and accumulate span tokens until a gold document identifier appears. That cumulative value is \(B_k^*\). The calibrated budget is a conformal quantile of the \(B_k^*\) values. Coverage is the fraction of test queries whose packed prompt contains a gold document. That is a statement about inclusion in the prompt, not about nDCG.
+
+The empirical stance is a Pareto claim, not a ranking sweep. Hybrid reciprocal-rank fusion of 500-character dense retrieval and BM25, with the fusion constant of \citet{cormack2009reciprocal}, is often a strong SciFact ranker in this encoder and this cutoff, while the prompt metric charges full-document tokens. Parent-document retrieval can raise NFCorpus nDCG@10 relative to 500-character windows and still explode the prompt. On SciFact the same expansion can fail to help nDCG@10. QALS is built for the other corner. Document ranking stays in range of the dense splitters, with a prompt held near \(B\).
+
+We ask three questions.
+
+\textbf{RQ1.} If documents are indexed as title-contextualized sentence multi-vectors, and spans are assembled only at query time under a hard budget \(B\), does document nDCG@10 at cutoff 10 stay competitive with static character chunking on BEIR SciFact and NFCorpus?
+
+\textbf{RQ2.} When prompt tokens are counted as five concatenated retrieved units for baselines and as packed spans under \(B=150\) for QALS, where does each system sit on the nDCG@10 versus token plane, including BM25, parent-document expansion, and hybrid RRF?
+
+\textbf{RQ3.} If \(B\) is replaced by a split-conformal quantile of gold-inclusion token depth on training queries, what budget and what test coverage appear at error rates \(\alpha=0.1\) and \(\alpha=0.2\)?
+
+The contributions follow those questions. We specify sentence multi-vector indexing, a two-stage ranker with \(\mathrm{Score}(D)=0.4\) coarse \(+ 0.6\) max sentence similarity, and an exact 1D program over at most two spans. We separate document ranking at \(k=10\) from prompt construction. We calibrate \(B\) by split conformal prediction on gold-inclusion depth. We measure that combination on two BEIR corpora with one CPU encoder and report Pareto structure rather than a single winner.
+
+\section{Related work}
+
+\subsection{Dense retrieval and RAG pipelines}
+\citet{lewis2020retrieval} defined retrieval-augmented generation as conditioning a parametric model on documents fetched at inference time. \citet{karpukhin2020dense} showed that a dual encoder trained with in-batch negatives can outperform lexical matching on open-domain question answering. Later dual encoders improved the training recipe rather than the index unit. \citet{reimers2019sentence} made sentence-level BERT embeddings practical with a siamese objective. \citet{hofstatter2021efficiently} trained TAS-B with topic-aware sampling. \citet{izacard2022unsupervised} trained Contriever by unsupervised contrastive learning. \citet{wang2022text} trained E5 on weakly supervised text pairs. In every case the encoder still pools a pre-cut passage into one vector.
+
+Lexical retrieval did not go away. \citet{robertson2009probabilistic} documented BM25 as a still-competitive ranker, especially when the query contains rare terms. \citet{cormack2009reciprocal} showed that reciprocal rank fusion of independent ranked lists is a stable way to combine them. Hybrid ensembles fuse ranks. They do not change how documents were sliced.
+
+\citet{thakur2021beir} assembled BEIR as a heterogeneous zero-shot suite. SciFact asks a system to retrieve scientific abstracts that support or refute expert claims \citep{wadden2020fact}. NFCorpus pairs patient nutrition questions with medical documents \citep{boteva2016full}. Both collections reward locating a short evidentiary span inside a longer document. Downstream RAG metrics often look past that span. \citet{es2024ragas} proposed RAGAs to score faithfulness of generated answers. \citet{liu2024lost} showed that even when the gold span sits in a long prompt, current models use the beginning and the end of the context more reliably than the middle. Returning more text can hide the evidence the retriever already found. \citet{gao2023retrieval} survey this failure pattern.
+
+\subsection{Chunking and retrieval granularity}
+Because dual encoders pool tokens into one vector, chunk size is a first-order variable. \citet{qu2025semantic} tested semantic splitters against fixed-size windows. Semantic chunking helped mainly on stitched collections with high topic diversity. On ordinary documents, fixed windows often won, and embedding quality dominated the choice of splitter. \citet{bhat2025rethinking} reached a related conclusion by varying window size across datasets and encoders. Fact-seeking collections preferred short windows. Broader narrative collections preferred longer ones. Encoder families disagreed on the same windows.
+
+Late chunking \citep{gunther2024late} is easy to confuse with late segmentation. A long-context transformer encodes the full document. Chunk embeddings are then mean-pooled from token states inside predetermined spans. Those embeddings carry document-wide context. The spans themselves are still chosen before the query arrives. Late chunking is late encoding with early segmentation. QALS inverts that order.
+
+\citet{chen2024dense} replace passages with propositions, atomic factoids produced by a generator at index time. The rewrite solves coreference by construction and freezes a new set of units once the propositionizer has run. RAPTOR \citep{sarthi2024raptor} clusters chunks and recursively summarizes them into a tree. Retrieval can land at a leaf or at a summary node. The tree is built offline. Parent-document retrieval indexes small child chunks for matching, then substitutes the enclosing parent at return time. Matching becomes precise. The prompt becomes the parent.
+
+\subsection{Late interaction and multi-vector indexing}
+ColBERT \citep{khattab2020colbert} keeps a vector per token and scores a query-document pair by summing MaxSim over query tokens. ColBERTv2 \citep{santhanam2022colbertv2} compressed residual codes. PLAID \citep{santhanam2022plaid} pruned candidates with centroid interaction. These systems remain the strongest argument that fine-grained embeddings beat pooled ones. They are also expensive, and they still retrieve pre-segmented passages. The fine grain is in the scoring, not in the text returned to the generator.
+
+QALS is multi-vector at a coarser grain. It stores one vector per sentence rather than one per token. Title prefixing supplies document identity. Coarse document vectors bound query-time work. After scoring, an online 1D program reconstructs spans. Late interaction ranks frozen passages. QALS builds the passage after the query.
+
+\subsection{Adaptive retrieval, compression, and conformal coverage}
+Fixed top-\(k\) is the other half of prompt bloat. \citet{jeong2024adaptive} classify query complexity and route among retrieval depths. \citet{asai2024self} train Self-RAG with reflection tokens. \citet{taguchi2025efficient} proposed Adaptive-\(k\): sorted similarities, a gap cutoff, and no extra language-model call. Adaptive-\(k\) answers how many passages to keep. It does not answer where those passages should begin or end.
+
+RECOMP \citep{xu2024recomp} summarizes retrieved documents. LLMLingua \citep{jiang2023llmlingua} and LongLLMLingua \citep{jiang2024longllmlingua} drop or reorder tokens after retrieval. These methods assume a retrieved blob already exists. They shrink it. They do not assemble it.
+
+Heuristic \(k\) and heuristic \(B\) fail in the same way. They offer no statement about how often gold evidence will be missing. \citet{vovk2005algorithmic} developed conformal prediction. \citet{lei2018distribution} gave the split-conformal recipe. \citet{angelopoulos2023conformal} restated it for a machine-learning audience. \citet{quach2024conformal} conformalize generation. \citet{li2024traq} construct answer sets in TRAQ. \citet{kang2024crag} certify generation risk for RAG. \citet{rouzrokh2024conflare} calibrate a similarity cutoff in CONFLARE so that chunks above the cutoff are returned. \citet{intrator2024streamlining} shrink conformal document sets on BEIR. CONFLARE returns a variable number of fixed chunks. TRAQ's guarantee is on the generated answer set. QALS records, for each calibration query, the smallest budget \(B_k^*\) that lets assembled spans cover the gold document, then takes the split-conformal quantile of those minimal budgets.
+
+Late chunking still uses fixed boundaries after contextual encoding. ColBERT is token-level and expensive, and it still returns pre-cut passages. Adaptive-\(k\) selects how many passages to keep, not how to cut them. CONFLARE and TRAQ calibrate counts or scores, not token budgets. RAPTOR builds hierarchical summaries offline. Parent-document retrieval expands a precise child match into the full parent. What is missing is a retriever that stores title-prefixed sentence vectors, assembles contiguous spans under budget \(B\), and calibrates \(B\) as the split-conformal quantile of the minimal gold-covering budgets on held-out queries.
+
+\section{Method}
+QALS has an offline encoder, a two-stage document ranker, a per-document span program, a global packer, and an optional conformal rule for \(B\). Ranking does not wait on packing. Packing does not change \(\mathrm{Score}(D)\).
+
+\subsection{Encoder}
+Let each document be \(D=(T,S)\), where \(T\) is a title string and \(S=(s_1,\ldots,s_n)\) is an ordered sentence sequence. Sentence boundaries come from a regular split on punctuation followed by whitespace. Documents that do not split are stored as a single sentence. Token counts throughout this paper are whitespace-separated words. They are not MiniLM wordpieces and not the tokenizer of any downstream generator.
+
+Each sentence is mapped to a unit vector in \(\mathbb{R}^d\) by prefixing the title:
+\begin{equation}
+v_i=\mathrm{Embed}(T\circ s_i).
+\end{equation}
+The implementation truncates \(T\) to the first 60 characters before the colon separator. Embed is all-MiniLM-L6-v2 \citep{reimers2019sentence}, 384 dimensions, L2-normalized, run on CPU. After normalization, cosine similarity is an inner product. A coarse document vector \(u_D\) is encoded from title, then a period, then the body, truncated to 600 characters. That truncation is for candidate generation only. Packing returns sentence spans from the full body. Queries are encoded with the same model and no title prefix, giving \(q_e=\mathrm{Embed}(q)\).
+
+\subsection{Two-stage retrieval}
+Let
+\begin{equation}
+\mathcal{C}_M=\mathrm{argtop}_M\{\langle q_e,u_D\rangle:D\in\mathcal{D}\}.
+\end{equation}
+\(M=100\) in all experiments reported here. For each \(D\in\mathcal{C}_M\) the retriever computes \(\sigma_{D,i}=\langle q_e,v_{D,i}\rangle\). Document ranking uses
+\begin{equation}
+\mathrm{Score}(D)=0.4\,\langle q_e,u_D\rangle+0.6\max_i\sigma_{D,i}.
+\end{equation}
+The \(0.4/0.6\) weights are not tuned per dataset. Candidates are sorted by \(\mathrm{Score}(D)\) descending. nDCG@10 and Recall@10 read this ordered list of parent document identifiers, truncated at 10 unique IDs. Span selection can change the prompt. It does not reorder \(\mathrm{Score}(D)\).
+
+\subsection{Span objective and algorithm}
+For integers \(1\le i\le j\le n\) define
+\begin{equation}
+U(i,j)=\sum_{k=i}^{j}(\sigma_{D,k}-\mu)+\kappa\log_2(j-i+2).
+\end{equation}
+Defaults are \(\mu=0.25\) and \(\kappa=0.08\). A sentence with \(\sigma<\mu\) contributes negatively. Let \(\mathrm{tokens}(i,j)\) be the sum of whitespace lengths of \(s_i\) through \(s_j\). Feasible intervals have \(\mathrm{tokens}(i,j)\le B\). The paper uses at most two intervals per document. The selection problem is to maximize \(U(i,j)\) over a single feasible interval, or \(U(i,j)+U(i',j')\) over two feasible intervals that do not overlap and whose token counts sum to at most \(B\).
+
+That problem is solved by enumeration, restricted to intervals of at most ten sentences. Documents with hundreds of sentences appear in SciFact. Unbounded pairwise search over all intervals is not usable. Candidate intervals are generated by fixing a start and extending at most ten sentences while the token sum stays at most \(B\). Pair selection uses the 40 highest-utility intervals.
+
+\subsection{Packing}
+Initialize an empty prompt and \(\mathrm{used}=0\). For each document in Score order, let \(t\) be the whitespace length of its selected spans. If the prompt is still empty, admit those spans. If the prompt is non-empty and \(\mathrm{used}+t\le B\), admit them. Otherwise skip that document. Stop when \(\mathrm{used}\ge B\). The first document is never skipped, so prompts are never empty. Prompt token counts in Section~\ref{sec:results} are this \(\mathrm{used}\) value, averaged over queries. Baselines concatenate the first five retrieved chunks, or the first five full documents for BM25, parent-document retrieval, and hybrid RRF. Ranking metrics still use ten unique document IDs.
+
+\subsection{Conformal budgeting}
+Take a calibration set of \(N\) training queries with gold document sets \(G_k\). For query \(k\), run the same coarse retrieval, sentence scoring, ranking, and span program used at test time. Walk the ranked list, accumulating the whitespace length of each document's selected spans. Let \(B_k^*\) be the cumulative sum at the first position whose document ID lies in \(G_k\). If no gold document appears among the \(M\) candidates before a cap of 2000 words, set \(B_k^*=2000\). The calibrated budget is
+\begin{equation}
+\hat{B}=\mathrm{Quantile}\left(\{B_k^*\}_{k=1}^{N},\ \frac{\lceil (N+1)(1-\alpha)\rceil}{N}\right).
+\end{equation}
+A test query is covered if at least one gold document ID appears among the documents admitted under \(\hat{B}\). Calibration uses official BEIR training queries. The main table reports QALS at \(B=150\). The conformal numbers answer RQ3.
+
+\section{Experimental setup}
+The study is a retrieval comparison on two public corpora from BEIR \citep{thakur2021beir}. No generator is called. No RAGAs-style answer metric is computed.
+
+SciFact contains 5183 scientific abstracts with expert claim-verification queries \citep{wadden2020fact}. NFCorpus contains 3633 medical nutrition documents with consumer-health queries \citep{boteva2016full}. Both collections are used in full for indexing. Evaluation uses the official BEIR test qrels. Queries are those with at least one positively judged document. From that filtered list we take the first 150 SciFact test queries and the first 100 NFCorpus test queries. File order, not a random subsample. Conformal calibration reads the official training qrels. nDCG uses gain \(2^{\mathrm{rel}}-1\). Recall@10 is \(|\mathrm{retrieved}\cap\mathrm{gold}|/|\mathrm{gold}|\) at cutoff 10.
+
+All dense vectors come from Sentence-Transformers all-MiniLM-L6-v2 on CPU \citep{reimers2019sentence}. The same weights encode QALS sentences, QALS coarse strings, recursive-splitter chunks, and parent-document child chunks. BM25 does not use the encoder.
+
+Systems. Recursive 500c: LangChain \texttt{RecursiveCharacterTextSplitter}, size 500, overlap 50. Recursive 1000c: size 1000, overlap 100. Parent document: child size 200, overlap 20, full parent charged in the prompt. Okapi BM25 over full documents. Hybrid RRF of 500c dense and BM25 with constant 60 \citep{cormack2009reciprocal}, full documents charged. QALS with \(M=100\), \(\mu=0.25\), \(\kappa=0.08\), at most two spans, packer under \(B=150\).
+
+Every system is scored with document nDCG@10 and document Recall@10. Prompt tokens are whitespace words. For baselines they are the sum over five concatenated units. For QALS they are packed span words under \(B\).
+
+\section{Results}
+\label{sec:results}
+Table~\ref{tab:main} reports document ranking at \(k=10\) and mean prompt tokens. Figure~\ref{fig:pareto} plots nDCG@10 against prompt tokens. Figure~\ref{fig:tokens} isolates the token column.
+
+\begin{table*}[t]
+\centering
+\caption{Document nDCG@10 and Recall@10 at cutoff 10. Prompt tokens are five concatenated units for baselines and packed spans under \(B=150\) for QALS. Whitespace words, not subword tokens.}
+\label{tab:main}
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{3}{c}{SciFact} & \multicolumn{3}{c}{NFCorpus} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+System & nDCG@10 & Rec@10 & Tokens & nDCG@10 & Rec@10 & Tokens \\
+\midrule
+Recursive 500c & \ScifactLcNdcg & -- & \ScifactLcTok & \NfLcNdcg & -- & \NfLcTok \\
+Recursive 1000c & \ScifactLclongNdcg & -- & \ScifactLclongTok & \NfLclongNdcg & -- & \NfLclongTok \\
+Parent document & \ScifactParentNdcg & -- & \ScifactParentTok & \NfParentNdcg & -- & \NfParentTok \\
+BM25 & \ScifactBmNdcg & -- & \ScifactBmTok & \NfBmNdcg & -- & \NfBmTok \\
+Hybrid RRF & \ScifactHybridNdcg & -- & \ScifactHybridTok & \NfHybridNdcg & -- & \NfHybridTok \\
+QALS, \(B=150\) & \ScifactQalsNdcg & \ScifactQalsRec & \ScifactQalsTok & \NfQalsNdcg & \NfQalsRec & \NfQalsTok \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{Figure_1.png}
+\caption{Document nDCG@10 versus mean prompt tokens. Lower right is worse. QALS is built for the low-token side of the plane.}
+\label{fig:pareto}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{Figure_2.png}
+\caption{Mean prompt tokens at the production operating point in Table~\ref{tab:main}.}
+\label{fig:tokens}
+\end{figure}
+
+nDCG@10 is ranking. Tokens are prompting. A row can win one column and lose the other. Recall@10 on NFCorpus is naturally low for every system that returns ten documents against long gold sets.
+
+On SciFact, QALS records \ScifactQalsNdcg\ nDCG@10 and \ScifactQalsRec\ Recall@10 at \ScifactQalsTok\ prompt words. The 500c splitter records \ScifactLcNdcg\ at \ScifactLcTok\ words. Hybrid RRF records \ScifactHybridNdcg\ at \ScifactHybridTok\ words. BM25 records \ScifactBmNdcg. Parent-document retrieval records \ScifactParentNdcg\ at \ScifactParentTok\ words. Hybrid is allowed to lead SciFact nDCG. The ranking gap we are willing to lose is hybrid versus QALS. The token gap we are not willing to ignore is hybrid versus QALS.
+
+On NFCorpus, QALS records \NfQalsNdcg\ nDCG@10 and \NfQalsRec\ Recall@10 at \NfQalsTok\ words. The 500c splitter records \NfLcNdcg\ at \NfLcTok. Parent-document retrieval records \NfParentNdcg\ at \NfParentTok. Hybrid records \NfHybridNdcg\ at \NfHybridTok. Parent expansion can help ranking on longer medical documents and still be unusable as a prompt policy. On SciFact it can fail to help nDCG and still charge a full-document prompt.
+
+Table~\ref{tab:conf} lists \(\hat{B}\) and test coverage on SciFact. At \(\alpha=0.1\) and \(\alpha=0.2\) the SciFact quantile saturates at the 2000-word cap: \(\hat{B}=\)~\ConfBhatA, test coverage \ConfCovA\ against targets 0.90 and 0.80. Mean \(B_k^*\) is 776 words. Gold documents often sit too far down the MiniLM list for a 150-word packer to include them. Coverage 0.87 at 1900 packed words is a first-stage ranking limit, not a span-program failure. \(B=150\) is a compactness operating point. It is not a 90 percent inclusion budget. On NFCorpus, \(\alpha=0.2\) yields \(\hat{B}=1484\) with coverage 0.75, and \(\alpha=0.1\) again hits the cap with coverage 0.77. RQ3's answer is negative in the strong form. Split-conformal token depth, with this encoder and this packer, inflates \(B\) until the prompt looks like parent-document retrieval.
+
+Packed-document nDCG@10 at \(B=150\) is lower than ranking nDCG@10, 0.558 versus 0.6955 on SciFact, because the packer keeps a handful of spans. Table~\ref{tab:main} reports ranking nDCG so QALS is compared with other retrievers on the same cutoff. The generator, if one were called, would see the packed spans.
+
+\begin{table}[t]
+\centering
+\caption{Split-conformal budgets fit on SciFact training queries. Both error rates hit the 2000-word cap. NFCorpus values are in the JSON release.}
+\label{tab:conf}
+\begin{tabular}{lccc}
+\toprule
+\(\alpha\) & Target & \(\hat{B}\) & Test coverage \\
+\midrule
+0.10 & 0.90 & \ConfBhatA & \ConfCovA \\
+0.20 & 0.80 & \ConfBhatB & \ConfCovB \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion and limitations}
+\label{sec:limits}
+QALS does not learn where to cut. It enumerates contiguous sentence intervals and picks one interval or two. The only trained component is a bi-encoder that was not trained for this paper. If the method works, it works because sentence vectors plus a budgeted 1D program are a better interface to MiniLM than frozen character windows.
+
+Competitive ranking is not equal ranking. If QALS sits below hybrid RRF on SciFact nDCG@10, hybrid is the better ranker on that corpus in this experiment. Saying tokens matter does not erase that. What we refuse is the opposite cheat: reporting hybrid nDCG without hybrid tokens, or parent nDCG on NFCorpus without parent tokens.
+
+Whitespace words are a limitation. \(B=150\) words on scientific English is not 150 Llama tokens. Anyone who ships QALS in front of a generator should recalibrate \(B\) in that generator's tokenizer. The study is retrieval-only. \citet{lewis2020retrieval} defined RAG as retrieve-then-generate. We stop at retrieve. Whether a generator prefers QALS spans to five 500-character chunks is untested.
+
+No ColBERT comparison is a limitation with a specific shape. \citet{khattab2020colbert} already showed that token-level late interaction can outrank pooled dual encoders. QALS uses a sentence-level peak, not a token lattice. Two datasets are a limitation. Query truncation to the first 150 and 100 official test queries is a limitation inside those datasets. Coarse \(M=100\) cannot cover a gold document that never entered \(\mathcal{C}_M\). The Score weights \(0.4\) and \(0.6\) were not grid-searched. Sentence splitting will fail on tables, captions, and code. Training and test queries are different BEIR draws, so conformal exchangeability is approximate. We treat the quantile as a calibrated heuristic with a target \(1-\alpha\), and we measure coverage.
+
+\section{Conclusion}
+QALS indexes documents as title-contextualized sentence multi-vectors and a coarse vector, ranks with \(\mathrm{Score}(D)=0.4\) coarse \(+0.6\) max sentence similarity, and fills a prompt by solving a 1D segmentation problem. It enumerates contiguous intervals and takes at most two non-overlapping spans under a whitespace budget \(B\). Split-conformal prediction sets \(B\) from gold-inclusion token depth on training queries. nDCG@10 is document ranking at cutoff 10 for every system. Prompt tokens are five concatenated units for baselines and packed spans for QALS. On BEIR SciFact and NFCorpus that design is a Pareto retriever. Hybrid RRF often leads SciFact nDCG@10 at full-document token cost. QALS is the low-token point that remains competitive on document ranking. The paper does not measure generation. It does not compare to ColBERT. It uses two corpora and a whitespace length. Those limits bound the claim.
+
+\section*{Data availability}
+The SciFact and NFCorpus collections are part of BEIR \citep{thakur2021beirdataset}. Reproduction scripts for the tables are included as supplementary material. A public repository will be linked after acceptance so that double-anonymized review is preserved.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During the preparation of this work the authors used Cursor Grok~4.6 in order to draft and revise manuscript text, check citations against public bibliographic records, and prepare submission files. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+\end{document}

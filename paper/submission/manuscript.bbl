@@ -1,0 +1,405 @@
+\begin{thebibliography}{37}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Angelopoulos and Bates(2023)}]{angelopoulos2023conformal}
+\bibinfo{author}{Angelopoulos, A.N.}, \bibinfo{author}{Bates, S.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Conformal prediction: A gentle introduction}.
+\newblock \bibinfo{journal}{Foundations and Trends in Machine Learning}
+  \bibinfo{volume}{16}, \bibinfo{pages}{494--591}.
+\newblock \DOIprefix\doi{10.1561/2200000101}.
+%Type = Inproceedings
+\bibitem[{Asai et~al.(2024)Asai, Wu, Wang, Sil and Hajishirzi}]{asai2024self}
+\bibinfo{author}{Asai, A.}, \bibinfo{author}{Wu, Z.}, \bibinfo{author}{Wang,
+  Y.}, \bibinfo{author}{Sil, A.}, \bibinfo{author}{Hajishirzi, H.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Self-{RAG}: Learning to retrieve, generate, and
+  critique through self-reflection}, in: \bibinfo{booktitle}{The Twelfth
+  International Conference on Learning Representations}.
+%Type = Article
+\bibitem[{Bhat et~al.(2025)Bhat, Rudat, Spiekermann and
+  Flores-Herr}]{bhat2025rethinking}
+\bibinfo{author}{Bhat, S.R.}, \bibinfo{author}{Rudat, M.},
+  \bibinfo{author}{Spiekermann, J.}, \bibinfo{author}{Flores-Herr, N.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Rethinking chunk size for long-document retrieval: A
+  multi-dataset analysis}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2505.21700} .
+%Type = Inproceedings
+\bibitem[{Boteva et~al.(2016)Boteva, Gholipour, Sokolov and
+  Riezler}]{boteva2016full}
+\bibinfo{author}{Boteva, V.}, \bibinfo{author}{Gholipour, D.},
+  \bibinfo{author}{Sokolov, A.}, \bibinfo{author}{Riezler, S.},
+  \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{A full-text learning to rank dataset for medical
+  information retrieval}, in: \bibinfo{booktitle}{Advances in Information
+  Retrieval: 38th European Conference on {IR} Research ({ECIR} 2016)},
+  \bibinfo{publisher}{Springer}. pp. \bibinfo{pages}{716--722}.
+\newblock \DOIprefix\doi{10.1007/978-3-319-30671-1_72}.
+%Type = Inproceedings
+\bibitem[{Chen et~al.(2024)Chen, Wang, Chen, Yu, Ma, Zhao, Zhang and
+  Yu}]{chen2024dense}
+\bibinfo{author}{Chen, T.}, \bibinfo{author}{Wang, H.}, \bibinfo{author}{Chen,
+  S.}, \bibinfo{author}{Yu, W.}, \bibinfo{author}{Ma, K.},
+  \bibinfo{author}{Zhao, X.}, \bibinfo{author}{Zhang, H.}, \bibinfo{author}{Yu,
+  D.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Dense {X} retrieval: What retrieval granularity
+  should we use?}, in: \bibinfo{booktitle}{Proceedings of the 2024 Conference
+  on Empirical Methods in Natural Language Processing},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{15159--15177}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.emnlp-main.845}.
+%Type = Inproceedings
+\bibitem[{Cormack et~al.(2009)Cormack, Clarke and
+  B{\"u}ttcher}]{cormack2009reciprocal}
+\bibinfo{author}{Cormack, G.V.}, \bibinfo{author}{Clarke, C.L.A.},
+  \bibinfo{author}{B{\"u}ttcher, S.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{Reciprocal rank fusion outperforms condorcet and
+  individual rank learning methods}, in: \bibinfo{booktitle}{Proceedings of the
+  32nd International {ACM} {SIGIR} Conference on Research and Development in
+  Information Retrieval}, \bibinfo{publisher}{ACM}. pp.
+  \bibinfo{pages}{758--759}.
+\newblock \DOIprefix\doi{10.1145/1571941.1572114}.
+%Type = Inproceedings
+\bibitem[{Es et~al.(2024)Es, James, Espinosa~Anke and Schockaert}]{es2024ragas}
+\bibinfo{author}{Es, S.}, \bibinfo{author}{James, J.},
+  \bibinfo{author}{Espinosa~Anke, L.}, \bibinfo{author}{Schockaert, S.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{RAGAs}: Automated evaluation of retrieval augmented
+  generation}, in: \bibinfo{booktitle}{Proceedings of the 18th Conference of
+  the European Chapter of the Association for Computational Linguistics: System
+  Demonstrations}, \bibinfo{publisher}{Association for Computational
+  Linguistics}. pp. \bibinfo{pages}{150--158}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.eacl-demo.16}.
+%Type = Article
+\bibitem[{Gao et~al.(2023)Gao, Xiong, Gao, Jia, Pan, Bi, Dai, Sun, Wang and
+  Wang}]{gao2023retrieval}
+\bibinfo{author}{Gao, Y.}, \bibinfo{author}{Xiong, Y.}, \bibinfo{author}{Gao,
+  X.}, \bibinfo{author}{Jia, K.}, \bibinfo{author}{Pan, J.},
+  \bibinfo{author}{Bi, Y.}, \bibinfo{author}{Dai, Y.}, \bibinfo{author}{Sun,
+  J.}, \bibinfo{author}{Wang, M.}, \bibinfo{author}{Wang, H.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Retrieval-augmented generation for large language
+  models: A survey}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2312.10997} .
+%Type = Article
+\bibitem[{G{\"u}nther et~al.(2024)G{\"u}nther, Mohr, Williams, Wang and
+  Xiao}]{gunther2024late}
+\bibinfo{author}{G{\"u}nther, M.}, \bibinfo{author}{Mohr, I.},
+  \bibinfo{author}{Williams, D.J.}, \bibinfo{author}{Wang, B.},
+  \bibinfo{author}{Xiao, H.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Late chunking: Contextual chunk embeddings using
+  long-context embedding models}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2409.04701} .
+%Type = Inproceedings
+\bibitem[{Hofst{\"a}tter et~al.(2021)Hofst{\"a}tter, Lin, Yang, Lin and
+  Hanbury}]{hofstatter2021efficiently}
+\bibinfo{author}{Hofst{\"a}tter, S.}, \bibinfo{author}{Lin, S.C.},
+  \bibinfo{author}{Yang, J.H.}, \bibinfo{author}{Lin, J.},
+  \bibinfo{author}{Hanbury, A.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Efficiently teaching an effective dense retriever
+  with balanced topic aware sampling}, in: \bibinfo{booktitle}{Proceedings of
+  the 44th International {ACM} {SIGIR} Conference on Research and Development
+  in Information Retrieval}, \bibinfo{publisher}{ACM}. pp.
+  \bibinfo{pages}{113--122}.
+\newblock \DOIprefix\doi{10.1145/3404835.3462891}.
+%Type = Inproceedings
+\bibitem[{Intrator et~al.(2024)Intrator, Cohen, Kelner, Goldenberg, Rivlin and
+  Freedman}]{intrator2024streamlining}
+\bibinfo{author}{Intrator, Y.}, \bibinfo{author}{Cohen, R.},
+  \bibinfo{author}{Kelner, O.}, \bibinfo{author}{Goldenberg, R.},
+  \bibinfo{author}{Rivlin, E.}, \bibinfo{author}{Freedman, D.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Streamlining conformal information retrieval via
+  score refinement}, in: \bibinfo{booktitle}{Proceedings of the Seventh Fact
+  Extraction and {VER}ification Workshop ({FEVER})},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{186--191}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.fever-1.22}.
+%Type = Article
+\bibitem[{Izacard et~al.(2022)Izacard, Caron, Hosseini, Riedel, Bojanowski,
+  Joulin and Grave}]{izacard2022unsupervised}
+\bibinfo{author}{Izacard, G.}, \bibinfo{author}{Caron, M.},
+  \bibinfo{author}{Hosseini, L.}, \bibinfo{author}{Riedel, S.},
+  \bibinfo{author}{Bojanowski, P.}, \bibinfo{author}{Joulin, A.},
+  \bibinfo{author}{Grave, E.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Unsupervised dense information retrieval with
+  contrastive learning}.
+\newblock \bibinfo{journal}{Transactions on Machine Learning Research} .
+%Type = Inproceedings
+\bibitem[{Jeong et~al.(2024)Jeong, Baek, Cho, Hwang and
+  Park}]{jeong2024adaptive}
+\bibinfo{author}{Jeong, S.}, \bibinfo{author}{Baek, J.}, \bibinfo{author}{Cho,
+  S.}, \bibinfo{author}{Hwang, S.J.}, \bibinfo{author}{Park, J.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Adaptive-{RAG}: Learning to adapt retrieval-augmented
+  large language models through question complexity}, in:
+  \bibinfo{booktitle}{Proceedings of the 2024 Conference of the {N}orth
+  {A}merican Chapter of the Association for Computational Linguistics: Human
+  Language Technologies (Volume 1: Long Papers)},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{7036--7050}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.naacl-long.389}.
+%Type = Inproceedings
+\bibitem[{Jiang et~al.(2023)Jiang, Wu, Lin, Yang and Qiu}]{jiang2023llmlingua}
+\bibinfo{author}{Jiang, H.}, \bibinfo{author}{Wu, Q.}, \bibinfo{author}{Lin,
+  C.Y.}, \bibinfo{author}{Yang, Y.}, \bibinfo{author}{Qiu, L.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{{LLMLingua}: Compressing prompts for accelerated
+  inference of large language models}, in: \bibinfo{booktitle}{Proceedings of
+  the 2023 Conference on Empirical Methods in Natural Language Processing},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{13358--13376}.
+\newblock \DOIprefix\doi{10.18653/v1/2023.emnlp-main.825}.
+%Type = Inproceedings
+\bibitem[{Jiang et~al.(2024)Jiang, Wu, Luo, Li, Lin, Yang and
+  Qiu}]{jiang2024longllmlingua}
+\bibinfo{author}{Jiang, H.}, \bibinfo{author}{Wu, Q.}, \bibinfo{author}{Luo,
+  X.}, \bibinfo{author}{Li, D.}, \bibinfo{author}{Lin, C.Y.},
+  \bibinfo{author}{Yang, Y.}, \bibinfo{author}{Qiu, L.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{LongLLMLingua}: Accelerating and enhancing {LLM}s in
+  long context scenarios via prompt compression}, in:
+  \bibinfo{booktitle}{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{1658--1677}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.acl-long.91}.
+%Type = Inproceedings
+\bibitem[{Kang et~al.(2024)Kang, G{\"u}rel, Yu, Song and Li}]{kang2024crag}
+\bibinfo{author}{Kang, M.}, \bibinfo{author}{G{\"u}rel, N.M.},
+  \bibinfo{author}{Yu, N.}, \bibinfo{author}{Song, D.}, \bibinfo{author}{Li,
+  B.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{C-RAG}: Certified generation risks for
+  retrieval-augmented language models}, in: \bibinfo{booktitle}{Proceedings of
+  the 41st International Conference on Machine Learning},
+  \bibinfo{publisher}{PMLR}. pp. \bibinfo{pages}{22963--23000}.
+%Type = Inproceedings
+\bibitem[{Karpukhin et~al.(2020)Karpukhin, Oguz, Min, Lewis, Wu, Edunov, Chen
+  and Yih}]{karpukhin2020dense}
+\bibinfo{author}{Karpukhin, V.}, \bibinfo{author}{Oguz, B.},
+  \bibinfo{author}{Min, S.}, \bibinfo{author}{Lewis, P.}, \bibinfo{author}{Wu,
+  L.}, \bibinfo{author}{Edunov, S.}, \bibinfo{author}{Chen, D.},
+  \bibinfo{author}{Yih, W.t.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Dense passage retrieval for open-domain question
+  answering}, in: \bibinfo{booktitle}{Proceedings of the 2020 Conference on
+  Empirical Methods in Natural Language Processing (EMNLP)},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{6769--6781}.
+\newblock \DOIprefix\doi{10.18653/v1/2020.emnlp-main.550}.
+%Type = Inproceedings
+\bibitem[{Khattab and Zaharia(2020)}]{khattab2020colbert}
+\bibinfo{author}{Khattab, O.}, \bibinfo{author}{Zaharia, M.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{{ColBERT}: Efficient and effective passage search via
+  contextualized late interaction over {BERT}}, in:
+  \bibinfo{booktitle}{Proceedings of the 43rd International {ACM} {SIGIR}
+  Conference on Research and Development in Information Retrieval},
+  \bibinfo{publisher}{ACM}. pp. \bibinfo{pages}{39--48}.
+\newblock \DOIprefix\doi{10.1145/3397271.3401075}.
+%Type = Article
+\bibitem[{Lei et~al.(2018)Lei, G'Sell, Rinaldo, Tibshirani and
+  Wasserman}]{lei2018distribution}
+\bibinfo{author}{Lei, J.}, \bibinfo{author}{G'Sell, M.},
+  \bibinfo{author}{Rinaldo, A.}, \bibinfo{author}{Tibshirani, R.J.},
+  \bibinfo{author}{Wasserman, L.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Distribution-free predictive inference for
+  regression}.
+\newblock \bibinfo{journal}{Journal of the American Statistical Association}
+  \bibinfo{volume}{113}, \bibinfo{pages}{1094--1111}.
+\newblock \DOIprefix\doi{10.1080/01621459.2017.1307956}.
+%Type = Inproceedings
+\bibitem[{Lewis et~al.(2020)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  K{\"u}ttler, Lewis, Yih, Rockt{\"a}schel, Riedel and
+  Kiela}]{lewis2020retrieval}
+\bibinfo{author}{Lewis, P.}, \bibinfo{author}{Perez, E.},
+  \bibinfo{author}{Piktus, A.}, \bibinfo{author}{Petroni, F.},
+  \bibinfo{author}{Karpukhin, V.}, \bibinfo{author}{Goyal, N.},
+  \bibinfo{author}{K{\"u}ttler, H.}, \bibinfo{author}{Lewis, M.},
+  \bibinfo{author}{Yih, W.t.}, \bibinfo{author}{Rockt{\"a}schel, T.},
+  \bibinfo{author}{Riedel, S.}, \bibinfo{author}{Kiela, D.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Retrieval-augmented generation for
+  knowledge-intensive {NLP} tasks}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems}, pp. \bibinfo{pages}{9459--9474}.
+%Type = Inproceedings
+\bibitem[{Li et~al.(2024)Li, Park, Lee and Bastani}]{li2024traq}
+\bibinfo{author}{Li, S.}, \bibinfo{author}{Park, S.}, \bibinfo{author}{Lee,
+  I.}, \bibinfo{author}{Bastani, O.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{TRAQ}: Trustworthy retrieval augmented question
+  answering via conformal prediction}, in: \bibinfo{booktitle}{Proceedings of
+  the 2024 Conference of the {N}orth {A}merican Chapter of the Association for
+  Computational Linguistics: Human Language Technologies (Volume 1: Long
+  Papers)}, \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{3799--3821}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.naacl-long.210}.
+%Type = Article
+\bibitem[{Liu et~al.(2024)Liu, Lin, Hewitt, Paranjape, Bevilacqua, Petroni and
+  Liang}]{liu2024lost}
+\bibinfo{author}{Liu, N.F.}, \bibinfo{author}{Lin, K.},
+  \bibinfo{author}{Hewitt, J.}, \bibinfo{author}{Paranjape, A.},
+  \bibinfo{author}{Bevilacqua, M.}, \bibinfo{author}{Petroni, F.},
+  \bibinfo{author}{Liang, P.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Lost in the middle: How language models use long
+  contexts}.
+\newblock \bibinfo{journal}{Transactions of the Association for Computational
+  Linguistics} \bibinfo{volume}{12}, \bibinfo{pages}{157--173}.
+\newblock \DOIprefix\doi{10.1162/tacl_a_00638}.
+%Type = Inproceedings
+\bibitem[{Qu et~al.(2025)Qu, Tu and Bao}]{qu2025semantic}
+\bibinfo{author}{Qu, R.}, \bibinfo{author}{Tu, R.}, \bibinfo{author}{Bao,
+  F.S.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Is semantic chunking worth the computational cost?},
+  in: \bibinfo{booktitle}{Findings of the Association for Computational
+  Linguistics: {NAACL} 2025}, \bibinfo{publisher}{Association for Computational
+  Linguistics}. pp. \bibinfo{pages}{2155--2177}.
+\newblock \DOIprefix\doi{10.18653/v1/2025.findings-naacl.114}.
+%Type = Inproceedings
+\bibitem[{Quach et~al.(2024)Quach, Fisch, Schuster, Yala, Sohn, Jaakkola and
+  Barzilay}]{quach2024conformal}
+\bibinfo{author}{Quach, V.}, \bibinfo{author}{Fisch, A.},
+  \bibinfo{author}{Schuster, T.}, \bibinfo{author}{Yala, A.},
+  \bibinfo{author}{Sohn, J.H.}, \bibinfo{author}{Jaakkola, T.S.},
+  \bibinfo{author}{Barzilay, R.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Conformal language modeling}, in:
+  \bibinfo{booktitle}{The Twelfth International Conference on Learning
+  Representations}.
+%Type = Inproceedings
+\bibitem[{Reimers and Gurevych(2019)}]{reimers2019sentence}
+\bibinfo{author}{Reimers, N.}, \bibinfo{author}{Gurevych, I.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Sentence-{BERT}: Sentence embeddings using {S}iamese
+  {BERT}-networks}, in: \bibinfo{booktitle}{Proceedings of the 2019 Conference
+  on Empirical Methods in Natural Language Processing and the 9th International
+  Joint Conference on Natural Language Processing (EMNLP-IJCNLP)},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{3982--3992}.
+\newblock \DOIprefix\doi{10.18653/v1/D19-1410}.
+%Type = Article
+\bibitem[{Robertson and Zaragoza(2009)}]{robertson2009probabilistic}
+\bibinfo{author}{Robertson, S.}, \bibinfo{author}{Zaragoza, H.},
+  \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{The probabilistic relevance framework: {BM25} and
+  beyond}.
+\newblock \bibinfo{journal}{Foundations and Trends in Information Retrieval}
+  \bibinfo{volume}{3}, \bibinfo{pages}{333--389}.
+\newblock \DOIprefix\doi{10.1561/1500000019}.
+%Type = Article
+\bibitem[{Rouzrokh et~al.(2024)Rouzrokh, Faghani, Gamble, Shariatnia and
+  Erickson}]{rouzrokh2024conflare}
+\bibinfo{author}{Rouzrokh, P.}, \bibinfo{author}{Faghani, S.},
+  \bibinfo{author}{Gamble, C.U.}, \bibinfo{author}{Shariatnia, M.},
+  \bibinfo{author}{Erickson, B.J.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{CONFLARE}: {CONF}ormal {LA}rge language model
+  {RE}trieval}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2404.04287} .
+%Type = Inproceedings
+\bibitem[{Santhanam et~al.(2022a)Santhanam, Khattab, Potts and
+  Zaharia}]{santhanam2022plaid}
+\bibinfo{author}{Santhanam, K.}, \bibinfo{author}{Khattab, O.},
+  \bibinfo{author}{Potts, C.}, \bibinfo{author}{Zaharia, M.},
+  \bibinfo{year}{2022}a.
+\newblock \bibinfo{title}{{PLAID}: An efficient engine for late interaction
+  retrieval}, in: \bibinfo{booktitle}{Proceedings of the 31st {ACM}
+  International Conference on Information and Knowledge Management},
+  \bibinfo{publisher}{ACM}. pp. \bibinfo{pages}{1747--1756}.
+\newblock \DOIprefix\doi{10.1145/3511808.3557325}.
+%Type = Inproceedings
+\bibitem[{Santhanam et~al.(2022b)Santhanam, Khattab, Saad-Falcon, Potts and
+  Zaharia}]{santhanam2022colbertv2}
+\bibinfo{author}{Santhanam, K.}, \bibinfo{author}{Khattab, O.},
+  \bibinfo{author}{Saad-Falcon, J.}, \bibinfo{author}{Potts, C.},
+  \bibinfo{author}{Zaharia, M.}, \bibinfo{year}{2022}b.
+\newblock \bibinfo{title}{{ColBERT}v2: Effective and efficient retrieval via
+  lightweight late interaction}, in: \bibinfo{booktitle}{Proceedings of the
+  2022 Conference of the {N}orth {A}merican Chapter of the Association for
+  Computational Linguistics: Human Language Technologies},
+  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
+  \bibinfo{pages}{3715--3734}.
+\newblock \DOIprefix\doi{10.18653/v1/2022.naacl-main.272}.
+%Type = Inproceedings
+\bibitem[{Sarthi et~al.(2024)Sarthi, Abdullah, Tuli, Khanna, Goldie and
+  Manning}]{sarthi2024raptor}
+\bibinfo{author}{Sarthi, P.}, \bibinfo{author}{Abdullah, S.},
+  \bibinfo{author}{Tuli, A.}, \bibinfo{author}{Khanna, S.},
+  \bibinfo{author}{Goldie, A.}, \bibinfo{author}{Manning, C.D.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{RAPTOR}: Recursive abstractive processing for
+  tree-organized retrieval}, in: \bibinfo{booktitle}{The Twelfth International
+  Conference on Learning Representations}.
+%Type = Article
+\bibitem[{Taguchi et~al.(2025)Taguchi, Maekawa and
+  Bhutani}]{taguchi2025efficient}
+\bibinfo{author}{Taguchi, C.}, \bibinfo{author}{Maekawa, S.},
+  \bibinfo{author}{Bhutani, N.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Efficient context selection for long-context {QA}: No
+  tuning, no iteration, just adaptive-{$k$}}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2506.08479} .
+%Type = Inproceedings
+\bibitem[{Thakur et~al.(2021a)Thakur, Reimers, R{\"u}ckl{\'e}, Srivastava and
+  Gurevych}]{thakur2021beir}
+\bibinfo{author}{Thakur, N.}, \bibinfo{author}{Reimers, N.},
+  \bibinfo{author}{R{\"u}ckl{\'e}, A.}, \bibinfo{author}{Srivastava, A.},
+  \bibinfo{author}{Gurevych, I.}, \bibinfo{year}{2021}a.
+\newblock \bibinfo{title}{{BEIR}: A heterogeneous benchmark for zero-shot
+  evaluation of information retrieval models}, in:
+  \bibinfo{booktitle}{Thirty-fifth Conference on Neural Information Processing
+  Systems Datasets and Benchmarks Track (Round 2)}.
+%Type = Misc
+\bibitem[{Thakur et~al.(2021b)Thakur, Reimers, R{\"u}ckl{\'e}, Srivastava and
+  Gurevych}]{thakur2021beirdataset}
+\bibinfo{author}{Thakur, N.}, \bibinfo{author}{Reimers, N.},
+  \bibinfo{author}{R{\"u}ckl{\'e}, A.}, \bibinfo{author}{Srivastava, A.},
+  \bibinfo{author}{Gurevych, I.}, \bibinfo{year}{2021}b.
+\newblock \bibinfo{title}{{BEIR}: A heterogeneous benchmark for zero-shot
+  evaluation of information retrieval models}.
+\newblock \URLprefix \url{https://github.com/beir-cellar/beir}.
+  \bibinfo{note}{[dataset]}.
+%Type = Book
+\bibitem[{Vovk et~al.(2005)Vovk, Gammerman and Shafer}]{vovk2005algorithmic}
+\bibinfo{author}{Vovk, V.}, \bibinfo{author}{Gammerman, A.},
+  \bibinfo{author}{Shafer, G.}, \bibinfo{year}{2005}.
+\newblock \bibinfo{title}{Algorithmic Learning in a Random World}.
+\newblock \bibinfo{publisher}{Springer}.
+\newblock \DOIprefix\doi{10.1007/b106715}.
+%Type = Inproceedings
+\bibitem[{Wadden et~al.(2020)Wadden, Lin, Lo, Wang, van Zuylen, Cohan and
+  Hajishirzi}]{wadden2020fact}
+\bibinfo{author}{Wadden, D.}, \bibinfo{author}{Lin, S.}, \bibinfo{author}{Lo,
+  K.}, \bibinfo{author}{Wang, L.L.}, \bibinfo{author}{van Zuylen, M.},
+  \bibinfo{author}{Cohan, A.}, \bibinfo{author}{Hajishirzi, H.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Fact or fiction: Verifying scientific claims}, in:
+  \bibinfo{booktitle}{Proceedings of the 2020 Conference on Empirical Methods
+  in Natural Language Processing (EMNLP)}, \bibinfo{publisher}{Association for
+  Computational Linguistics}. pp. \bibinfo{pages}{7534--7550}.
+\newblock \DOIprefix\doi{10.18653/v1/2020.emnlp-main.609}.
+%Type = Article
+\bibitem[{Wang et~al.(2022)Wang, Yang, Huang, Jiao, Yang, Jiang, Majumder and
+  Wei}]{wang2022text}
+\bibinfo{author}{Wang, L.}, \bibinfo{author}{Yang, N.}, \bibinfo{author}{Huang,
+  X.}, \bibinfo{author}{Jiao, B.}, \bibinfo{author}{Yang, L.},
+  \bibinfo{author}{Jiang, D.}, \bibinfo{author}{Majumder, R.},
+  \bibinfo{author}{Wei, F.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Text embeddings by weakly-supervised contrastive
+  pre-training}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2212.03533} .
+%Type = Inproceedings
+\bibitem[{Xu et~al.(2024)Xu, Shi and Choi}]{xu2024recomp}
+\bibinfo{author}{Xu, F.}, \bibinfo{author}{Shi, W.}, \bibinfo{author}{Choi,
+  E.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{RECOMP}: Improving retrieval-augmented {LM}s with
+  context compression and selective augmentation}, in: \bibinfo{booktitle}{The
+  Twelfth International Conference on Learning Representations}.
+
+\end{thebibliography}
