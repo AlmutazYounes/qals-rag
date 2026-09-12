@@ -1,0 +1,42 @@
+{
+  "BM25 (Fixed k=5)": {
+    "Hit Rate": 0.9714,
+    "MRR": 0.8986,
+    "NDCG": 0.9133,
+    "Avg Delivered Tokens": 1206.5,
+    "Signal-to-Noise Ratio (Gold/Total Tokens)": 27.57,
+    "Avg Latency (ms)": 0.54
+  },
+  "Flat Dense (Fixed k=5)": {
+    "Hit Rate": 0.9429,
+    "MRR": 0.9143,
+    "NDCG": 0.9068,
+    "Avg Delivered Tokens": 314.6,
+    "Signal-to-Noise Ratio (Gold/Total Tokens)": 61.61,
+    "Avg Latency (ms)": 84.6
+  },
+  "Parent-Document (Fixed k=5)": {
+    "Hit Rate": 0.9429,
+    "MRR": 0.9238,
+    "NDCG": 0.9286,
+    "Avg Delivered Tokens": 1038.0,
+    "Signal-to-Noise Ratio (Gold/Total Tokens)": 29.31,
+    "Avg Latency (ms)": 103.59
+  },
+  "QALS (Budget=150)": {
+    "Hit Rate": 0.9143,
+    "MRR": 0.9143,
+    "NDCG": 0.9143,
+    "Avg Delivered Tokens": 142.3,
+    "Signal-to-Noise Ratio (Gold/Total Tokens)": 88.78,
+    "Avg Latency (ms)": 11.52
+  },
+  "QALS (Conformal Budget)": {
+    "Hit Rate": 0.9143,
+    "MRR": 0.9143,
+    "NDCG": 0.9143,
+    "Avg Delivered Tokens": 324.3,
+    "Signal-to-Noise Ratio (Gold/Total Tokens)": 49.0,
+    "Avg Latency (ms)": 9.21
+  }
+}

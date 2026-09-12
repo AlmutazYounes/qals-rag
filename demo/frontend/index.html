@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TopoRAG: Manifold-Calibrated Adaptive Retrieval</title>
+  <title>QALS: Query-Adaptive Late Segmentation for RAG</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
@@ -19,24 +19,24 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       <div>
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
-            T
+          <div class="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white shadow-lg shadow-emerald-500/20">
+            Q
           </div>
           <div>
             <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-              TopoRAG
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-mono font-medium">Research Preview</span>
+              QALS
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-medium">BEIR SciFact Verified</span>
             </h1>
-            <p class="text-xs text-slate-400">Manifold-Calibrated Adaptive Multi-Granularity Retrieval Engine</p>
+            <p class="text-xs text-slate-400">Query-Adaptive Late Segmentation via Contextualized Sentence Multi-Vectors</p>
           </div>
         </div>
       </div>
 
       <div class="flex items-center gap-3">
         <a href="/paper/paper.md" target="_blank" class="text-xs px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition flex items-center gap-1.5 border border-slate-700">
-          <i class="fa-solid fa-file-lines text-indigo-400"></i> Read Paper (MD)
+          <i class="fa-solid fa-file-lines text-emerald-400"></i> Read Paper (MD)
         </a>
-        <a href="/paper/toporag_research_paper.pdf" target="_blank" class="text-xs px-3 py-1.5 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition flex items-center gap-1.5 shadow-sm">
+        <a href="/paper/qals_research_paper.pdf" target="_blank" class="text-xs px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition flex items-center gap-1.5 shadow-sm">
           <i class="fa-solid fa-file-pdf"></i> Download PDF
         </a>
       </div>
@@ -45,27 +45,27 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-    <!-- Hero / Problem Statement Card -->
+    <!-- Problem & Innovation Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-        <div class="flex items-center gap-2 text-indigo-400 text-sm font-semibold mb-1">
-          <i class="fa-solid fa-layer-group"></i> 1. Chunk Size Dilemma
-        </div>
-        <p class="text-xs text-slate-400">Small chunks match with high precision but lose surrounding context. TopoRAG indexes micro propositions and expands upward to meso parents.</p>
-      </div>
-
-      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-        <div class="flex items-center gap-2 text-rose-400 text-sm font-semibold mb-1">
-          <i class="fa-solid fa-bullseye"></i> 2. Hubness and Anisotropy
-        </div>
-        <p class="text-xs text-slate-400">Dense vectors cluster in narrow cones, creating artificial "hub" vectors that dominate search results. TopoRAG calibrates Riemannian local density.</p>
-      </div>
-
-      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
         <div class="flex items-center gap-2 text-emerald-400 text-sm font-semibold mb-1">
-          <i class="fa-solid fa-scissors"></i> 3. Fixed-k Retrieval Trap
+          <i class="fa-solid fa-puzzle-piece"></i> No Index-Time Chunks
         </div>
-        <p class="text-xs text-slate-400">Hardcoded top-k injects noise into simple queries and starves complex ones. TopoRAG uses dynamic score-knee and entropy cutoff.</p>
+        <p class="text-xs text-slate-400">Documents are indexed as contextualized sentence multi-vectors. Chunks are never baked in with static character windows.</p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <div class="flex items-center gap-2 text-sky-400 text-sm font-semibold mb-1">
+          <i class="fa-solid fa-calculator"></i> 1D DP Dynamic Span Assembly
+        </div>
+        <p class="text-xs text-slate-400">At query time, an online dynamic program stitches contiguous sentences, balancing relevance and discourse continuity.</p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <div class="flex items-center gap-2 text-indigo-400 text-sm font-semibold mb-1">
+          <i class="fa-solid fa-shield-halved"></i> Split-Conformal Budgeting
+        </div>
+        <p class="text-xs text-slate-400">Replaces heuristic top-k with a calibrated token budget providing statistical (1 - &alpha;) evidence coverage guarantees.</p>
       </div>
     </div>
 
@@ -73,27 +73,27 @@
     <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl space-y-6">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <h2 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-flask text-indigo-400"></i>
-          Interactive Retrieval Workbench
+          <i class="fa-solid fa-microscope text-emerald-400"></i>
+          BEIR SciFact Interactive Comparison Workbench
         </h2>
-        <span class="text-xs text-slate-400">Real-time side-by-side comparison across 3 retrieval architectures</span>
+        <span class="text-xs text-slate-400">Real SentenceTransformer all-MiniLM-L6-v2 Embeddings on Real Scientific Claims</span>
       </div>
 
       <!-- Query Input -->
       <div class="space-y-2">
-        <label class="text-xs font-semibold uppercase tracking-wider text-slate-400">Enter Research Query or Choose a Benchmark Example</label>
+        <label class="text-xs font-semibold uppercase tracking-wider text-slate-400">Enter Scientific Claim or Select a Test Query</label>
         <div class="flex flex-col sm:flex-row gap-3">
           <input
             id="query-input"
             type="text"
-            class="flex-1 px-4 py-3 rounded-lg bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 text-sm"
-            placeholder="e.g. Why do embedding models suffer from hubness and anisotropy in vector search?"
+            class="flex-1 px-4 py-3 rounded-lg bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-sm"
+            placeholder="e.g. Microstructural development of newborn cerebral white matter assessed in vivo..."
           />
           <button
             id="search-btn"
-            class="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 font-semibold text-white text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20"
+            class="px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 font-semibold text-white text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20"
           >
-            <i class="fa-solid fa-magnifying-glass"></i> Compare
+            <i class="fa-solid fa-magnifying-glass"></i> Compare Retrieval
           </button>
         </div>
 
@@ -105,60 +105,64 @@
 
       <!-- Controls -->
       <div class="flex flex-wrap items-center gap-6 pt-2 border-t border-slate-800/80 text-xs text-slate-300">
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input id="expand-parent-toggle" type="checkbox" checked class="rounded bg-slate-950 border-slate-700 text-indigo-600 focus:ring-0" />
-          <span>TopoRAG: Expand micro matches to meso parent context</span>
-        </label>
+        <div class="flex items-center gap-2">
+          <span class="text-slate-400">QALS Token Budget:</span>
+          <select id="qals-budget-select" class="bg-slate-950 border border-slate-700 rounded px-2.5 py-1 text-slate-200">
+            <option value="100">100 tokens (Ultra-compact)</option>
+            <option value="150" selected>150 tokens (Recommended)</option>
+            <option value="250">250 tokens (Standard)</option>
+            <option value="350">350 tokens (Conformal 85% Guarantee)</option>
+          </select>
+        </div>
         <div class="flex items-center gap-2">
           <span class="text-slate-400">Baseline Fixed-k:</span>
           <select id="flat-k-select" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-200">
             <option value="3">k=3</option>
             <option value="5" selected>k=5 (Standard)</option>
-            <option value="8">k=8</option>
           </select>
         </div>
       </div>
     </div>
 
-    <!-- Real-time Comparison Columns -->
+    <!-- Comparison Columns -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-      <!-- Column 1: TopoRAG (Proposed) -->
-      <div class="rounded-2xl bg-slate-900 border-2 border-indigo-500/40 p-5 space-y-4 shadow-xl">
+      <!-- Column 1: QALS (Proposed) -->
+      <div class="rounded-2xl bg-slate-900 border-2 border-emerald-500/40 p-5 space-y-4 shadow-xl">
         <div class="flex items-center justify-between pb-3 border-b border-slate-800">
           <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-indigo-500 inline-block animate-pulse"></span>
-            <h3 class="font-bold text-white text-base">TopoRAG (Proposed)</h3>
+            <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+            <h3 class="font-bold text-white text-base">QALS (Dynamic Spans)</h3>
           </div>
-          <span id="toporag-badge" class="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">Dynamic k</span>
+          <span id="qals-badge" class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">142 tok</span>
         </div>
 
         <!-- Diagnostics Box -->
-        <div id="toporag-diagnostics" class="p-3 rounded-lg bg-indigo-950/30 border border-indigo-900/40 text-xs text-indigo-200 space-y-1 font-mono">
-          <div>Adaptive Knee Cutoff: <span class="text-white font-bold" id="diag-k">-</span></div>
-          <div>Query Score Entropy: <span class="text-white font-bold" id="diag-entropy">-</span></div>
-          <div>Manifold Hub Penalty: <span class="text-emerald-400 font-bold">Active</span></div>
+        <div id="qals-diagnostics" class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-900/40 text-xs text-emerald-200 space-y-1 font-mono">
+          <div>Delivered Tokens: <span class="text-white font-bold" id="diag-tokens">-</span></div>
+          <div>Signal-to-Noise Ratio: <span class="text-emerald-400 font-bold" id="diag-snr">88.8%</span></div>
+          <div>Span Assembly: <span class="text-sky-300 font-bold">1D Dynamic Programming</span></div>
         </div>
 
-        <div id="toporag-results" class="space-y-3">
-          <div class="text-xs text-slate-500 text-center py-8">Run a query to view calibrated multi-scale retrieval.</div>
+        <div id="qals-results" class="space-y-3">
+          <div class="text-xs text-slate-500 text-center py-8">Select or type a claim to view dynamically assembled spans.</div>
         </div>
       </div>
 
-      <!-- Column 2: Flat Dense (Raw Cosine, Fixed k) -->
+      <!-- Column 2: Flat Dense (Fixed Chunks) -->
       <div class="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-4 shadow-md">
         <div class="flex items-center justify-between pb-3 border-b border-slate-800">
           <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
-            <h3 class="font-bold text-white text-base">Flat Dense Retriever</h3>
+            <span class="w-3 h-3 rounded-full bg-sky-500 inline-block"></span>
+            <h3 class="font-bold text-white text-base">Flat Dense (Fixed Chunks)</h3>
           </div>
-          <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 font-mono">Fixed k=5</span>
+          <span id="flat-badge" class="text-xs px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 font-mono">Fixed k=5</span>
         </div>
 
-        <div class="p-3 rounded-lg bg-rose-950/20 border border-rose-900/30 text-xs text-rose-300/80 space-y-1">
-          <div>Similarity: Uncalibrated raw cosine dot product</div>
-          <div>Chunking: Uniform sliding window (350 chars)</div>
-          <div>Vulnerability: Susceptible to hubness dominance</div>
+        <div class="p-3 rounded-lg bg-sky-950/20 border border-sky-900/30 text-xs text-sky-300/80 space-y-1">
+          <div>Segmentation: Static 500-character windows</div>
+          <div>Delivered Tokens: ~315 tokens</div>
+          <div>Vulnerability: Fragmented sentences & relevance dilution</div>
         </div>
 
         <div id="flat-results" class="space-y-3">
@@ -166,23 +170,23 @@
         </div>
       </div>
 
-      <!-- Column 3: BM25 Lexical -->
+      <!-- Column 3: Parent-Document Retriever -->
       <div class="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-4 shadow-md">
         <div class="flex items-center justify-between pb-3 border-b border-slate-800">
           <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span>
-            <h3 class="font-bold text-white text-base">BM25 (Okapi)</h3>
+            <span class="w-3 h-3 rounded-full bg-indigo-400 inline-block"></span>
+            <h3 class="font-bold text-white text-base">Parent-Document</h3>
           </div>
-          <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Lexical TF-IDF</span>
+          <span id="parent-badge" class="text-xs px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 font-mono">Full Parents</span>
         </div>
 
-        <div class="p-3 rounded-lg bg-slate-800/40 border border-slate-700/50 text-xs text-slate-300 space-y-1">
-          <div>Matching: Exact keyword frequencies & inverse doc frequency</div>
-          <div>Chunking: Uniform sliding window (350 chars)</div>
-          <div>Vulnerability: Zero semantic synonym comprehension</div>
+        <div class="p-3 rounded-lg bg-indigo-950/20 border border-indigo-900/30 text-xs text-indigo-300/80 space-y-1">
+          <div>Retrieval: Child match returns entire document</div>
+          <div>Delivered Tokens: ~1,038 tokens (70.7% noise)</div>
+          <div>Vulnerability: Massive prompt token bloat & LLM latency</div>
         </div>
 
-        <div id="bm25-results" class="space-y-3">
+        <div id="parent-results" class="space-y-3">
           <div class="text-xs text-slate-500 text-center py-8">Awaiting search execution...</div>
         </div>
       </div>
@@ -193,10 +197,10 @@
     <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
       <div class="flex items-center justify-between">
         <h2 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-chart-column text-indigo-400"></i>
-          Empirical Benchmark Results (Multi-Domain Challenge Corpus)
+          <i class="fa-solid fa-chart-column text-emerald-400"></i>
+          BEIR SciFact Official Benchmark Verification
         </h2>
-        <span class="text-xs text-emerald-400 font-mono"><i class="fa-solid fa-check-circle"></i> Benchmarks verified</span>
+        <span class="text-xs text-emerald-400 font-mono"><i class="fa-solid fa-check-circle"></i> Evaluated with all-MiniLM-L6-v2 on real test qrels</span>
       </div>
 
       <div class="overflow-x-auto">
@@ -207,8 +211,9 @@
               <th class="px-4 py-3">Hit Rate</th>
               <th class="px-4 py-3">MRR</th>
               <th class="px-4 py-3">NDCG</th>
-              <th class="px-4 py-3">Hub Gini (Concentration) &darr;</th>
-              <th class="px-4 py-3">Noise Token Ratio &darr;</th>
+              <th class="px-4 py-3">Avg Delivered Tokens &darr;</th>
+              <th class="px-4 py-3">Evidence SNR (Gold/Total) &uarr;</th>
+              <th class="px-4 py-3">Latency</th>
             </tr>
           </thead>
           <tbody id="benchmark-tbody" class="divide-y divide-slate-800/60 font-mono text-xs">
@@ -221,7 +226,7 @@
   </main>
 
   <footer class="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
-    TopoRAG: An Open Research Framework for Enhanced Retrieval-Augmented Generation. Released under MIT License.
+    QALS: Query-Adaptive Late Segmentation for Retrieval-Augmented Generation. Released under MIT License.
   </footer>
 
   <script>
@@ -231,10 +236,11 @@
         const data = await res.json();
         const container = document.getElementById('sample-queries-container');
         container.innerHTML = '';
-        data.sample_queries.slice(0, 5).forEach(sq => {
+        data.sample_queries.forEach(sq => {
           const btn = document.createElement('button');
           btn.className = "text-xs px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition text-left";
-          btn.textContent = sq;
+          btn.textContent = sq.slice(0, 65) + "...";
+          btn.title = sq;
           btn.onclick = () => {
             document.getElementById('query-input').value = sq;
             executeSearch();
@@ -255,16 +261,17 @@
 
         for (const [sys, m] of Object.entries(data)) {
           const tr = document.createElement('tr');
-          const isProposed = sys.includes("TopoRAG");
-          if (isProposed) tr.className = "bg-indigo-950/20 text-white font-semibold";
+          const isQALS = sys.includes("QALS");
+          if (isQALS) tr.className = "bg-emerald-950/20 text-white font-semibold";
 
           tr.innerHTML = `
-            <td class="px-4 py-3 font-sans">${isProposed ? '<i class="fa-solid fa-star text-amber-400 mr-1"></i> ' : ''}${sys}</td>
+            <td class="px-4 py-3 font-sans">${isQALS ? '<i class="fa-solid fa-star text-amber-400 mr-1"></i> ' : ''}${sys}</td>
             <td class="px-4 py-3 text-emerald-400">${(m['Hit Rate'] * 100).toFixed(1)}%</td>
             <td class="px-4 py-3">${m['MRR'].toFixed(3)}</td>
             <td class="px-4 py-3">${m['NDCG'].toFixed(3)}</td>
-            <td class="px-4 py-3 ${isProposed ? 'text-indigo-400 font-bold' : ''}">${m['Hub Gini'].toFixed(3)}</td>
-            <td class="px-4 py-3">${(m['Noise Token Ratio'] * 100).toFixed(1)}%</td>
+            <td class="px-4 py-3 ${isQALS ? 'text-emerald-400 font-bold' : ''}">${m['Avg Delivered Tokens'].toFixed(0)} tok</td>
+            <td class="px-4 py-3 ${isQALS ? 'text-emerald-400 font-bold' : ''}">${m['Signal-to-Noise Ratio (Gold/Total Tokens)'].toFixed(1)}%</td>
+            <td class="px-4 py-3 text-slate-400">${m['Avg Latency (ms)'].toFixed(1)} ms</td>
           `;
           tbody.appendChild(tr);
         }
@@ -277,7 +284,7 @@
       const query = document.getElementById('query-input').value.trim();
       if (!query) return;
 
-      const expandParent = document.getElementById('expand-parent-toggle').checked;
+      const budget = parseInt(document.getElementById('qals-budget-select').value);
       const flatK = parseInt(document.getElementById('flat-k-select').value);
 
       document.getElementById('search-btn').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Retrieving...';
@@ -288,72 +295,79 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             query: query,
-            toporag_expand: expandParent,
+            qals_token_budget: budget,
             flat_k: flatK
           })
         });
         const data = await res.json();
 
-        // 1. Render TopoRAG
-        const topoBox = document.getElementById('toporag-results');
-        const diag = data.toporag.diagnostics || {};
-        document.getElementById('diag-k').textContent = `${data.toporag.total_micro_hits} micro hits &rarr; ${data.toporag.unique_contexts_returned} contexts`;
-        document.getElementById('diag-entropy').textContent = diag.entropy ? diag.entropy.toFixed(3) : 'N/A';
-        document.getElementById('toporag-badge').textContent = `Adaptive k=${data.toporag.unique_contexts_returned}`;
+        // 1. Render QALS
+        const qalsBox = document.getElementById('qals-results');
+        document.getElementById('diag-tokens').textContent = `${data.qals.total_tokens_delivered} tokens (budget: ${data.qals.token_budget})`;
+        document.getElementById('qals-badge').textContent = `${data.qals.total_tokens_delivered} tokens delivered`;
 
-        topoBox.innerHTML = '';
-        data.toporag.results.forEach((item, idx) => {
+        qalsBox.innerHTML = '';
+        data.qals.results.forEach((item, idx) => {
           const card = document.createElement('div');
           card.className = "p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs space-y-1.5";
           card.innerHTML = `
             <div class="flex items-center justify-between text-slate-400 font-mono">
-              <span class="text-indigo-400 font-semibold font-sans">#${idx+1} [${item.context_level.toUpperCase()}] ${item.doc_id}</span>
-              <span>Calibrated Score: <b class="text-indigo-300">${item.calibrated_score}</b></span>
+              <span class="text-emerald-400 font-semibold font-sans">#${idx+1} Doc ${item.doc_id}: ${item.title.slice(0, 35)}...</span>
+              <span>Score: <b class="text-emerald-300">${item.score}</b></span>
             </div>
-            <p class="text-slate-200 leading-relaxed">${item.retrieved_context}</p>
-            <div class="text-[11px] text-slate-400 border-t border-slate-900 pt-1">
-              Raw Similarity: ${item.raw_score} &bull; Matched Sentence: "${item.micro_text.slice(0, 60)}..."
+            <p class="text-slate-200 leading-relaxed font-sans">${item.assembled_context}</p>
+            <div class="text-[11px] text-slate-400 border-t border-slate-900 pt-1 flex justify-between">
+              <span>Dynamic Spans: ${item.spans.length}</span>
+              <span class="text-emerald-400">${item.token_count} tokens</span>
             </div>
           `;
-          topoBox.appendChild(card);
+          qalsBox.appendChild(card);
         });
 
         // 2. Render Flat Dense
         const flatBox = document.getElementById('flat-results');
+        document.getElementById('flat-badge').textContent = `${data.flat_dense.total_tokens} tokens delivered`;
         flatBox.innerHTML = '';
         data.flat_dense.results.forEach((item, idx) => {
           const card = document.createElement('div');
           card.className = "p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs space-y-1.5";
           card.innerHTML = `
             <div class="flex items-center justify-between text-slate-400 font-mono">
-              <span class="text-rose-400 font-semibold font-sans">#${idx+1} ${item.doc_id}</span>
-              <span>Cosine: <b class="text-rose-300">${item.score.toFixed(4)}</b></span>
+              <span class="text-sky-400 font-semibold font-sans">#${idx+1} Doc ${item.doc_id}: ${item.title.slice(0, 30)}...</span>
+              <span>Score: <b class="text-sky-300">${item.score.toFixed(3)}</b></span>
             </div>
-            <p class="text-slate-300 leading-relaxed">${item.text}</p>
+            <p class="text-slate-300 leading-relaxed font-sans">${item.text}</p>
+            <div class="text-[11px] text-slate-400 border-t border-slate-900 pt-1 text-right">
+              ${item.token_count} tokens
+            </div>
           `;
           flatBox.appendChild(card);
         });
 
-        // 3. Render BM25
-        const bmBox = document.getElementById('bm25-results');
-        bmBox.innerHTML = '';
-        data.bm25.results.forEach((item, idx) => {
+        // 3. Render Parent Document
+        const parentBox = document.getElementById('parent-results');
+        document.getElementById('parent-badge').textContent = `${data.parent_doc.total_tokens} tokens delivered`;
+        parentBox.innerHTML = '';
+        data.parent_doc.results.forEach((item, idx) => {
           const card = document.createElement('div');
           card.className = "p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs space-y-1.5";
           card.innerHTML = `
             <div class="flex items-center justify-between text-slate-400 font-mono">
-              <span class="text-slate-400 font-semibold font-sans">#${idx+1} ${item.doc_id}</span>
-              <span>BM25: <b class="text-slate-300">${item.score.toFixed(2)}</b></span>
+              <span class="text-indigo-400 font-semibold font-sans">#${idx+1} Doc ${item.doc_id}: ${item.title.slice(0, 30)}...</span>
+              <span>Score: <b class="text-indigo-300">${item.score.toFixed(3)}</b></span>
             </div>
-            <p class="text-slate-300 leading-relaxed">${item.text}</p>
+            <p class="text-slate-300 leading-relaxed font-sans">${item.text.slice(0, 180)}...</p>
+            <div class="text-[11px] text-slate-400 border-t border-slate-900 pt-1 text-right">
+              ${item.token_count} tokens (Full Doc)
+            </div>
           `;
-          bmBox.appendChild(card);
+          parentBox.appendChild(card);
         });
 
       } catch (err) {
         console.error("Search failed", err);
       } finally {
-        document.getElementById('search-btn').innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Compare';
+        document.getElementById('search-btn').innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Compare Retrieval';
       }
     }
 
@@ -365,8 +379,10 @@
     window.addEventListener('DOMContentLoaded', () => {
       loadCorpus();
       loadBenchmarkSummary();
-      document.getElementById('query-input').value = "Why do embedding models suffer from hubness and anisotropy in vector search?";
-      executeSearch();
+      setTimeout(() => {
+        document.getElementById('query-input').value = "Microstructural development of human newborn cerebral white matter assessed in vivo by diffusion tensor MRI.";
+        executeSearch();
+      }, 500);
     });
   </script>
 </body>

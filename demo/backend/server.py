@@ -1,7 +1,10 @@
 """
-FastAPI demonstration backend for TopoRAG.
-Provides endpoints for indexing documents, comparing TopoRAG vs Standard Flat Dense & BM25,
-and returning manifold calibration & dynamic cutoff diagnostics.
+FastAPI demonstration backend for QALS (Query-Adaptive Late Segmentation).
+Provides interactive endpoints comparing:
+  - QALS (Contextualized Sentence Multi-Vectors + 1D DP Dynamic Span Assembly)
+  - Standard Flat Dense (Fixed 500-char chunks, k=5)
+  - Parent-Document Retriever (Child sentence -> Full Document returned)
+  - BM25 Lexical (Okapi BM25 on full document)
 """
 
 from fastapi import FastAPI
@@ -10,13 +13,14 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional
 import os
+import json
 
-from toporag.embeddings import HashFeatureEmbedder
-from toporag.retriever import TopoRAGRetriever
-from toporag.baselines import FlatDenseRetriever, BM25Retriever
-from benchmarks.benchmark import generate_synthetic_evaluation_corpus
+from toporag.qals_encoder import SentenceMultiVectorEncoder
+from toporag.qals_retriever import QALSRetriever
+from toporag.real_baselines import RealFlatDenseRetriever, RealParentDocumentRetriever, RealBM25Retriever
+from benchmarks.run_scifact_benchmark import load_scifact_data
 
-app = FastAPI(title="TopoRAG Research Demonstrator", version="0.1.0")
+app = FastAPI(title="QALS Research Demonstrator", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,24 +30,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize engines
-corpus, sample_queries = generate_synthetic_evaluation_corpus()
-embedder = HashFeatureEmbedder(dim=256, anisotropy_strength=0.08)
+# Load real SciFact subset (120 docs, 20 queries for instant responsiveness)
+corpus, queries = load_scifact_data(max_docs=120, max_queries=20)
+model_name = "all-MiniLM-L6-v2"
+encoder = SentenceMultiVectorEncoder(model_name=model_name)
 
-toporag = TopoRAGRetriever(embedder=embedder)
-toporag.index_documents(corpus)
+print("Indexing demo models...")
+qals = QALSRetriever(encoder=encoder, default_token_budget=150, coarse_top_m=12)
+qals.index_documents(corpus)
 
-flat_dense = FlatDenseRetriever(embedder=embedder, chunk_size=350, overlap=40)
+flat_dense = RealFlatDenseRetriever(model_name=model_name, chunk_size=500, overlap=50)
 flat_dense.index_documents(corpus)
 
-bm25 = BM25Retriever(chunk_size=350)
+parent_doc = RealParentDocumentRetriever(model_name=model_name)
+parent_doc.index_documents(corpus)
+
+bm25 = RealBM25Retriever()
 bm25.index_documents(corpus)
+print("Demo models ready.")
 
 
 class QueryRequest(BaseModel):
     query: str
-    toporag_expand: bool = True
-    toporag_fixed_k: Optional[int] = None
+    qals_token_budget: int = 150
     flat_k: int = 5
 
 
@@ -52,37 +61,42 @@ def get_corpus():
     return {
         "documents": [
             {"id": d["id"], "title": d["title"], "snippet": d["text"][:160] + "..."}
-            for d in corpus
+            for d in corpus[:10]
         ],
-        "sample_queries": [q["query"] for q in sample_queries],
+        "sample_queries": [q["text"] for q in queries[:6]],
     }
 
 
 @app.post("/api/retrieve")
 def compare_retrieval(req: QueryRequest):
-    # TopoRAG retrieval
-    topo_res = toporag.retrieve(
-        req.query,
-        k=req.toporag_fixed_k,
-        expand_to_parent=req.toporag_expand,
-        return_diagnostics=True,
-    )
+    # 1. QALS retrieval
+    qals_res = qals.retrieve(req.query, token_budget=req.qals_token_budget, return_diagnostics=True)
 
-    # Flat Dense retrieval
+    # 2. Flat Dense retrieval
     flat_res = flat_dense.retrieve(req.query, k=req.flat_k)
 
-    # BM25 retrieval
+    # 3. Parent-Document retrieval
+    parent_res = parent_doc.retrieve(req.query, k=req.flat_k)
+
+    # 4. BM25 retrieval
     bm25_res = bm25.retrieve(req.query, k=req.flat_k)
 
     return {
         "query": req.query,
-        "toporag": topo_res,
+        "qals": qals_res,
         "flat_dense": {
             "results": flat_res,
+            "total_tokens": sum(r["token_count"] for r in flat_res),
+            "k": req.flat_k,
+        },
+        "parent_doc": {
+            "results": parent_res,
+            "total_tokens": sum(r["token_count"] for r in parent_res),
             "k": req.flat_k,
         },
         "bm25": {
             "results": bm25_res,
+            "total_tokens": sum(r["token_count"] for r in bm25_res),
             "k": req.flat_k,
         },
     }
@@ -90,13 +104,12 @@ def compare_retrieval(req: QueryRequest):
 
 @app.get("/api/benchmark-summary")
 def get_benchmark_summary():
-    import json
-    if os.path.exists("benchmarks/extended_results.json"):
-        with open("benchmarks/extended_results.json", "r") as f:
+    if os.path.exists("benchmarks/scifact_results.json"):
+        with open("benchmarks/scifact_results.json", "r") as f:
             return json.load(f)
     return {}
 
 
-# Mount frontend static files
+# Mount static files
 app.mount("/paper", StaticFiles(directory="paper"), name="paper")
 app.mount("/", StaticFiles(directory="demo/frontend", html=True), name="static")
