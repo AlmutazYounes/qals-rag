@@ -10,17 +10,64 @@
 
 ---
 
-## Overview
+## What is QALS?
 
-Retrieval-augmented generation grounds language models in factual text. Conventional pipelines split documents into static character chunks before indexing, often 200 to 1,000 characters, and retrieve a hardcoded count of chunks. This creates the chunk-size dilemma:
+Retrieval-augmented generation pipelines depend on similarity search to feed evidence into language models. Standard architectures split text into fixed character windows before indexing, often 200 to 1,000 characters, and retrieve a fixed count of chunks. This creates the chunk-size dilemma:
 - Small chunks pinpoint specific claims, but they discard surrounding context, pronoun antecedents, and qualifications.
 - Large chunks preserve paragraph context, but they average multiple facts into a single dense vector and clutter prompts with irrelevant text.
 - Parent document retrieval returns entire documents whenever a small chunk matches, wasting up to 70% of prompt tokens on irrelevant padding.
 
-Query-adaptive late segmentation eliminates index-time chunk boundaries:
-1. **Contextualized sentence multi-vectors**: Documents are indexed as sequences of atomic sentences carrying document context, along with a coarse document vector for fast candidate generation.
-2. **Dynamic programming span segmentation**: At query time, an online dynamic program stitches contiguous sentences into coherent passages, balancing semantic relevance and passage continuity within an explicit token budget.
+Query-adaptive late segmentation removes index-time chunk boundaries:
+1. **Contextualized sentence multi-vectors**: Documents are indexed as sequences of atomic sentences carrying document title context, along with a coarse document vector for fast candidate generation.
+2. **Dynamic programming span segmentation**: At query time, an online 1D dynamic program stitches contiguous sentences into coherent passages, balancing semantic relevance and sentence continuity within an explicit token budget.
 3. **Split-conformal budget calibration**: Uses held-out calibration queries to determine the minimum token budget that guarantees empirical evidence coverage without prompt bloat.
+
+---
+
+## Core architecture
+
+```
+                     Document Collection
+                              │
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │ 1. Contextualized sentence multi-vectors     │
+       │    v_i = Embed(Title: Sentence_i)            │
+       │    u_D = Coarse document representation      │
+       └──────────────────────────────────────────────┘
+                              │
+                        Offline index
+                              │
+══════════════════════════════╪══════════════════════════════
+                          Query time
+                              │
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │ 2. Coarse candidate filtering                │
+       │    Prune corpus to candidate documents       │
+       └──────────────────────────────────────────────┘
+                              │
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │ 3. Sentence similarity scoring               │
+       │    Compute query-sentence dot products       │
+       └──────────────────────────────────────────────┘
+                              │
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │ 4. Dynamic programming span assembly         │
+       │    Maximize relevance and continuity bonus   │
+       └──────────────────────────────────────────────┘
+                              │
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │ 5. Conformal token budget packing            │
+       │    Enforce calibrated prompt limit           │
+       └──────────────────────────────────────────────┘
+                              │
+                              ▼
+                  Assembled coherent context
+```
 
 ---
 
@@ -41,6 +88,16 @@ Evaluated on the full BEIR SciFact scientific retrieval corpus across 150 evalua
 - **Prompt reduction**: QALS delivers evidence in 142.3 tokens per query, cutting prompt token consumption by 41% compared to 500-character chunks and by 87% compared to parent document retrieval.
 - **Accuracy preservation**: QALS achieves 0.6924 nDCG@10, matching or slightly exceeding standard 500-character dense retrieval, while 1,000-character chunks degrade to 0.6715.
 - **Parent document inefficiency**: Returning full parent documents expends 1,145 tokens per query without improving ranking accuracy over standard single-chunk search.
+
+---
+
+## Visualizations
+
+### Prompt token footprint across chunking architectures
+![Token Footprint](paper/figures/scifact_snr.png)
+
+### Pareto efficiency: nDCG@10 vs context token footprint
+![Pareto Efficiency](paper/figures/scifact_pareto.png)
 
 ---
 
@@ -156,6 +213,34 @@ python3 paper/generate_pdf.py
 PYTHONPATH=src python3 -m uvicorn demo.backend.server:app --host 0.0.0.0 --port 8765
 ```
 Open `http://localhost:8765` in your browser to run live queries and compare QALS against LangChain chunking strategies.
+
+---
+
+## Mathematical formulation
+
+### Dynamic programming span segmentation
+
+Given sentence scores $s_1, \dots, s_S$, the objective utility of a contiguous span $[i, j]$ is:
+
+$$U(i, j) = \sum_{k=i}^j (s_k - \mu) + \kappa \cdot \log_2(j - i + 2)$$
+
+where:
+- $\mu$ is the baseline relevance hurdle (default $0.25$).
+- $\kappa \cdot \log_2(j - i + 2)$ provides a diminishing-returns discourse continuity bonus.
+
+Spans are selected via non-overlapping dynamic programming under an explicit token budget $B$:
+
+$$\max_{\mathcal{P}} \sum_{[i, j] \in \mathcal{P}} U(i, j) \quad \text{subject to} \quad \sum_{[i, j] \in \mathcal{P}} \text{tokens}(i, j) \le B$$
+
+### Split-conformal budget calibration
+
+Given calibration queries $\{q_k, D_k^*\}_{k=1}^N$ with gold evidence passages, let $B_k^*$ be the minimal token budget required to retrieve $D_k^*$. For coverage guarantee $1 - \alpha$:
+
+$$\hat{B} = \text{Quantile}\left( \{B_k^*\}_{k=1}^N, \frac{\lceil (N + 1)(1 - \alpha) \rceil}{N} \right)$$
+
+By exchangeability, the calibrated token budget guarantees:
+
+$$P\left(D^* \in \text{RetrievedContext}(\hat{B})\right) \ge 1 - \alpha$$
 
 ---
 
