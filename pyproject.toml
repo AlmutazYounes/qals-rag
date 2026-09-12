@@ -3,10 +3,13 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "toporag"
-version = "0.1.0"
-description = "Manifold-Calibrated Adaptive Multi-Granularity Retrieval Engine for RAG"
-authors = [{ name = "Open Research Collective for Retrieval Augmentation" }]
+name = "qals"
+version = "0.2.0"
+description = "Query-Adaptive Late Segmentation for Retrieval-Augmented Generation"
+authors = [
+    { name = "Mohammad Bani Younes", email = "mohamed.banyyounes@anu.edu.jo" },
+    { name = "Mutaz Younes", email = "mutazyounes@gmail.com" }
+]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
