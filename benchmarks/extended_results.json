@@ -1,0 +1,34 @@
+{
+  "BM25": {
+    "Hit Rate": 1.0,
+    "MRR": 0.9583,
+    "NDCG": 0.9692,
+    "Avg Tokens Retrieved": 75.7,
+    "Noise Token Ratio": 0.7687,
+    "Hub Gini": 0.3733
+  },
+  "Flat Dense (Fixed k=5)": {
+    "Hit Rate": 0.8333,
+    "MRR": 0.8333,
+    "NDCG": 0.8142,
+    "Avg Tokens Retrieved": 77.5,
+    "Noise Token Ratio": 0.8075,
+    "Hub Gini": 0.475
+  },
+  "Fine-grained Dense (k=5)": {
+    "Hit Rate": 0.9167,
+    "MRR": 0.7667,
+    "NDCG": 0.7901,
+    "Avg Tokens Retrieved": 76.5,
+    "Noise Token Ratio": 0.7037,
+    "Hub Gini": 0.4433
+  },
+  "TopoRAG (Proposed)": {
+    "Hit Rate": 1.0,
+    "MRR": 0.8778,
+    "NDCG": 0.9065,
+    "Avg Tokens Retrieved": 169.3,
+    "Noise Token Ratio": 0.8898,
+    "Hub Gini": 0.2201
+  }
+}

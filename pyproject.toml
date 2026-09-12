@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toporag"
+version = "0.1.0"
+description = "Manifold-Calibrated Adaptive Multi-Granularity Retrieval Engine for RAG"
+authors = [{ name = "Open Research Collective for Retrieval Augmentation" }]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.20.0",
+    "scipy>=1.7.0",
+    "scikit-learn>=1.0.0",
+    "pydantic>=2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "matplotlib>=3.5.0",
+    "reportlab>=3.6.0"
+]
+
+[project.optional-dependencies]
+dense = [
+    "sentence-transformers>=2.2.0",
+    "torch>=2.0.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

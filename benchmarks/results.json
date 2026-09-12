@@ -1,0 +1,26 @@
+{
+  "BM25": {
+    "Hit Rate": 1.0,
+    "MRR": 1.0,
+    "NDCG": 0.9983,
+    "Avg Items Retrieved": 5.0,
+    "Hub Concentration (Gini)": 0.275,
+    "Avg Latency (ms)": 0.03
+  },
+  "Flat-Dense (Fixed k=5)": {
+    "Hit Rate": 1.0,
+    "MRR": 0.9333,
+    "NDCG": 0.9065,
+    "Avg Items Retrieved": 5.0,
+    "Hub Concentration (Gini)": 0.325,
+    "Avg Latency (ms)": 0.13
+  },
+  "TopoRAG (Proposed)": {
+    "Hit Rate": 1.0,
+    "MRR": 0.9333,
+    "NDCG": 0.919,
+    "Avg Items Retrieved": 5.7,
+    "Hub Concentration (Gini)": 0.0899,
+    "Avg Latency (ms)": 0.18
+  }
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TopoRAG: Manifold-Calibrated Adaptive Retrieval</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    pre, code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
+            T
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+              TopoRAG
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-mono font-medium">Research Preview</span>
+            </h1>
+            <p class="text-xs text-slate-400">Manifold-Calibrated Adaptive Multi-Granularity Retrieval Engine</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/paper/paper.md" target="_blank" class="text-xs px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition flex items-center gap-1.5 border border-slate-700">
+          <i class="fa-solid fa-file-lines text-indigo-400"></i> Read Paper (MD)
+        </a>
+        <a href="/paper/toporag_research_paper.pdf" target="_blank" class="text-xs px-3 py-1.5 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-file-pdf"></i> Download PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Hero / Problem Statement Card -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <div class="flex items-center gap-2 text-indigo-400 text-sm font-semibold mb-1">
+          <i class="fa-solid fa-layer-group"></i> 1. Chunk Size Dilemma
+        </div>
+        <p class="text-xs text-slate-400">Small chunks match with high precision but lose surrounding context. TopoRAG indexes micro propositions and expands upward to meso parents.</p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <div class="flex items-center gap-2 text-rose-400 text-sm font-semibold mb-1">
+          <i class="fa-solid fa-bullseye"></i> 2. Hubness and Anisotropy
+        </div>
+        <p class="text-xs text-slate-400">Dense vectors cluster in narrow cones, creating artificial "hub" vectors that dominate search results. TopoRAG calibrates Riemannian local density.</p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <div class="flex items-center gap-2 text-emerald-400 text-sm font-semibold mb-1">
+          <i class="fa-solid fa-scissors"></i> 3. Fixed-k Retrieval Trap
+        </div>
+        <p class="text-xs text-slate-400">Hardcoded top-k injects noise into simple queries and starves complex ones. TopoRAG uses dynamic score-knee and entropy cutoff.</p>
+      </div>
+    </div>
+
+    <!-- Search / Retrieval Experiment Workbench -->
+    <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-flask text-indigo-400"></i>
+          Interactive Retrieval Workbench
+        </h2>
+        <span class="text-xs text-slate-400">Real-time side-by-side comparison across 3 retrieval architectures</span>
+      </div>
+
+      <!-- Query Input -->
+      <div class="space-y-2">
+        <label class="text-xs font-semibold uppercase tracking-wider text-slate-400">Enter Research Query or Choose a Benchmark Example</label>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input
+            id="query-input"
+            type="text"
+            class="flex-1 px-4 py-3 rounded-lg bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g. Why do embedding models suffer from hubness and anisotropy in vector search?"
+          />
+          <button
+            id="search-btn"
+            class="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 font-semibold text-white text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i> Compare
+          </button>
+        </div>
+
+        <!-- Sample queries chips -->
+        <div class="flex flex-wrap gap-2 pt-2" id="sample-queries-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center gap-6 pt-2 border-t border-slate-800/80 text-xs text-slate-300">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input id="expand-parent-toggle" type="checkbox" checked class="rounded bg-slate-950 border-slate-700 text-indigo-600 focus:ring-0" />
+          <span>TopoRAG: Expand micro matches to meso parent context</span>
+        </label>
+        <div class="flex items-center gap-2">
+          <span class="text-slate-400">Baseline Fixed-k:</span>
+          <select id="flat-k-select" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-200">
+            <option value="3">k=3</option>
+            <option value="5" selected>k=5 (Standard)</option>
+            <option value="8">k=8</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Real-time Comparison Columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Column 1: TopoRAG (Proposed) -->
+      <div class="rounded-2xl bg-slate-900 border-2 border-indigo-500/40 p-5 space-y-4 shadow-xl">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-indigo-500 inline-block animate-pulse"></span>
+            <h3 class="font-bold text-white text-base">TopoRAG (Proposed)</h3>
+          </div>
+          <span id="toporag-badge" class="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">Dynamic k</span>
+        </div>
+
+        <!-- Diagnostics Box -->
+        <div id="toporag-diagnostics" class="p-3 rounded-lg bg-indigo-950/30 border border-indigo-900/40 text-xs text-indigo-200 space-y-1 font-mono">
+          <div>Adaptive Knee Cutoff: <span class="text-white font-bold" id="diag-k">-</span></div>
+          <div>Query Score Entropy: <span class="text-white font-bold" id="diag-entropy">-</span></div>
+          <div>Manifold Hub Penalty: <span class="text-emerald-400 font-bold">Active</span></div>
+        </div>
+
+        <div id="toporag-results" class="space-y-3">
+          <div class="text-xs text-slate-500 text-center py-8">Run a query to view calibrated multi-scale retrieval.</div>
+        </div>
+      </div>
+
+      <!-- Column 2: Flat Dense (Raw Cosine, Fixed k) -->
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-4 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+            <h3 class="font-bold text-white text-base">Flat Dense Retriever</h3>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 font-mono">Fixed k=5</span>
+        </div>
+
+        <div class="p-3 rounded-lg bg-rose-950/20 border border-rose-900/30 text-xs text-rose-300/80 space-y-1">
+          <div>Similarity: Uncalibrated raw cosine dot product</div>
+          <div>Chunking: Uniform sliding window (350 chars)</div>
+          <div>Vulnerability: Susceptible to hubness dominance</div>
+        </div>
+
+        <div id="flat-results" class="space-y-3">
+          <div class="text-xs text-slate-500 text-center py-8">Awaiting search execution...</div>
+        </div>
+      </div>
+
+      <!-- Column 3: BM25 Lexical -->
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-4 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span>
+            <h3 class="font-bold text-white text-base">BM25 (Okapi)</h3>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Lexical TF-IDF</span>
+        </div>
+
+        <div class="p-3 rounded-lg bg-slate-800/40 border border-slate-700/50 text-xs text-slate-300 space-y-1">
+          <div>Matching: Exact keyword frequencies & inverse doc frequency</div>
+          <div>Chunking: Uniform sliding window (350 chars)</div>
+          <div>Vulnerability: Zero semantic synonym comprehension</div>
+        </div>
+
+        <div id="bm25-results" class="space-y-3">
+          <div class="text-xs text-slate-500 text-center py-8">Awaiting search execution...</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quantitative Benchmark Summary Section -->
+    <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-chart-column text-indigo-400"></i>
+          Empirical Benchmark Results (Multi-Domain Challenge Corpus)
+        </h2>
+        <span class="text-xs text-emerald-400 font-mono"><i class="fa-solid fa-check-circle"></i> Benchmarks verified</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-950 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
+            <tr>
+              <th class="px-4 py-3">Retrieval System</th>
+              <th class="px-4 py-3">Hit Rate</th>
+              <th class="px-4 py-3">MRR</th>
+              <th class="px-4 py-3">NDCG</th>
+              <th class="px-4 py-3">Hub Gini (Concentration) &darr;</th>
+              <th class="px-4 py-3">Noise Token Ratio &darr;</th>
+            </tr>
+          </thead>
+          <tbody id="benchmark-tbody" class="divide-y divide-slate-800/60 font-mono text-xs">
+            <!-- Populated via API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+    TopoRAG: An Open Research Framework for Enhanced Retrieval-Augmented Generation. Released under MIT License.
+  </footer>
+
+  <script>
+    async function loadCorpus() {
+      try {
+        const res = await fetch('/api/corpus');
+        const data = await res.json();
+        const container = document.getElementById('sample-queries-container');
+        container.innerHTML = '';
+        data.sample_queries.slice(0, 5).forEach(sq => {
+          const btn = document.createElement('button');
+          btn.className = "text-xs px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition text-left";
+          btn.textContent = sq;
+          btn.onclick = () => {
+            document.getElementById('query-input').value = sq;
+            executeSearch();
+          };
+          container.appendChild(btn);
+        });
+      } catch (err) {
+        console.error("Failed to load corpus", err);
+      }
+    }
+
+    async function loadBenchmarkSummary() {
+      try {
+        const res = await fetch('/api/benchmark-summary');
+        const data = await res.json();
+        const tbody = document.getElementById('benchmark-tbody');
+        tbody.innerHTML = '';
+
+        for (const [sys, m] of Object.entries(data)) {
+          const tr = document.createElement('tr');
+          const isProposed = sys.includes("TopoRAG");
+          if (isProposed) tr.className = "bg-indigo-950/20 text-white font-semibold";
+
+          tr.innerHTML = `
+            <td class="px-4 py-3 font-sans">${isProposed ? '<i class="fa-solid fa-star text-amber-400 mr-1"></i> ' : ''}${sys}</td>
+            <td class="px-4 py-3 text-emerald-400">${(m['Hit Rate'] * 100).toFixed(1)}%</td>
+            <td class="px-4 py-3">${m['MRR'].toFixed(3)}</td>
+            <td class="px-4 py-3">${m['NDCG'].toFixed(3)}</td>
+            <td class="px-4 py-3 ${isProposed ? 'text-indigo-400 font-bold' : ''}">${m['Hub Gini'].toFixed(3)}</td>
+            <td class="px-4 py-3">${(m['Noise Token Ratio'] * 100).toFixed(1)}%</td>
+          `;
+          tbody.appendChild(tr);
+        }
+      } catch (err) {
+        console.error("Failed to load benchmark summary", err);
+      }
+    }
+
+    async function executeSearch() {
+      const query = document.getElementById('query-input').value.trim();
+      if (!query) return;
+
+      const expandParent = document.getElementById('expand-parent-toggle').checked;
+      const flatK = parseInt(document.getElementById('flat-k-select').value);
+
+      document.getElementById('search-btn').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Retrieving...';
+
+      try {
+        const res = await fetch('/api/retrieve', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: query,
+            toporag_expand: expandParent,
+            flat_k: flatK
+          })
+        });
+        const data = await res.json();
+
+        // 1. Render TopoRAG
+        const topoBox = document.getElementById('toporag-results');
+        const diag = data.toporag.diagnostics || {};
+        document.getElementById('diag-k').textContent = `${data.toporag.total_micro_hits} micro hits &rarr; ${data.toporag.unique_contexts_returned} contexts`;
+        document.getElementById('diag-entropy').textContent = diag.entropy ? diag.entropy.toFixed(3) : 'N/A';
+        document.getElementById('toporag-badge').textContent = `Adaptive k=${data.toporag.unique_contexts_returned}`;
+
+        topoBox.innerHTML = '';
+        data.toporag.results.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = "p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs space-y-1.5";
+          card.innerHTML = `
+            <div class="flex items-center justify-between text-slate-400 font-mono">
+              <span class="text-indigo-400 font-semibold font-sans">#${idx+1} [${item.context_level.toUpperCase()}] ${item.doc_id}</span>
+              <span>Calibrated Score: <b class="text-indigo-300">${item.calibrated_score}</b></span>
+            </div>
+            <p class="text-slate-200 leading-relaxed">${item.retrieved_context}</p>
+            <div class="text-[11px] text-slate-400 border-t border-slate-900 pt-1">
+              Raw Similarity: ${item.raw_score} &bull; Matched Sentence: "${item.micro_text.slice(0, 60)}..."
+            </div>
+          `;
+          topoBox.appendChild(card);
+        });
+
+        // 2. Render Flat Dense
+        const flatBox = document.getElementById('flat-results');
+        flatBox.innerHTML = '';
+        data.flat_dense.results.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = "p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs space-y-1.5";
+          card.innerHTML = `
+            <div class="flex items-center justify-between text-slate-400 font-mono">
+              <span class="text-rose-400 font-semibold font-sans">#${idx+1} ${item.doc_id}</span>
+              <span>Cosine: <b class="text-rose-300">${item.score.toFixed(4)}</b></span>
+            </div>
+            <p class="text-slate-300 leading-relaxed">${item.text}</p>
+          `;
+          flatBox.appendChild(card);
+        });
+
+        // 3. Render BM25
+        const bmBox = document.getElementById('bm25-results');
+        bmBox.innerHTML = '';
+        data.bm25.results.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = "p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs space-y-1.5";
+          card.innerHTML = `
+            <div class="flex items-center justify-between text-slate-400 font-mono">
+              <span class="text-slate-400 font-semibold font-sans">#${idx+1} ${item.doc_id}</span>
+              <span>BM25: <b class="text-slate-300">${item.score.toFixed(2)}</b></span>
+            </div>
+            <p class="text-slate-300 leading-relaxed">${item.text}</p>
+          `;
+          bmBox.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error("Search failed", err);
+      } finally {
+        document.getElementById('search-btn').innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Compare';
+      }
+    }
+
+    document.getElementById('search-btn').addEventListener('click', executeSearch);
+    document.getElementById('query-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') executeSearch();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadCorpus();
+      loadBenchmarkSummary();
+      document.getElementById('query-input').value = "Why do embedding models suffer from hubness and anisotropy in vector search?";
+      executeSearch();
+    });
+  </script>
+</body>
+</html>
