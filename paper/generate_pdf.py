@@ -643,7 +643,7 @@ def build_pdf():
 
     story.append(Paragraph("Data availability", h1_style))
     story.append(Paragraph(
-        "All evaluation benchmark datasets (BEIR SciFact and NFCorpus) and implementation code are publicly available in the project repository: https://github.com/open-rag-research/qals-retrieval.",
+        "All evaluation benchmark datasets (BEIR SciFact and NFCorpus) and implementation code are publicly available in the project repository: https://github.com/AlmutazYounes/qals-rag.",
         body_style
     ))
 

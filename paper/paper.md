@@ -149,7 +149,7 @@ Query-adaptive late segmentation demonstrates that eliminating index-time chunk 
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 ## Data availability
-All evaluation benchmark datasets (BEIR SciFact and NFCorpus) and implementation code are publicly available in the project repository: https://github.com/open-rag-research/qals-retrieval.
+All evaluation benchmark datasets (BEIR SciFact and NFCorpus) and implementation code are publicly available in the project repository: https://github.com/AlmutazYounes/qals-rag.
 
 ---
 

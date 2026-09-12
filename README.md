@@ -153,8 +153,8 @@ Query-adaptive late segmentation removes index-time chunk boundaries:
 ### 1. Installation
 
 ```bash
-git clone https://github.com/open-rag-research/qals-retrieval.git
-cd qals-retrieval
+git clone https://github.com/AlmutazYounes/qals-rag.git
+cd qals-rag
 pip install -e .
 ```
 
