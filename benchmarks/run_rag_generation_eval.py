@@ -102,14 +102,20 @@ def load_beir(name: str, qrel_split: str = "test"):
                 continue
             meta = q.get("metadata") or {}
             label = None
-            for _did, evid in meta.items():
-                for e in evid:
-                    lab = LABEL_MAP.get(str(e.get("label", "")).upper())
-                    if lab:
-                        label = lab
+            if isinstance(meta, dict):
+                for _did, evid in meta.items():
+                    if not isinstance(evid, list):
+                        continue
+                    for e in evid:
+                        if isinstance(e, dict):
+                            lab = LABEL_MAP.get(str(e.get("label", "")).upper())
+                        else:
+                            lab = LABEL_MAP.get(str(e).upper())
+                        if lab:
+                            label = lab
+                            break
+                    if label:
                         break
-                if label:
-                    break
             if label:
                 gold_labels[qid] = label
             queries.append({
@@ -178,16 +184,22 @@ def split_sentences(text: str) -> List[str]:
 
 
 def faithfulness_proxy(answer: str, context: str) -> float:
-    """Fraction of answer content words that appear in the context (RAGAS-like)."""
+    """Fraction of answer content words that appear in the context (RAGAS-like).
+
+    Pure SciFact label answers (SUPPORT / REFUTE / NOT ENOUGH) do not invent free
+    text, so they score 1.0 when context is non-empty and 0.0 otherwise.
+    """
+    compact = " ".join(answer.strip().upper().split())
+    if compact in {"SUPPORT", "REFUTE", "NOT ENOUGH"}:
+        return 1.0 if context.strip() else 0.0
     ans_words = [w.lower() for w in re.findall(r"[a-zA-Z0-9]+", answer)]
     if not ans_words:
         return 0.0
     ctx = set(w.lower() for w in re.findall(r"[a-zA-Z0-9]+", context))
-    # Ignore the three SciFact labels themselves.
     stop = {"support", "refute", "not", "enough", "the", "a", "an", "of", "to", "and", "in", "is"}
     content = [w for w in ans_words if w not in stop]
     if not content:
-        return 1.0 if answer.strip() else 0.0
+        return 1.0 if answer.strip() and context.strip() else 0.0
     return float(sum(1 for w in content if w in ctx) / len(content))
 
 
@@ -269,11 +281,18 @@ class HFInstructBackend(ChatBackend):
         from transformers import AutoModelForCausalLM, AutoTokenizer
         print(f"[HF] loading {model_id} ...", flush=True)
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_id,
-            torch_dtype=torch.float32,
-            device_map="cpu",
-        )
+        # Prefer plain CPU load so accelerate is not required.
+        try:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_id,
+                dtype=torch.float32,
+            )
+        except TypeError:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_id,
+                torch_dtype=torch.float32,
+            )
+        self.model.to("cpu")
         self.model.eval()
         self.model_id = model_id
 

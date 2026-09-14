@@ -1,38 +1,5 @@
 {
   "scifact": {
-    "LangChain Recursive 500c": {
-      "ndcg": 0.6883,
-      "recall": 0.7888,
-      "tokens": 239.6
-    },
-    "LangChain Recursive 1000c": {
-      "ndcg": 0.6715,
-      "recall": 0.7866,
-      "tokens": 382.7
-    },
-    "LangChain ParentDocument": {
-      "ndcg": 0.6843,
-      "recall": 0.8107,
-      "tokens": 1145.2
-    },
-    "BM25": {
-      "ndcg": 0.6995,
-      "recall": 0.8232,
-      "tokens": 1142.7
-    },
-    "LangChain Hybrid RRF": {
-      "ndcg": 0.7234,
-      "recall": 0.8754,
-      "tokens": 1134.6
-    },
-    "QALS B=150": {
-      "ndcg": 0.6955,
-      "recall": 0.8184,
-      "ndcg_packed": 0.558,
-      "recall_packed": 0.5539,
-      "tokens": 136.1,
-      "covered": 0.5733
-    },
     "conformal": {
       "alpha=0.2": {
         "B_hat": 2000,
@@ -61,42 +28,99 @@
         }
       }
     },
-    "ablations": {}
-  },
-  "nfcorpus": {
+    "ablations": {
+      "B=50": {
+        "ndcg": 0.6955,
+        "recall": 0.8184,
+        "ndcg_packed": 0.558,
+        "recall_packed": 0.5539,
+        "tokens": 45.1,
+        "covered": 0.5733
+      },
+      "B=100": {
+        "ndcg": 0.6955,
+        "recall": 0.8184,
+        "ndcg_packed": 0.558,
+        "recall_packed": 0.5539,
+        "tokens": 93.3,
+        "covered": 0.5733
+      },
+      "B=150": {
+        "ndcg": 0.6955,
+        "recall": 0.8184,
+        "ndcg_packed": 0.558,
+        "recall_packed": 0.5539,
+        "tokens": 136.1,
+        "covered": 0.5733
+      },
+      "B=200": {
+        "ndcg": 0.6955,
+        "recall": 0.8184,
+        "ndcg_packed": 0.558,
+        "recall_packed": 0.5539,
+        "tokens": 173.3,
+        "covered": 0.5733
+      },
+      "kappa=0.00": {
+        "ndcg": 0.6955,
+        "recall": 0.8184,
+        "ndcg_packed": 0.558,
+        "recall_packed": 0.5539,
+        "tokens": 136.1,
+        "covered": 0.5733
+      },
+      "M=20": {
+        "ndcg": 0.6877,
+        "recall": 0.8107,
+        "ndcg_packed": 0.558,
+        "recall_packed": 0.5539,
+        "tokens": 136.2,
+        "covered": 0.5733
+      }
+    },
     "LangChain Recursive 500c": {
-      "ndcg": 0.3185,
-      "recall": 0.1544,
-      "tokens": 198.1
+      "ndcg": 0.6883,
+      "recall": 0.7888,
+      "tokens": 239.6
     },
     "LangChain Recursive 1000c": {
-      "ndcg": 0.3156,
-      "recall": 0.1624,
-      "tokens": 281.4
+      "ndcg": 0.6715,
+      "recall": 0.7866,
+      "tokens": 382.7
     },
     "LangChain ParentDocument": {
-      "ndcg": 0.3479,
-      "recall": 0.1736,
-      "tokens": 1206.7
+      "ndcg": 0.6843,
+      "recall": 0.8107,
+      "tokens": 1145.2
     },
     "BM25": {
-      "ndcg": 0.3403,
-      "recall": 0.1758,
-      "tokens": 1180.0
+      "ndcg": 0.6995,
+      "recall": 0.8232,
+      "tokens": 1142.7
     },
     "LangChain Hybrid RRF": {
-      "ndcg": 0.369,
-      "recall": 0.1841,
-      "tokens": 1182.6
+      "ndcg": 0.7234,
+      "recall": 0.8754,
+      "tokens": 1134.6
+    },
+    "Adaptive-k (LC500 gap)": {
+      "ndcg": 0.6041,
+      "recall": 0.6277,
+      "tokens": 122.3,
+      "k_star": 2.64,
+      "mean_k": 2.64,
+      "note": "Taguchi Adaptive-k approximation: largest relative consecutive gap on LC500 dense scores, k clamped to [1,10]. Tokens are whitespace tokens of the selected units."
     },
     "QALS B=150": {
-      "ndcg": 0.375,
-      "recall": 0.1815,
-      "ndcg_packed": 0.1629,
-      "recall_packed": 0.0716,
-      "tokens": 138.2,
-      "covered": 0.53
-    },
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 136.1,
+      "covered": 0.5733
+    }
+  },
+  "nfcorpus": {
     "conformal": {
       "alpha=0.2": {
         "B_hat": 1484,
@@ -125,6 +149,47 @@
         }
       }
     },
-    "ablations": {}
+    "ablations": {},
+    "LangChain Recursive 500c": {
+      "ndcg": 0.3185,
+      "recall": 0.1544,
+      "tokens": 198.1
+    },
+    "LangChain Recursive 1000c": {
+      "ndcg": 0.3156,
+      "recall": 0.1624,
+      "tokens": 281.4
+    },
+    "LangChain ParentDocument": {
+      "ndcg": 0.3479,
+      "recall": 0.1736,
+      "tokens": 1206.7
+    },
+    "BM25": {
+      "ndcg": 0.3403,
+      "recall": 0.1758,
+      "tokens": 1180.0
+    },
+    "LangChain Hybrid RRF": {
+      "ndcg": 0.369,
+      "recall": 0.1841,
+      "tokens": 1182.6
+    },
+    "Adaptive-k (LC500 gap)": {
+      "ndcg": 0.1933,
+      "recall": 0.0872,
+      "tokens": 97.8,
+      "k_star": 2.57,
+      "mean_k": 2.57,
+      "note": "Taguchi Adaptive-k approximation: largest relative consecutive gap on LC500 dense scores, k clamped to [1,10]. Tokens are whitespace tokens of the selected units."
+    },
+    "QALS B=150": {
+      "ndcg": 0.375,
+      "recall": 0.1815,
+      "ndcg_packed": 0.1629,
+      "recall_packed": 0.0716,
+      "tokens": 138.2,
+      "covered": 0.53
+    }
   }
 }

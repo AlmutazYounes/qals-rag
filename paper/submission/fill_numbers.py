@@ -23,22 +23,22 @@ OUT = Path(__file__).resolve().parent
 
 KEYS = {
     "scifact": {
-        "QALS B=150": ("ScifactQalsNdcg", "ScifactQalsRec", "ScifactQalsTok"),
-        "LangChain Recursive 500c": ("ScifactLcNdcg", None, "ScifactLcTok"),
-        "LangChain Recursive 1000c": ("ScifactLclongNdcg", None, "ScifactLclongTok"),
-        "LangChain ParentDocument": ("ScifactParentNdcg", None, "ScifactParentTok"),
-        "LangChain Hybrid RRF": ("ScifactHybridNdcg", None, "ScifactHybridTok"),
-        "BM25": ("ScifactBmNdcg", None, "ScifactBmTok"),
-        "Adaptive-k (LC500 gap)": ("ScifactAdaptkNdcg", "ScifactAdaptkRec", "ScifactAdaptkTok"),
+        "LangChain Recursive 500c": ('ScifactLcNdcg', None, 'ScifactLcTok'),
+        "LangChain Recursive 1000c": ('ScifactLclongNdcg', None, 'ScifactLclongTok'),
+        "LangChain ParentDocument": ('ScifactParentNdcg', None, 'ScifactParentTok'),
+        "BM25": ('ScifactBmNdcg', None, 'ScifactBmTok'),
+        "LangChain Hybrid RRF": ('ScifactHybridNdcg', None, 'ScifactHybridTok'),
+        "Adaptive-k (LC500 gap)": ('ScifactAdaptkNdcg', 'ScifactAdaptkRec', 'ScifactAdaptkTok'),
+        "QALS B=150": ('ScifactQalsNdcg', 'ScifactQalsRec', 'ScifactQalsTok'),
     },
     "nfcorpus": {
-        "QALS B=150": ("NfQalsNdcg", "NfQalsRec", "NfQalsTok"),
-        "LangChain Recursive 500c": ("NfLcNdcg", None, "NfLcTok"),
-        "LangChain Recursive 1000c": ("NfLclongNdcg", None, "NfLclongTok"),
-        "LangChain ParentDocument": ("NfParentNdcg", None, "NfParentTok"),
-        "LangChain Hybrid RRF": ("NfHybridNdcg", None, "NfHybridTok"),
-        "BM25": ("NfBmNdcg", None, "NfBmTok"),
-        "Adaptive-k (LC500 gap)": ("NfAdaptkNdcg", "NfAdaptkRec", "NfAdaptkTok"),
+        "LangChain Recursive 500c": ('NfLcNdcg', None, 'NfLcTok'),
+        "LangChain Recursive 1000c": ('NfLclongNdcg', None, 'NfLclongTok'),
+        "LangChain ParentDocument": ('NfParentNdcg', None, 'NfParentTok'),
+        "BM25": ('NfBmNdcg', None, 'NfBmTok'),
+        "LangChain Hybrid RRF": ('NfHybridNdcg', None, 'NfHybridTok'),
+        "Adaptive-k (LC500 gap)": ('NfAdaptkNdcg', 'NfAdaptkRec', 'NfAdaptkTok'),
+        "QALS B=150": ('NfQalsNdcg', 'NfQalsRec', 'NfQalsTok'),
     },
 }
 
@@ -54,8 +54,8 @@ ABLATION_MACROS = {
 RAG_SYSTEM_MACROS = {
     "QALS": ("RagQalsAcc", "RagQalsFaith", "RagQalsTok"),
     "Recursive500": ("RagLcAcc", "RagLcFaith", "RagLcTok"),
-    "ParentDocument": ("RagParentAcc", "RagParentFaith", "RagParentTok"),
     "HybridRRF": ("RagHybridAcc", "RagHybridFaith", "RagHybridTok"),
+    "AdaptiveK": ("RagParentAcc", "RagParentFaith", "RagParentTok"),  # reuse Parent macros for Adaptive-k reader row
 }
 
 

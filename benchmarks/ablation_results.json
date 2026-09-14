@@ -1,0 +1,52 @@
+{
+  "scifact": {
+    "B=50": {
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 45.1,
+      "covered": 0.5733
+    },
+    "B=100": {
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 93.3,
+      "covered": 0.5733
+    },
+    "B=150": {
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 136.1,
+      "covered": 0.5733
+    },
+    "B=200": {
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 173.3,
+      "covered": 0.5733
+    },
+    "kappa=0.00": {
+      "ndcg": 0.6955,
+      "recall": 0.8184,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 136.1,
+      "covered": 0.5733
+    },
+    "M=20": {
+      "ndcg": 0.6877,
+      "recall": 0.8107,
+      "ndcg_packed": 0.558,
+      "recall_packed": 0.5539,
+      "tokens": 136.2,
+      "covered": 0.5733
+    }
+  }
+}

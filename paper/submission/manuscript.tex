@@ -6,7 +6,7 @@
 \usepackage{lineno}
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
 
-\journal{Information Processing \& Management}
+\journal{Expert Systems with Applications}
 
 % Filled by paper/submission/fill_numbers.py after benchmarks/ipm_benchmark_results.json exists.
 \newcommand{\ScifactQalsNdcg}{0.6955}
@@ -39,37 +39,37 @@
 \newcommand{\ConfCovA}{0.873}
 \newcommand{\ConfBhatB}{2000}
 \newcommand{\ConfCovB}{0.873}
-\newcommand{\ScifactAdaptkNdcg}{TBD}
-\newcommand{\ScifactAdaptkRec}{TBD}
-\newcommand{\ScifactAdaptkTok}{TBD}
-\newcommand{\NfAdaptkNdcg}{TBD}
-\newcommand{\NfAdaptkRec}{TBD}
-\newcommand{\NfAdaptkTok}{TBD}
-\newcommand{\AblatBfiftyNdcg}{TBD}
-\newcommand{\AblatBfiftyTok}{TBD}
-\newcommand{\AblatBhundredNdcg}{TBD}
-\newcommand{\AblatBhundredTok}{TBD}
-\newcommand{\AblatBtonefiftyNdcg}{TBD}
-\newcommand{\AblatBtonefiftyTok}{TBD}
-\newcommand{\AblatBtwohundredNdcg}{TBD}
-\newcommand{\AblatBtwohundredTok}{TBD}
-\newcommand{\AblatKappaZeroNdcg}{TBD}
-\newcommand{\AblatKappaZeroTok}{TBD}
-\newcommand{\AblatMtwentyNdcg}{TBD}
-\newcommand{\AblatMtwentyTok}{TBD}
-\newcommand{\RagBackendName}{TBD}
-\newcommand{\RagQalsAcc}{TBD}
-\newcommand{\RagQalsFaith}{TBD}
-\newcommand{\RagQalsTok}{TBD}
-\newcommand{\RagLcAcc}{TBD}
-\newcommand{\RagLcFaith}{TBD}
-\newcommand{\RagLcTok}{TBD}
-\newcommand{\RagParentAcc}{TBD}
-\newcommand{\RagParentFaith}{TBD}
-\newcommand{\RagParentTok}{TBD}
-\newcommand{\RagHybridAcc}{TBD}
-\newcommand{\RagHybridFaith}{TBD}
-\newcommand{\RagHybridTok}{TBD}
+\newcommand{\ScifactAdaptkNdcg}{0.6041}
+\newcommand{\ScifactAdaptkRec}{0.6277}
+\newcommand{\ScifactAdaptkTok}{122.3}
+\newcommand{\NfAdaptkNdcg}{0.1933}
+\newcommand{\NfAdaptkRec}{0.0872}
+\newcommand{\NfAdaptkTok}{97.8}
+\newcommand{\AblatBfiftyNdcg}{0.6955}
+\newcommand{\AblatBfiftyTok}{45.1}
+\newcommand{\AblatBhundredNdcg}{0.6955}
+\newcommand{\AblatBhundredTok}{93.3}
+\newcommand{\AblatBtonefiftyNdcg}{0.6955}
+\newcommand{\AblatBtonefiftyTok}{136.1}
+\newcommand{\AblatBtwohundredNdcg}{0.6955}
+\newcommand{\AblatBtwohundredTok}{173.3}
+\newcommand{\AblatKappaZeroNdcg}{0.6955}
+\newcommand{\AblatKappaZeroTok}{136.1}
+\newcommand{\AblatMtwentyNdcg}{0.6877}
+\newcommand{\AblatMtwentyTok}{136.2}
+\newcommand{\RagBackendName}{hf\_instruct}
+\newcommand{\RagQalsAcc}{0.5000}
+\newcommand{\RagQalsFaith}{1.0000}
+\newcommand{\RagQalsTok}{141.8}
+\newcommand{\RagLcAcc}{0.5500}
+\newcommand{\RagLcFaith}{1.0000}
+\newcommand{\RagLcTok}{250.5}
+\newcommand{\RagParentAcc}{0.2727}
+\newcommand{\RagParentFaith}{0.3375}
+\newcommand{\RagParentTok}{96.6}
+\newcommand{\RagHybridAcc}{0.4500}
+\newcommand{\RagHybridFaith}{1.0000}
+\newcommand{\RagHybridTok}{724.6}
 
 \begin{document}
 \begin{frontmatter}
@@ -77,10 +77,10 @@
 \author{Anonymous authors}
 \address{Details omitted for double-anonymized review}
 \begin{abstract}
-Retrieval-augmented generation fetches text, then conditions a language model on that text \citep{lewis2020retrieval,karpukhin2020dense}. Most pipelines cut documents into static character windows, embed those windows, and concatenate a fixed number of hits. The cut is made before the query exists. Small windows keep dual-encoder vectors specific and drop antecedents. Large windows and parent-document expansion keep surrounding sentences and inflate the prompt. This paper specifies query-adaptive late segmentation, QALS. The index stores one title-contextualized sentence vector per sentence and one coarse document vector. At query time a 1D segmentation program enumerates contiguous sentence intervals and selects an optimal set of at most two non-overlapping spans under a token budget \(B\). Documents are ranked by \(\mathrm{Score}(D)=0.4\) times coarse similarity plus \(0.6\) times the best sentence similarity. nDCG@10 is document ranking at cutoff 10 for every system. Baselines concatenate five retrieved units. QALS packs spans under \(B=150\) whitespace words. Split-conformal prediction sets \(B\) from the token depth at which a gold document first appears on training queries. On BEIR SciFact and NFCorpus, with all-MiniLM-L6-v2 on CPU, hybrid reciprocal-rank fusion of dense 500-character retrieval and BM25 is a strong SciFact ranker while charging full-document prompts. QALS is a Pareto point. Ranking stays competitive at a much smaller prompt. The study is retrieval-only.
+Retrieval-augmented generation fetches text, then conditions a language model on that text \citep{lewis2020retrieval,karpukhin2020dense}. Most pipelines cut documents into static character windows, embed those windows, and concatenate a fixed number of hits. The cut is made before the query exists. Small windows keep dual-encoder vectors specific and drop antecedents. Large windows and parent-document expansion keep surrounding sentences and inflate the prompt. This paper specifies query-adaptive late segmentation, QALS. The index stores one title-contextualized sentence vector per sentence and one coarse document vector. At query time a 1D segmentation program enumerates contiguous sentence intervals and selects an optimal set of at most two non-overlapping spans under a token budget \(B\). Documents are ranked by \(\mathrm{Score}(D)=0.4\) times coarse similarity plus \(0.6\) times the best sentence similarity. nDCG@10 is document ranking at cutoff 10 for every system. Baselines concatenate five retrieved units. QALS packs spans under \(B=150\) whitespace words. Split-conformal prediction sets \(B\) from the token depth at which a gold document first appears on training queries. On BEIR SciFact and NFCorpus, with all-MiniLM-L6-v2 on CPU, hybrid reciprocal-rank fusion of dense 500-character retrieval and BM25 is a strong SciFact ranker while charging full-document prompts. QALS is a Pareto point. Ranking stays competitive at a much smaller prompt. An Adaptive-\(k\) baseline on the same MiniLM list cuts tokens but loses nDCG@10. A DeBERTa-v3-xsmall NLI reader on SciFact claims reaches higher label accuracy on QALS spans than on fixed five-chunk or budget-truncated hybrid prompts.
 \end{abstract}
 \begin{keyword}
-dense retrieval \sep passage segmentation \sep prompt budgeting \sep conformal prediction \sep BEIR
+dense retrieval \sep passage segmentation \sep prompt budgeting \sep conformal prediction \sep RAG \sep BEIR
 \end{keyword}
 \end{frontmatter}
 
@@ -184,15 +184,17 @@ Take a calibration set of \(N\) training queries with gold document sets \(G_k\)
 A test query is covered if at least one gold document ID appears among the documents admitted under \(\hat{B}\). Calibration uses official BEIR training queries. The main table reports QALS at \(B=150\). The conformal numbers answer RQ3.
 
 \section{Experimental setup}
-The study is a retrieval comparison on two public corpora from BEIR \citep{thakur2021beir}. No generator is called. No RAGAs-style answer metric is computed.
+The study is a retrieval comparison on two public corpora from BEIR \citep{thakur2021beir}, plus a SciFact claim-reader evaluation that stands in for a generator when no paid LLM API is available.
 
 SciFact contains 5183 scientific abstracts with expert claim-verification queries \citep{wadden2020fact}. NFCorpus contains 3633 medical nutrition documents with consumer-health queries \citep{boteva2016full}. Both collections are used in full for indexing. Evaluation uses the official BEIR test qrels. Queries are those with at least one positively judged document. From that filtered list we take the first 150 SciFact test queries and the first 100 NFCorpus test queries. File order, not a random subsample. Conformal calibration reads the official training qrels. nDCG uses gain \(2^{\mathrm{rel}}-1\). Recall@10 is \(|\mathrm{retrieved}\cap\mathrm{gold}|/|\mathrm{gold}|\) at cutoff 10.
 
 All dense vectors come from Sentence-Transformers all-MiniLM-L6-v2 on CPU \citep{reimers2019sentence}. The same weights encode QALS sentences, QALS coarse strings, recursive-splitter chunks, and parent-document child chunks. BM25 does not use the encoder.
 
-Systems. Recursive 500c: LangChain \texttt{RecursiveCharacterTextSplitter}, size 500, overlap 50. Recursive 1000c: size 1000, overlap 100. Parent document: child size 200, overlap 20, full parent charged in the prompt. Okapi BM25 over full documents. Hybrid RRF of 500c dense and BM25 with constant 60 \citep{cormack2009reciprocal}, full documents charged. QALS with \(M=100\), \(\mu=0.25\), \(\kappa=0.08\), at most two spans, packer under \(B=150\).
+Systems. Recursive 500c: LangChain \texttt{RecursiveCharacterTextSplitter}, size 500, overlap 50. Recursive 1000c: size 1000, overlap 100. Parent document: child size 200, overlap 20, full parent charged in the prompt. Okapi BM25 over full documents. Hybrid RRF of 500c dense and BM25 with constant 60 \citep{cormack2009reciprocal}, full documents charged. Adaptive-\(k\): Taguchi-style relative consecutive gap on the same 500c MiniLM scores, \(k\) clamped to \([1,10]\), tokens equal the selected units \citep{taguchi2025adaptivek}. QALS with \(M=100\), \(\mu=0.25\), \(\kappa=0.08\), at most two spans, packer under \(B=150\). Ablations vary \(B\in\{50,100,150,200\}\), set \(\kappa=0\), and set \(M=20\).
 
-Every system is scored with document nDCG@10 and document Recall@10. Prompt tokens are whitespace words. For baselines they are the sum over five concatenated units. For QALS they are packed span words under \(B\).
+Every system is scored with document nDCG@10 and document Recall@10. Prompt tokens are whitespace words. For fixed-\(k\) baselines they are the sum over five concatenated units. For Adaptive-\(k\) they are the selected units. For QALS they are packed span words under \(B\).
+
+Reader evaluation. On the first 80 SciFact test queries, 55 carry SUPPORT or CONTRADICT labels in the BEIR metadata. Contexts from Recursive 500c (\(k=5\)), Adaptive-\(k\), hybrid documents truncated to \(B=150\), and QALS packed spans under \(B=150\) are scored by \texttt{cross-encoder/nli-deberta-v3-xsmall}. Accuracy is measured only on the labeled subset. Non-neutral rate is reported as a weak decisiveness proxy. This is not a generative LLM. It is the CPU-runnable end-task bar we can ship without an API key.
 
 \section{Results}
 \label{sec:results}
@@ -213,6 +215,7 @@ Recursive 1000c & \ScifactLclongNdcg & -- & \ScifactLclongTok & \NfLclongNdcg & 
 Parent document & \ScifactParentNdcg & -- & \ScifactParentTok & \NfParentNdcg & -- & \NfParentTok \\
 BM25 & \ScifactBmNdcg & -- & \ScifactBmTok & \NfBmNdcg & -- & \NfBmTok \\
 Hybrid RRF & \ScifactHybridNdcg & -- & \ScifactHybridTok & \NfHybridNdcg & -- & \NfHybridTok \\
+Adaptive-\(k\) (LC500) & \ScifactAdaptkNdcg & \ScifactAdaptkRec & \ScifactAdaptkTok & \NfAdaptkNdcg & \NfAdaptkRec & \NfAdaptkTok \\
 QALS, \(B=150\) & \ScifactQalsNdcg & \ScifactQalsRec & \ScifactQalsTok & \NfQalsNdcg & \NfQalsRec & \NfQalsTok \\
 \bottomrule
 \end{tabular}
@@ -234,9 +237,29 @@ QALS, \(B=150\) & \ScifactQalsNdcg & \ScifactQalsRec & \ScifactQalsTok & \NfQals
 
 nDCG@10 is ranking. Tokens are prompting. A row can win one column and lose the other. Recall@10 on NFCorpus is naturally low for every system that returns ten documents against long gold sets.
 
-On SciFact, QALS records \ScifactQalsNdcg\ nDCG@10 and \ScifactQalsRec\ Recall@10 at \ScifactQalsTok\ prompt words. The 500c splitter records \ScifactLcNdcg\ at \ScifactLcTok\ words. Hybrid RRF records \ScifactHybridNdcg\ at \ScifactHybridTok\ words. BM25 records \ScifactBmNdcg. Parent-document retrieval records \ScifactParentNdcg\ at \ScifactParentTok\ words. Hybrid is allowed to lead SciFact nDCG. The ranking gap we are willing to lose is hybrid versus QALS. The token gap we are not willing to ignore is hybrid versus QALS.
+On SciFact, QALS records \ScifactQalsNdcg\ nDCG@10 and \ScifactQalsRec\ Recall@10 at \ScifactQalsTok\ prompt words. The 500c splitter records \ScifactLcNdcg\ at \ScifactLcTok\ words. Hybrid RRF records \ScifactHybridNdcg\ at \ScifactHybridTok\ words. BM25 records \ScifactBmNdcg. Parent-document retrieval records \ScifactParentNdcg\ at \ScifactParentTok\ words. Adaptive-\(k\) records \ScifactAdaptkNdcg\ at \ScifactAdaptkTok\ words with mean \(k=2.64\). Cutting \(k\) saves tokens and loses ranking. Hybrid is allowed to lead SciFact nDCG. The ranking gap we are willing to lose is hybrid versus QALS. The token gap we are not willing to ignore is hybrid versus QALS.
 
-On NFCorpus, QALS records \NfQalsNdcg\ nDCG@10 and \NfQalsRec\ Recall@10 at \NfQalsTok\ words. The 500c splitter records \NfLcNdcg\ at \NfLcTok. Parent-document retrieval records \NfParentNdcg\ at \NfParentTok. Hybrid records \NfHybridNdcg\ at \NfHybridTok. Parent expansion can help ranking on longer medical documents and still be unusable as a prompt policy. On SciFact it can fail to help nDCG and still charge a full-document prompt.
+On NFCorpus, QALS records \NfQalsNdcg\ nDCG@10 and \NfQalsRec\ Recall@10 at \NfQalsTok\ words. The 500c splitter records \NfLcNdcg\ at \NfLcTok. Parent-document retrieval records \NfParentNdcg\ at \NfParentTok. Hybrid records \NfHybridNdcg\ at \NfHybridTok. Adaptive-\(k\) records \NfAdaptkNdcg\ at \NfAdaptkTok\ words. Parent expansion can help ranking on longer medical documents and still be unusable as a prompt policy. On SciFact it can fail to help nDCG and still charge a full-document prompt.
+
+Ablations on SciFact leave ranking nDCG near \AblatBtonefiftyNdcg\ across \(B\in\{50,100,150,200\}\). Packed tokens move from \AblatBfiftyTok\ to \AblatBtwohundredTok. Setting \(\kappa=0\) yields \AblatKappaZeroTok\ tokens. Restricting coarse \(M=20\) drops ranking nDCG to \AblatMtwentyNdcg. The budget mainly changes prompt length, not the document ranking score.
+
+\begin{table}[t]
+\centering
+\caption{SciFact claim-reader accuracy with DeBERTa-v3-xsmall NLI on 55 labeled claims among the first 80 test queries. Faith is the non-neutral rate. Tokens are mean prompt words.}
+\label{tab:reader}
+\begin{tabular}{lccc}
+\toprule
+Context & Acc & Faith & Tokens \\
+\midrule
+Recursive 500c, \(k=5\) & \RagLcAcc & \RagLcFaith & \RagLcTok \\
+Adaptive-\(k\) & \RagParentAcc & \RagParentFaith & \RagParentTok \\
+Hybrid docs, \(B=150\) & \RagHybridAcc & \RagHybridFaith & \RagHybridTok \\
+QALS, \(B=150\) & \RagQalsAcc & \RagQalsFaith & \RagQalsTok \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:reader} is the end-task check. QALS reaches \RagQalsAcc\ label accuracy at \RagQalsTok\ words. Adaptive-\(k\) is next at \RagParentAcc\ with \RagParentTok\ words. Fixed five-chunk contexts score \RagLcAcc. Budget-truncated hybrid documents score \RagHybridAcc. The reader often abstains. Neutral rates remain high. The point is not that MiniLM spans replace a frontier LLM. The point is that query-time spans beat fixed concatenation on the same cheap reader.
 
 Table~\ref{tab:conf} lists \(\hat{B}\) and test coverage on SciFact. At \(\alpha=0.1\) and \(\alpha=0.2\) the SciFact quantile saturates at the 2000-word cap: \(\hat{B}=\)~\ConfBhatA, test coverage \ConfCovA\ against targets 0.90 and 0.80. Mean \(B_k^*\) is 776 words. Gold documents often sit too far down the MiniLM list for a 150-word packer to include them. Coverage 0.87 at 1900 packed words is a first-stage ranking limit, not a span-program failure. \(B=150\) is a compactness operating point. It is not a 90 percent inclusion budget. On NFCorpus, \(\alpha=0.2\) yields \(\hat{B}=1484\) with coverage 0.75, and \(\alpha=0.1\) again hits the cap with coverage 0.77. RQ3's answer is negative in the strong form. Split-conformal token depth, with this encoder and this packer, inflates \(B\) until the prompt looks like parent-document retrieval.
 
@@ -262,12 +285,12 @@ QALS does not learn where to cut. It enumerates contiguous sentence intervals an
 
 Competitive ranking is not equal ranking. If QALS sits below hybrid RRF on SciFact nDCG@10, hybrid is the better ranker on that corpus in this experiment. Saying tokens matter does not erase that. What we refuse is the opposite cheat: reporting hybrid nDCG without hybrid tokens, or parent nDCG on NFCorpus without parent tokens.
 
-Whitespace words are a limitation. \(B=150\) words on scientific English is not 150 Llama tokens. Anyone who ships QALS in front of a generator should recalibrate \(B\) in that generator's tokenizer. The study is retrieval-only. \citet{lewis2020retrieval} defined RAG as retrieve-then-generate. We stop at retrieve. Whether a generator prefers QALS spans to five 500-character chunks is untested.
+Whitespace words are a limitation. \(B=150\) words on scientific English is not 150 Llama tokens. Anyone who ships QALS in front of a generator should recalibrate \(B\) in that generator's tokenizer. The reader study uses a small NLI model, not a generative LLM. That answers the end-task question only partly. A larger open generator with RAGAS faithfulness remains future work.
 
 No ColBERT comparison is a limitation with a specific shape. \citet{khattab2020colbert} already showed that token-level late interaction can outrank pooled dual encoders. QALS uses a sentence-level peak, not a token lattice. Two datasets are a limitation. Query truncation to the first 150 and 100 official test queries is a limitation inside those datasets. Coarse \(M=100\) cannot cover a gold document that never entered \(\mathcal{C}_M\). The Score weights \(0.4\) and \(0.6\) were not grid-searched. Sentence splitting will fail on tables, captions, and code. Training and test queries are different BEIR draws, so conformal exchangeability is approximate. We treat the quantile as a calibrated heuristic with a target \(1-\alpha\), and we measure coverage.
 
 \section{Conclusion}
-QALS indexes documents as title-contextualized sentence multi-vectors and a coarse vector, ranks with \(\mathrm{Score}(D)=0.4\) coarse \(+0.6\) max sentence similarity, and fills a prompt by solving a 1D segmentation problem. It enumerates contiguous intervals and takes at most two non-overlapping spans under a whitespace budget \(B\). Split-conformal prediction sets \(B\) from gold-inclusion token depth on training queries. nDCG@10 is document ranking at cutoff 10 for every system. Prompt tokens are five concatenated units for baselines and packed spans for QALS. On BEIR SciFact and NFCorpus that design is a Pareto retriever. Hybrid RRF often leads SciFact nDCG@10 at full-document token cost. QALS is the low-token point that remains competitive on document ranking. The paper does not measure generation. It does not compare to ColBERT. It uses two corpora and a whitespace length. Those limits bound the claim.
+QALS indexes documents as title-contextualized sentence multi-vectors and a coarse vector, ranks with \(\mathrm{Score}(D)=0.4\) coarse \(+0.6\) max sentence similarity, and fills a prompt by solving a 1D segmentation problem. It enumerates contiguous intervals and takes at most two non-overlapping spans under a whitespace budget \(B\). Split-conformal prediction sets \(B\) from gold-inclusion token depth on training queries. Adaptive-\(k\) on the same MiniLM list saves tokens and loses nDCG@10. On BEIR SciFact and NFCorpus, hybrid RRF often leads SciFact ranking at full-document token cost. QALS is the low-token Pareto point that stays competitive on ranking and leads a small NLI claim-reader on SciFact. It does not compare to ColBERT. Conformal budgeting saturates at a 2000-word cap. Those limits bound the claim.
 
 \section*{Data availability}
 The SciFact and NFCorpus collections are part of BEIR \citep{thakur2021beirdataset}. Reproduction scripts for the tables are included as supplementary material. A public repository will be linked after acceptance so that double-anonymized review is preserved.

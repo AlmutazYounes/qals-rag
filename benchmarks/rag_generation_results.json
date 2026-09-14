@@ -1,0 +1,5058 @@
+{
+  "meta": {
+    "updated_at": "2026-09-14T06:12:10",
+    "num_eval_default": 30,
+    "notes": "SciFact accuracy only counted when query metadata has SUPPORT/CONTRADICT. Faithfulness is a lexical overlap proxy, not full RAGAS. Optional FiQA/TREC-COVID skipped unless present under data/."
+  },
+  "scifact": {
+    "n_queries": 30,
+    "budget_words": 150,
+    "token_accounting": "whitespace split, consistent with run_ipm_benchmark.py",
+    "backends": {
+      "oracle_answerability": {
+        "Recursive500": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 1.0,
+            "mean_prompt_tokens": 250.5,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 253,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 227,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 314,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 381,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 193,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 169,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "48",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 269,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 291,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 193,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 207,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 207,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 213,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 330,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 330,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 274,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 196,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 326,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 293,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 109,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 266,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 231,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 218,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 342,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "128",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 229,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "129",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 316,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 316,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 284,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 253,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "HybridRRF": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 1.0,
+            "mean_prompt_tokens": 724.6,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 687,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 631,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "48",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 724,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 705,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 738,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 672,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 729,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 676,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 743,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "128",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "129",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 694,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 694,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 680,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "ParentDocument": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.95,
+            "mean_prompt_tokens": 733.2,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 663,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 747,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 689,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "48",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 724,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "70",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 705,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 747,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 740,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 686,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 729,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 736,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "128",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "129",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 735,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 735,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "QALS": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.8,
+            "mean_prompt_tokens": 141.8,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 128,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "48",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 127,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 143,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 141,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 141,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "70",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 99,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 137,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 119,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 134,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 146,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "128",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "129",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "133",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            }
+          ]
+        }
+      },
+      "extractive_minilm": {
+        "Recursive500": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.65,
+            "mean_prompt_tokens": 250.5,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 253,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 227,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 314,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "13",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 381,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "36",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 193,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "42",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 169,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "48",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 269,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 291,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 193,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 207,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 207,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 213,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 330,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 330,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 274,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "75",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 196,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 326,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 293,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 109,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 266,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 231,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 218,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 342,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 229,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 316,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 316,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 284,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 253,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "HybridRRF": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.6,
+            "mean_prompt_tokens": 724.6,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 687,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 631,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "36",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "42",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "48",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 724,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 705,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "75",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 738,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 672,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 729,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 676,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 743,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 694,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 694,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 680,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "ParentDocument": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.65,
+            "mean_prompt_tokens": 733.2,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 663,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 747,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "13",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 689,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "36",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "42",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "48",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 724,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 705,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 747,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "75",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 740,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 686,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 729,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 736,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 735,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 735,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "QALS": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.6,
+            "mean_prompt_tokens": 141.8,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 128,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "36",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "42",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "48",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 127,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 143,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 141,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 141,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 99,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "75",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 137,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 119,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 134,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 146,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        }
+      },
+      "hf_instruct": {
+        "Recursive500": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.55,
+            "mean_prompt_tokens": 250.5,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 253,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 227,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 314,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 381,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 193,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "REFUTE",
+              "gold": "REFUTE",
+              "tokens": 169,
+              "faithfulness": 1.0,
+              "answer": "REFUTE"
+            },
+            {
+              "qid": "48",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 269,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 291,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 193,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 207,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 207,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 213,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 330,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 330,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 274,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 196,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 326,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 293,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 109,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 266,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 231,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 218,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 342,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 229,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 316,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 316,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 284,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "133",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 253,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            }
+          ]
+        },
+        "HybridRRF": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.45,
+            "mean_prompt_tokens": 724.6,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 687,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 631,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "48",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 724,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 705,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 738,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 672,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 729,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 676,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "118",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 743,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "128",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "129",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 694,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "130",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 694,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "132",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 680,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "ParentDocument": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.45,
+            "mean_prompt_tokens": 733.2,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 663,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 747,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 689,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "48",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 709,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 704,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 724,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 705,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "72",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 747,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 740,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 686,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 729,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 736,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 735,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "130",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "132",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 735,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        },
+        "QALS": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 20,
+            "accuracy": 0.5,
+            "mean_prompt_tokens": 141.8,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "1",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 128,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "3",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "5",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "13",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "36",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "42",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "48",
+              "pred": "NOT ENOUGH",
+              "gold": "REFUTE",
+              "tokens": 127,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "49",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "50",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "51",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "53",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "54",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 143,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "56",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 141,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "57",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 141,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "70",
+              "pred": "NOT ENOUGH",
+              "gold": "SUPPORT",
+              "tokens": 99,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "72",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "75",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 137,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "94",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "99",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 119,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "100",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 134,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "113",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "115",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "118",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 146,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "124",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "127",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "128",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "129",
+              "pred": "SUPPORT",
+              "gold": "REFUTE",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "130",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "132",
+              "pred": "SUPPORT",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            },
+            {
+              "qid": "133",
+              "pred": "SUPPORT",
+              "gold": "SUPPORT",
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "SUPPORT"
+            }
+          ]
+        }
+      }
+    },
+    "api_model": null,
+    "api_note": "No OPENAI_API_KEY / ANTHROPIC_API_KEY in env or .env",
+    "hf_model": "Qwen/Qwen2.5-1.5B-Instruct"
+  },
+  "nfcorpus": {
+    "n_queries": 30,
+    "budget_words": 150,
+    "token_accounting": "whitespace split, consistent with run_ipm_benchmark.py",
+    "backends": {
+      "oracle_answerability": {
+        "Recursive500": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 209.9,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 295,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 214,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 186,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 127,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 31,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 247,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 173,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 82,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 357,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 66,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 223,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 116,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 179,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 220,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 52,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 315,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 245,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 275,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 320,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 175,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 158,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 300,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 228,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 197,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 294,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 267,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 183,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 349,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 251,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 173,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            }
+          ]
+        },
+        "HybridRRF": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 735.4,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 661,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 737,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 715,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 585,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 716,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 725,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 730,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 699,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            }
+          ]
+        },
+        "ParentDocument": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 731.4,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 697,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 737,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 715,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 639,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 675,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 617,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 703,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 731,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 707,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 734,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 742,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            }
+          ]
+        },
+        "QALS": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 139.9,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 123,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 112,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 123,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 135,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 140,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 117,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 132,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 135,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 143,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 129,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 146,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 135,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "NOT ENOUGH",
+              "gold": null,
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "NOT ENOUGH"
+            }
+          ]
+        }
+      },
+      "extractive_minilm": {
+        "Recursive500": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 209.9,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "There was no evidence that reduction of LDL cholesterol with a statin increased cancer incidence (RR per 1\u00b70 mmol/L LDL cholesterol reduction 1\u00b700, 95% CI 0\u00b796\u20131\u00b704), cancer mortality (RR 0\u00b799, 95% CI 0\u00b793\u20131\u00b706), or other non-vascular mortality.",
+              "gold": null,
+              "tokens": 295,
+              "faithfulness": 1.0,
+              "answer": "There was no evidence that reduction of LDL cholesterol with a statin increased cancer incidence (RR per 1\u00b70 mmol/L LDL cholesterol reduction 1\u00b700, 95% CI 0\u00b796\u20131\u00b704), cancer mortality (RR 0\u00b799, 95% CI 0\u00b793\u20131\u00b706), or other non-vascular mortality."
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "Autophagy induction was accompanied by down-regulation of Bcl-2 and inhibition\n\nby down-regulation of Bcl-2 and inhibition of the mammalian target of rapamycin (mTOR) pathway.",
+              "gold": null,
+              "tokens": 214,
+              "faithfulness": 1.0,
+              "answer": "Autophagy induction was accompanied by down-regulation of Bcl-2 and inhibition\n\nby down-regulation of Bcl-2 and inhibition of the mammalian target of rapamycin (mTOR) pathway."
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "Alkylphenols--potential modulators of the allergic response.",
+              "gold": null,
+              "tokens": 186,
+              "faithfulness": 1.0,
+              "answer": "Alkylphenols--potential modulators of the allergic response."
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "estimating the progression and cost of the US obesity epidemic.",
+              "gold": null,
+              "tokens": 127,
+              "faithfulness": 1.0,
+              "answer": "estimating the progression and cost of the US obesity epidemic."
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "Curcumin: the story so far.",
+              "gold": null,
+              "tokens": 31,
+              "faithfulness": 1.0,
+              "answer": "Curcumin: the story so far."
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma.",
+              "gold": null,
+              "tokens": 247,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma."
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains.",
+              "gold": null,
+              "tokens": 173,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains."
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "in the meat products).",
+              "gold": null,
+              "tokens": 82,
+              "faithfulness": 1.0,
+              "answer": "in the meat products)."
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "An epidemiological investigation revealed that the only commonality between cases was their exposure to a pork brain extraction procedure involving compressed air.",
+              "gold": null,
+              "tokens": 357,
+              "faithfulness": 1.0,
+              "answer": "An epidemiological investigation revealed that the only commonality between cases was their exposure to a pork brain extraction procedure involving compressed air."
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "well as subclinical cardiovascular disease early for young male.",
+              "gold": null,
+              "tokens": 66,
+              "faithfulness": 1.0,
+              "answer": "well as subclinical cardiovascular disease early for young male."
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "While these strictures could have positive effects on behavior, the removal of food dyes is not a panacea for ADHD, which is a multifaceted disorder with both biological and environmental underpinnings.",
+              "gold": null,
+              "tokens": 223,
+              "faithfulness": 1.0,
+              "answer": "While these strictures could have positive effects on behavior, the removal of food dyes is not a panacea for ADHD, which is a multifaceted disorder with both biological and environmental underpinnings."
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "Neuroprotective effects of citrus flavonoids.",
+              "gold": null,
+              "tokens": 116,
+              "faithfulness": 1.0,
+              "answer": "Neuroprotective effects of citrus flavonoids."
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "A credible case can be made that diets\n\nTumor Angiogenesis as a Target for Dietary Cancer Prevention\n\nMortality from Western cancers rose dramatically among African-Americans during the 20th century: are dietary animal products to blame?",
+              "gold": null,
+              "tokens": 179,
+              "faithfulness": 1.0,
+              "answer": "A credible case can be made that diets\n\nTumor Angiogenesis as a Target for Dietary Cancer Prevention\n\nMortality from Western cancers rose dramatically among African-Americans during the 20th century: are dietary animal products to blame?"
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "Dental X-rays and Risk of Meningioma BACKGROUND AND OVERVIEW: The National Council on Radiation Protection & Measurements updated its recommendations on radiation protection in dentistry in 2003, the Centers for Disease Control and Prevention published its Guidelines for Infection Control",
+              "gold": null,
+              "tokens": 220,
+              "faithfulness": 1.0,
+              "answer": "Dental X-rays and Risk of Meningioma BACKGROUND AND OVERVIEW: The National Council on Radiation Protection & Measurements updated its recommendations on radiation protection in dentistry in 2003, the Centers for Disease Control and Prevention published its Guidelines for Infection Control"
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "Probiotics as prevention and treatment for diarrhea.",
+              "gold": null,
+              "tokens": 52,
+              "faithfulness": 1.0,
+              "answer": "Probiotics as prevention and treatment for diarrhea."
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "Conclusion: Our findings suggest that alcohol intake up to approximately one small drink per day does not negatively impact breast cancer-specific survival and a half",
+              "gold": null,
+              "tokens": 315,
+              "faithfulness": 1.0,
+              "answer": "Conclusion: Our findings suggest that alcohol intake up to approximately one small drink per day does not negatively impact breast cancer-specific survival and a half"
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "Our findings provide novel insights into the nature of cellulite and may give clues to the treatment of this cosmetic issue.",
+              "gold": null,
+              "tokens": 245,
+              "faithfulness": 1.0,
+              "answer": "Our findings provide novel insights into the nature of cellulite and may give clues to the treatment of this cosmetic issue."
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "safe, palatable and more effective than psyllium for the treatment of mild to moderate constipation, and should be considered as a first line therapy.",
+              "gold": null,
+              "tokens": 275,
+              "faithfulness": 1.0,
+              "answer": "safe, palatable and more effective than psyllium for the treatment of mild to moderate constipation, and should be considered as a first line therapy."
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "For several high-consumption Titanium Dioxide Nanoparticles in Food and Personal Care Products Titanium dioxide is a common additive in many food, personal care, and other consumer products used by people, which after use can enter the sewage system, and subsequently",
+              "gold": null,
+              "tokens": 320,
+              "faithfulness": 1.0,
+              "answer": "For several high-consumption Titanium Dioxide Nanoparticles in Food and Personal Care Products Titanium dioxide is a common additive in many food, personal care, and other consumer products used by people, which after use can enter the sewage system, and subsequently"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "Formation and biochemistry of carcinogenic heterocyclic aromatic amines in cooked meats.",
+              "gold": null,
+              "tokens": 175,
+              "faithfulness": 1.0,
+              "answer": "Formation and biochemistry of carcinogenic heterocyclic aromatic amines in cooked meats."
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "had previously tried certain diets in the attempt to alleviate disease symptoms, whereas 13% of the patients with psoriatic arthropathy and 10% with osteoarthritis had tried diet therapy.",
+              "gold": null,
+              "tokens": 158,
+              "faithfulness": 1.0,
+              "answer": "had previously tried certain diets in the attempt to alleviate disease symptoms, whereas 13% of the patients with psoriatic arthropathy and 10% with osteoarthritis had tried diet therapy."
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "A lack of elevated levels of circulating creatine phosphokinase does not rule out structural muscle injury.",
+              "gold": null,
+              "tokens": 300,
+              "faithfulness": 1.0,
+              "answer": "A lack of elevated levels of circulating creatine phosphokinase does not rule out structural muscle injury."
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "Even some metals were\n\ncarcinogenicity of the chemical.",
+              "gold": null,
+              "tokens": 228,
+              "faithfulness": 1.0,
+              "answer": "Even some metals were\n\ncarcinogenicity of the chemical."
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "A dietary intervention for recurrent prostate cancer after definitive primary treatment: results of a randomized pilot trial.",
+              "gold": null,
+              "tokens": 197,
+              "faithfulness": 1.0,
+              "answer": "A dietary intervention for recurrent prostate cancer after definitive primary treatment: results of a randomized pilot trial."
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "Phytosterol concentrations were greater than reported in existing food composition\n\nPhytosterols were quantified in nuts and seeds commonly consumed in the United States.",
+              "gold": null,
+              "tokens": 294,
+              "faithfulness": 1.0,
+              "answer": "Phytosterol concentrations were greater than reported in existing food composition\n\nPhytosterols were quantified in nuts and seeds commonly consumed in the United States."
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration.",
+              "gold": null,
+              "tokens": 267,
+              "faithfulness": 1.0,
+              "answer": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration."
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "Total mercury level in maternal hair during pregnancy correlates well with blood levels of methylmercury and with total mercury levels in fetal brain.",
+              "gold": null,
+              "tokens": 183,
+              "faithfulness": 1.0,
+              "answer": "Total mercury level in maternal hair during pregnancy correlates well with blood levels of methylmercury and with total mercury levels in fetal brain."
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and to be inversely related to colon cancer risk (r = -0.78).",
+              "gold": null,
+              "tokens": 349,
+              "faithfulness": 1.0,
+              "answer": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and to be inversely related to colon cancer risk (r = -0.78)."
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "VITAMIN D: A D-LIGHTFUL SOLUTION FOR HEALTH\n\ndue to the persistence of fundamental knowledge gaps in vitamin D.",
+              "gold": null,
+              "tokens": 251,
+              "faithfulness": 1.0,
+              "answer": "VITAMIN D: A D-LIGHTFUL SOLUTION FOR HEALTH\n\ndue to the persistence of fundamental knowledge gaps in vitamin D."
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "Diet and breast cancer: understanding risks and benefits.",
+              "gold": null,
+              "tokens": 173,
+              "faithfulness": 1.0,
+              "answer": "Diet and breast cancer: understanding risks and benefits."
+            }
+          ]
+        },
+        "HybridRRF": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 735.4,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "Statin use and risk of breast cancer: a meta-analysis of observational studies.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Statin use and risk of breast cancer: a meta-analysis of observational studies."
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "Autophagy induction was accompanied by down-regulation of Bcl-2 and inhibition\n\nAmino acid sensing and regulation of mTORC1.",
+              "gold": null,
+              "tokens": 661,
+              "faithfulness": 1.0,
+              "answer": "Autophagy induction was accompanied by down-regulation of Bcl-2 and inhibition\n\nAmino acid sensing and regulation of mTORC1."
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "Alkylphenols--potential modulators of the allergic response.",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "Alkylphenols--potential modulators of the allergic response."
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "BACKGROUND: The major drivers of the obesity epidemic are much debated and have considerable policy importance for the population-wide prevention of obesity.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "BACKGROUND: The major drivers of the obesity epidemic are much debated and have considerable policy importance for the population-wide prevention of obesity."
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "Dose-escalating studies have indicated the safety of\n\nCurcumin: the story so far.",
+              "gold": null,
+              "tokens": 737,
+              "faithfulness": 1.0,
+              "answer": "Dose-escalating studies have indicated the safety of\n\nCurcumin: the story so far."
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma."
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains.",
+              "gold": null,
+              "tokens": 715,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains."
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "Preliminary data in the literature indicate that iron absorption from a meal may be increased when consumed with low-pH beverages such as cola, and it is also possible that sugar iron complexes may alter iron availability.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Preliminary data in the literature indicate that iron absorption from a meal may be increased when consumed with low-pH beverages such as cola, and it is also possible that sugar iron complexes may alter iron availability."
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "An epidemiological investigation revealed that the only commonality between cases was their exposure to a pork brain extraction procedure involving compressed air.",
+              "gold": null,
+              "tokens": 585,
+              "faithfulness": 1.0,
+              "answer": "An epidemiological investigation revealed that the only commonality between cases was their exposure to a pork brain extraction procedure involving compressed air."
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "Can lifestyle changes reverse coronary heart disease?",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Can lifestyle changes reverse coronary heart disease?"
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "Artificial food dyes and attention deficit hyperactivity disorder.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Artificial food dyes and attention deficit hyperactivity disorder."
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "Neuroprotective effects of citrus flavonoids.",
+              "gold": null,
+              "tokens": 716,
+              "faithfulness": 1.0,
+              "answer": "Neuroprotective effects of citrus flavonoids."
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "Mortality from Western cancers rose dramatically among African-Americans during the 20th century: are dietary animal products to blame?",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Mortality from Western cancers rose dramatically among African-Americans during the 20th century: are dietary animal products to blame?"
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "Objective To examine the association between dental x-rays, the most common artificial source of ionizing radiation, and risk of intra-cranial meningioma.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Objective To examine the association between dental x-rays, the most common artificial source of ionizing radiation, and risk of intra-cranial meningioma."
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "Commercial literature on various probiotic products suggests that they can be taken before meals, during meals or after meals or even without meals.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Commercial literature on various probiotic products suggests that they can be taken before meals, during meals or after meals or even without meals."
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "Higher alcohol consumption was associated with a modest increase in breast cancer risk; the multivariable relative risks for > or =30 g/day of alcohol vs.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Higher alcohol consumption was associated with a modest increase in breast cancer risk; the multivariable relative risks for > or =30 g/day of alcohol vs."
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "Although extracellular matrix and lymphatic system disorders can increase its appearance, cellulite basically results from an excessive fat storage in the adipose tissue which exerts considerable pressure on the surrounding skin tissue and creates a dimpled irregular appearance.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Although extracellular matrix and lymphatic system disorders can increase its appearance, cellulite basically results from an excessive fat storage in the adipose tissue which exerts considerable pressure on the surrounding skin tissue and creates a dimpled irregular appearance."
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "BACKGROUND: Treatment of chronic constipation remains challenging with 50% of patients dissatisfied with current therapy.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "BACKGROUND: Treatment of chronic constipation remains challenging with 50% of patients dissatisfied with current therapy."
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "Titanium Dioxide Nanoparticles in Food and Personal Care Products Titanium dioxide is a common additive in many food, personal care, and other consumer products used by people, which after use can enter the sewage system, and subsequently enter the environment",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Titanium Dioxide Nanoparticles in Food and Personal Care Products Titanium dioxide is a common additive in many food, personal care, and other consumer products used by people, which after use can enter the sewage system, and subsequently enter the environment"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "This has frequently been attributed to chemical carcinogens arising during the cooking process of meat.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "This has frequently been attributed to chemical carcinogens arising during the cooking process of meat."
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "Side-effect profile of cyclosporin A in patients treated for psoriasis.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Side-effect profile of cyclosporin A in patients treated for psoriasis."
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "However, scientific evidence to support the protective effects of WBV training (WBVT) on muscle damage is lacking.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "However, scientific evidence to support the protective effects of WBV training (WBVT) on muscle damage is lacking."
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "We and others recently began studying brominated flame retardant levels in various matrices in the US including human milk and other food.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "We and others recently began studying brominated flame retardant levels in various matrices in the US including human milk and other food."
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "Fifteen men who were scheduled to undergo repeat prostate biopsy were instructed to follow a low-fat (less than 20% kcal), flaxseed-supplemented (30 g/day) diet and were provided with a supply of flaxseed to last throughout the 6-month intervention period.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Fifteen men who were scheduled to undergo repeat prostate biopsy were instructed to follow a low-fat (less than 20% kcal), flaxseed-supplemented (30 g/day) diet and were provided with a supply of flaxseed to last throughout the 6-month intervention period."
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "Sesame seed and wheat germ had the highest total phytosterol content (400-413 mg/100 g) and Brazil nuts the lowest (95 mg/100 g).",
+              "gold": null,
+              "tokens": 725,
+              "faithfulness": 1.0,
+              "answer": "Sesame seed and wheat germ had the highest total phytosterol content (400-413 mg/100 g) and Brazil nuts the lowest (95 mg/100 g)."
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration."
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "Total mercury level in maternal hair during pregnancy correlates well with blood levels of methylmercury and with total mercury levels in fetal brain.",
+              "gold": null,
+              "tokens": 730,
+              "faithfulness": 1.0,
+              "answer": "Total mercury level in maternal hair during pregnancy correlates well with blood levels of methylmercury and with total mercury levels in fetal brain."
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and Fecal weight, colon cancer risk, and dietary intake of nonstarch polysaccharides (dietary fiber) Low fecal weight and slow bowel transit time",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and Fecal weight, colon cancer risk, and dietary intake of nonstarch polysaccharides (dietary fiber) Low fecal weight and slow bowel transit time"
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "The present review provides a brief overview of the approach\n\nVitamin D supplementation for prevention of mortality in adults.",
+              "gold": null,
+              "tokens": 699,
+              "faithfulness": 1.0,
+              "answer": "The present review provides a brief overview of the approach\n\nVitamin D supplementation for prevention of mortality in adults."
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "Diet and breast cancer: understanding risks and benefits.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Diet and breast cancer: understanding risks and benefits."
+            }
+          ]
+        },
+        "ParentDocument": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 731.4,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "Statin Use and Breast Cancer Survival: A Nationwide Cohort Study from Finland Recent studies have suggested that statins, an established drug group in the prevention of cardiovascular mortality, could delay or prevent breast cancer recurrence but the effect on disease-specific",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Statin Use and Breast Cancer Survival: A Nationwide Cohort Study from Finland Recent studies have suggested that statins, an established drug group in the prevention of cardiovascular mortality, could delay or prevent breast cancer recurrence but the effect on disease-specific"
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "To adapt to their limitation during periods of protein starvation, multiple adaptive mechanisms have evolved, including a rapid cessation of new protein synthesis, an increase in amino acid biosynthesis and transport, and autophagy.",
+              "gold": null,
+              "tokens": 697,
+              "faithfulness": 1.0,
+              "answer": "To adapt to their limitation during periods of protein starvation, multiple adaptive mechanisms have evolved, including a rapid cessation of new protein synthesis, an increase in amino acid biosynthesis and transport, and autophagy."
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "Alkylphenols--potential modulators of the allergic response.",
+              "gold": null,
+              "tokens": 744,
+              "faithfulness": 1.0,
+              "answer": "Alkylphenols--potential modulators of the allergic response."
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "The United States is in the midst of a significant public health problem that relates to obesity and inactivity.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "The United States is in the midst of a significant public health problem that relates to obesity and inactivity."
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "Of 43 patients who received curcumin,\n\nCurcumin: the story so far.",
+              "gold": null,
+              "tokens": 737,
+              "faithfulness": 1.0,
+              "answer": "Of 43 patients who received curcumin,\n\nCurcumin: the story so far."
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma."
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains.",
+              "gold": null,
+              "tokens": 715,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains."
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "When fat is removed from meat, water is generally added to replace it.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "When fat is removed from meat, water is generally added to replace it."
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "BACKGROUND: Anecdotal reports and a single case-control epidemiological survey have suggested an association between the helminthic disease neurocysticercosis and primary headache.",
+              "gold": null,
+              "tokens": 639,
+              "faithfulness": 1.0,
+              "answer": "BACKGROUND: Anecdotal reports and a single case-control epidemiological survey have suggested an association between the helminthic disease neurocysticercosis and primary headache."
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "Reversing heart disease in the new millennium--the Fleming unified theory.",
+              "gold": null,
+              "tokens": 675,
+              "faithfulness": 1.0,
+              "answer": "Reversing heart disease in the new millennium--the Fleming unified theory."
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "Artificial food dyes and attention deficit hyperactivity disorder.",
+              "gold": null,
+              "tokens": 617,
+              "faithfulness": 1.0,
+              "answer": "Artificial food dyes and attention deficit hyperactivity disorder."
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "Neuroprotective effects of citrus flavonoids.",
+              "gold": null,
+              "tokens": 703,
+              "faithfulness": 1.0,
+              "answer": "Neuroprotective effects of citrus flavonoids."
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "CONTEXT: Restricting caloric intake is one of the most effective ways to extend lifespan and to reduce spontaneous tumor occurrence in experimental animals, but whether similar associations hold in humans has not been appropriately studied.",
+              "gold": null,
+              "tokens": 731,
+              "faithfulness": 1.0,
+              "answer": "CONTEXT: Restricting caloric intake is one of the most effective ways to extend lifespan and to reduce spontaneous tumor occurrence in experimental animals, but whether similar associations hold in humans has not been appropriately studied."
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "Objective To examine the association between dental x-rays, the most common artificial source of ionizing radiation, and risk of intra-cranial meningioma.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Objective To examine the association between dental x-rays, the most common artificial source of ionizing radiation, and risk of intra-cranial meningioma."
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "Probiotics as prevention and treatment for diarrhea.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Probiotics as prevention and treatment for diarrhea."
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "Higher alcohol consumption was associated with a modest increase in breast cancer risk; the multivariable relative risks for > or =30 g/day of alcohol vs.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Higher alcohol consumption was associated with a modest increase in breast cancer risk; the multivariable relative risks for > or =30 g/day of alcohol vs."
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "Cellulite: nature and aetiopathogenesis.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Cellulite: nature and aetiopathogenesis."
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "BACKGROUND: Treatment of chronic constipation remains challenging with 50% of patients dissatisfied with current therapy.",
+              "gold": null,
+              "tokens": 707,
+              "faithfulness": 1.0,
+              "answer": "BACKGROUND: Treatment of chronic constipation remains challenging with 50% of patients dissatisfied with current therapy."
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "Titanium Dioxide Nanoparticles in Food and Personal Care Products Titanium dioxide is a common additive in many food, personal care, and other consumer products used by people, which after use can enter the sewage system, and subsequently enter the environment",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Titanium Dioxide Nanoparticles in Food and Personal Care Products Titanium dioxide is a common additive in many food, personal care, and other consumer products used by people, which after use can enter the sewage system, and subsequently enter the environment"
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "This has frequently been attributed to chemical carcinogens arising during the cooking process of meat.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "This has frequently been attributed to chemical carcinogens arising during the cooking process of meat."
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "Side-effect profile of cyclosporin A in patients treated for psoriasis.",
+              "gold": null,
+              "tokens": 734,
+              "faithfulness": 1.0,
+              "answer": "Side-effect profile of cyclosporin A in patients treated for psoriasis."
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "Numerous studies have reported beneficial effects including increased muscle mass during training and neural protection.",
+              "gold": null,
+              "tokens": 742,
+              "faithfulness": 1.0,
+              "answer": "Numerous studies have reported beneficial effects including increased muscle mass during training and neural protection."
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "Perfluorinated Compounds, Polychlorinated Biphenyls, and Organochlorine Pesticide Contamination in Composite Food Samples from Dallas, Texas, USA Objectives The objective of this article is to extend our previous studies of persistent organic pollutant (POP) contamination of U.S.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Perfluorinated Compounds, Polychlorinated Biphenyls, and Organochlorine Pesticide Contamination in Composite Food Samples from Dallas, Texas, USA Objectives The objective of this article is to extend our previous studies of persistent organic pollutant (POP) contamination of U.S."
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "OBJECTIVES: Considerable evidence has shown that diet can affect both the incidence and the progression of prostate cancer.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "OBJECTIVES: Considerable evidence has shown that diet can affect both the incidence and the progression of prostate cancer."
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "Sesame seed and wheat germ had the highest total phytosterol content (400-413 mg/100 g) and Brazil nuts the lowest (95 mg/100 g).",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Sesame seed and wheat germ had the highest total phytosterol content (400-413 mg/100 g) and Brazil nuts the lowest (95 mg/100 g)."
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration."
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "Dose\u2013Response Relationship of Prenatal Mercury Exposure and IQ: An Integrative Analysis of Epidemiologic Data Background Prenatal exposure to mercury has been associated with adverse childhood neurologic outcomes in epidemiologic studies.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Dose\u2013Response Relationship of Prenatal Mercury Exposure and IQ: An Integrative Analysis of Epidemiologic Data Background Prenatal exposure to mercury has been associated with adverse childhood neurologic outcomes in epidemiologic studies."
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and Fecal weight, colon cancer risk, and dietary intake of nonstarch polysaccharides (dietary fiber) Low fecal weight and slow bowel transit time",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and Fecal weight, colon cancer risk, and dietary intake of nonstarch polysaccharides (dietary fiber) Low fecal weight and slow bowel transit time"
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "The DRI committee's deliberations underpinning this most comprehensive report on vitamin D nutrition to date benefited hugely from a much expanded knowledge base in vitamin D over the last decade or more.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "The DRI committee's deliberations underpinning this most comprehensive report on vitamin D nutrition to date benefited hugely from a much expanded knowledge base in vitamin D over the last decade or more."
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "Diet and breast cancer: understanding risks and benefits.",
+              "gold": null,
+              "tokens": 750,
+              "faithfulness": 1.0,
+              "answer": "Diet and breast cancer: understanding risks and benefits."
+            }
+          ]
+        },
+        "QALS": {
+          "summary": {
+            "n": 30,
+            "n_labeled": 0,
+            "accuracy": null,
+            "mean_prompt_tokens": 139.9,
+            "mean_faithfulness": 1.0
+          },
+          "per_query": [
+            {
+              "qid": "PLAIN-2",
+              "pred": "We investigated whether statins used after breast cancer diagnosis reduced the risk of breast cancer-specific, or all-cause, mortality in a large cohort of breast cancer patients.",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "We investigated whether statins used after breast cancer diagnosis reduced the risk of breast cancer-specific, or all-cause, mortality in a large cohort of breast cancer patients."
+            },
+            {
+              "qid": "PLAIN-12",
+              "pred": "Autophagy induction was accompanied by down-regulation of Bcl-2 and inhibition of the mammalian target of rapamycin (mTOR) pathway.",
+              "gold": null,
+              "tokens": 123,
+              "faithfulness": 1.0,
+              "answer": "Autophagy induction was accompanied by down-regulation of Bcl-2 and inhibition of the mammalian target of rapamycin (mTOR) pathway."
+            },
+            {
+              "qid": "PLAIN-23",
+              "pred": "Recently, new evidence has supported the importance of alkylphenols in the in vitro allergic response.",
+              "gold": null,
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "Recently, new evidence has supported the importance of alkylphenols in the in vitro allergic response."
+            },
+            {
+              "qid": "PLAIN-33",
+              "pred": "Rising prevalence of obesity is a worldwide health concern because excess weight gain within populations forecasts an increased burden from several diseases, most notably cardiovascular diseases, diabetes, and cancers.",
+              "gold": null,
+              "tokens": 139,
+              "faithfulness": 1.0,
+              "answer": "Rising prevalence of obesity is a worldwide health concern because excess weight gain within populations forecasts an increased burden from several diseases, most notably cardiovascular diseases, diabetes, and cancers."
+            },
+            {
+              "qid": "PLAIN-44",
+              "pred": "More importantly, curcumin treatment was found to be safe and did not relate with any adverse events.",
+              "gold": null,
+              "tokens": 112,
+              "faithfulness": 1.0,
+              "answer": "More importantly, curcumin treatment was found to be safe and did not relate with any adverse events."
+            },
+            {
+              "qid": "PLAIN-56",
+              "pred": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma.",
+              "gold": null,
+              "tokens": 123,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To explore the association between the consumption of fruits and vegetables and the presence of glaucoma."
+            },
+            {
+              "qid": "PLAIN-68",
+              "pred": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains.",
+              "gold": null,
+              "tokens": 135,
+              "faithfulness": 1.0,
+              "answer": "PURPOSE: To determine the contents of chicken nuggets from 2 national food chains."
+            },
+            {
+              "qid": "PLAIN-78",
+              "pred": "When fat is removed from meat, water is generally added to replace it.",
+              "gold": null,
+              "tokens": 140,
+              "faithfulness": 1.0,
+              "answer": "When fat is removed from meat, water is generally added to replace it."
+            },
+            {
+              "qid": "PLAIN-91",
+              "pred": "An epidemiological investigation revealed that the only commonality between cases was their exposure to a pork brain extraction procedure involving compressed air.",
+              "gold": null,
+              "tokens": 148,
+              "faithfulness": 1.0,
+              "answer": "An epidemiological investigation revealed that the only commonality between cases was their exposure to a pork brain extraction procedure involving compressed air."
+            },
+            {
+              "qid": "PLAIN-102",
+              "pred": "These results support lifestyle modification in youth to prevent development of the initial lesions and the subsequent progression to advanced lesions and, thereafter, to prevent or delay coronary heart disease.",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "These results support lifestyle modification in youth to prevent development of the initial lesions and the subsequent progression to advanced lesions and, thereafter, to prevent or delay coronary heart disease."
+            },
+            {
+              "qid": "PLAIN-112",
+              "pred": "While these strictures could have positive effects on behavior, the removal of food dyes is not a panacea for ADHD, which is a multifaceted disorder with both biological and environmental underpinnings.",
+              "gold": null,
+              "tokens": 147,
+              "faithfulness": 1.0,
+              "answer": "While these strictures could have positive effects on behavior, the removal of food dyes is not a panacea for ADHD, which is a multifaceted disorder with both biological and environmental underpinnings."
+            },
+            {
+              "qid": "PLAIN-123",
+              "pred": "In this review, we discuss the bioactivity, multiple neuroprotection mechanisms, and antioxidant and signaling properties of citrus flavonoids.",
+              "gold": null,
+              "tokens": 145,
+              "faithfulness": 1.0,
+              "answer": "In this review, we discuss the bioactivity, multiple neuroprotection mechanisms, and antioxidant and signaling properties of citrus flavonoids."
+            },
+            {
+              "qid": "PLAIN-133",
+              "pred": "This paper presents the scientific, epidemiologic, and clinical evidence supporting the role of an antiangiogenic diet for cancer prevention.",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "This paper presents the scientific, epidemiologic, and clinical evidence supporting the role of an antiangiogenic diet for cancer prevention."
+            },
+            {
+              "qid": "PLAIN-143",
+              "pred": "Objective To examine the association between dental x-rays, the most common artificial source of ionizing radiation, and risk of intra-cranial meningioma.",
+              "gold": null,
+              "tokens": 117,
+              "faithfulness": 1.0,
+              "answer": "Objective To examine the association between dental x-rays, the most common artificial source of ionizing radiation, and risk of intra-cranial meningioma."
+            },
+            {
+              "qid": "PLAIN-153",
+              "pred": "Probiotic efficacy was related to cause, early administration and bacterial load, and their mechanisms were associated with antiinfectious action in the intestine or, indirectly, to modulation of innate and adaptive immunity.",
+              "gold": null,
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "Probiotic efficacy was related to cause, early administration and bacterial load, and their mechanisms were associated with antiinfectious action in the intestine or, indirectly, to modulation of innate and adaptive immunity."
+            },
+            {
+              "qid": "PLAIN-165",
+              "pred": "Higher alcohol consumption was associated with a modest increase in breast cancer risk; the multivariable relative risks for > or =30 g/day of alcohol vs.",
+              "gold": null,
+              "tokens": 132,
+              "faithfulness": 1.0,
+              "answer": "Higher alcohol consumption was associated with a modest increase in breast cancer risk; the multivariable relative risks for > or =30 g/day of alcohol vs."
+            },
+            {
+              "qid": "PLAIN-175",
+              "pred": "Only a limited number of studies on cellulite have been published in the international literature and many of them reach somewhat antithetical conclusions.",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "Only a limited number of studies on cellulite have been published in the international literature and many of them reach somewhat antithetical conclusions."
+            },
+            {
+              "qid": "PLAIN-186",
+              "pred": "OBJECTIVE: To investigate the efficacy and cost effectiveness of an herbal tea, Smooth Move, in nursing home residents with chronic constipation.",
+              "gold": null,
+              "tokens": 138,
+              "faithfulness": 1.0,
+              "answer": "OBJECTIVE: To investigate the efficacy and cost effectiveness of an herbal tea, Smooth Move, in nursing home residents with chronic constipation."
+            },
+            {
+              "qid": "PLAIN-196",
+              "pred": "This study quantifies the amount of titanium in common food products, derives estimates of human exposure to dietary (nano-) TiO2, and discusses the impact of the nanoscale fraction of TiO2 entering the environment.",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "This study quantifies the amount of titanium in common food products, derives estimates of human exposure to dietary (nano-) TiO2, and discusses the impact of the nanoscale fraction of TiO2 entering the environment."
+            },
+            {
+              "qid": "PLAIN-207",
+              "pred": "METHODS: We estimated breast cancer risk in relation to intake of cooked meat in a population-based, case-control study (1508 cases and 1556 controls) conducted in Long Island, NY from 1996 to 1997.",
+              "gold": null,
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "METHODS: We estimated breast cancer risk in relation to intake of cooked meat in a population-based, case-control study (1508 cases and 1556 controls) conducted in Long Island, NY from 1996 to 1997."
+            },
+            {
+              "qid": "PLAIN-217",
+              "pred": "In conclusion, plant-based dietary interventions are effective in lowering plasma cholesterol concentrations.",
+              "gold": null,
+              "tokens": 150,
+              "faithfulness": 1.0,
+              "answer": "In conclusion, plant-based dietary interventions are effective in lowering plasma cholesterol concentrations."
+            },
+            {
+              "qid": "PLAIN-227",
+              "pred": "Numerous studies have reported beneficial effects including increased muscle mass during training and neural protection.",
+              "gold": null,
+              "tokens": 135,
+              "faithfulness": 1.0,
+              "answer": "Numerous studies have reported beneficial effects including increased muscle mass during training and neural protection."
+            },
+            {
+              "qid": "PLAIN-238",
+              "pred": "Objectives The objective of this article is to extend our previous studies of persistent organic pollutant (POP) contamination of U.S.",
+              "gold": null,
+              "tokens": 143,
+              "faithfulness": 1.0,
+              "answer": "Objectives The objective of this article is to extend our previous studies of persistent organic pollutant (POP) contamination of U.S."
+            },
+            {
+              "qid": "PLAIN-248",
+              "pred": "Future trials should examine the effect of the prostate-healthy diet with a larger sample of men for a longer period.",
+              "gold": null,
+              "tokens": 129,
+              "faithfulness": 1.0,
+              "answer": "Future trials should examine the effect of the prostate-healthy diet with a larger sample of men for a longer period."
+            },
+            {
+              "qid": "PLAIN-259",
+              "pred": "739 \u00b1 97 mg/day (530.1, 930.2), P<0.0001] relative to the phytosterol-poor diet.",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "739 \u00b1 97 mg/day (530.1, 930.2), P<0.0001] relative to the phytosterol-poor diet."
+            },
+            {
+              "qid": "PLAIN-270",
+              "pred": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration.",
+              "gold": null,
+              "tokens": 146,
+              "faithfulness": 1.0,
+              "answer": "There is a belief that caffeinated drinks, such as tea, may adversely affect hydration."
+            },
+            {
+              "qid": "PLAIN-280",
+              "pred": "Mothers and their newborns are divided in two groups according to their hair mercury levels; examined group with high body levels of mercury (\u2265 1 \u03bcg/g) and control group with low body levels of mercury (<1 \u03bcg/g).",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "Mothers and their newborns are divided in two groups according to their hair mercury levels; examined group with high body levels of mercury (\u2265 1 \u03bcg/g) and control group with low body levels of mercury (<1 \u03bcg/g)."
+            },
+            {
+              "qid": "PLAIN-291",
+              "pred": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and to be inversely related to colon cancer risk (r = -0.78).",
+              "gold": null,
+              "tokens": 135,
+              "faithfulness": 1.0,
+              "answer": "Data from other populations of the world show average stool weight to vary from 72 to 470 g/day and to be inversely related to colon cancer risk (r = -0.78)."
+            },
+            {
+              "qid": "PLAIN-307",
+              "pred": "The DRI committee's deliberations underpinning this most comprehensive report on vitamin D nutrition to date benefited hugely from a much expanded knowledge base in vitamin D over the last decade or more.",
+              "gold": null,
+              "tokens": 144,
+              "faithfulness": 1.0,
+              "answer": "The DRI committee's deliberations underpinning this most comprehensive report on vitamin D nutrition to date benefited hugely from a much expanded knowledge base in vitamin D over the last decade or more."
+            },
+            {
+              "qid": "PLAIN-320",
+              "pred": "Materials and METHODS: This review summarizes the current epidemiological and clinical trial evidence relating diet to breast cancer incidence, recurrence, survival, and mortality.",
+              "gold": null,
+              "tokens": 149,
+              "faithfulness": 1.0,
+              "answer": "Materials and METHODS: This review summarizes the current epidemiological and clinical trial evidence relating diet to breast cancer incidence, recurrence, survival, and mortality."
+            }
+          ]
+        }
+      }
+    },
+    "api_model": null,
+    "api_note": "No OPENAI_API_KEY / ANTHROPIC_API_KEY in env or .env",
+    "hf_model": null,
+    "hf_note": "HF instruct path skipped or unavailable"
+  }
+}
