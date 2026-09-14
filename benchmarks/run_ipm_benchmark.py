@@ -5,12 +5,18 @@ Document ranking uses k=10 unique documents for every system.
 Prompt tokens are measured at a production operating point:
   chunk and parent systems concatenate the first 5 retrieved units,
   QALS packs assembled spans under budget B.
+  Adaptive-k (Taguchi-style relative gap on LC500 scores) uses the selected
+  units' whitespace tokens.
 
 QALS ranking score is 0.4 * coarse + 0.6 * max sentence similarity.
 Packed tokens are the actual whitespace tokens of selected spans, not a constant.
 
 Split-conformal budgets are fit on BEIR train queries and tested on the official
 test split.
+
+Optional FiQA / TREC-COVID: pass --datasets fiqa trec-covid after placing BEIR
+folders under data/. Skip those downloads when they are slow; SciFact + NFCorpus
+are the default manuscript tables.
 """
 
 import json
@@ -133,6 +139,38 @@ def pack_qals(candidates: List[Dict[str, Any]], budget: int) -> Tuple[List[str],
     return packed_ids, used
 
 
+
+def adaptive_k_from_scores(scores: List[float], min_k: int = 1, max_k: int = 10) -> int:
+    """Taguchi Adaptive-k approximation (relative consecutive gap).
+
+    Taguchi et al. (EMNLP 2025) select how many passages to keep from the sorted
+    similarity curve without an extra LM call. We approximate that rule as:
+    choose k in [min_k, max_k] that maximizes the relative gap
+    (s_k - s_{k+1}) / s_k on the descending score list. This is the common
+    "largest relative drop" reading of Adaptive-k, not a byte-for-byte
+    reimplementation of their released code.
+    """
+    if not scores:
+        return min_k
+    n = len(scores)
+    if n == 1:
+        return 1
+    best_k = min_k
+    best_gap = -1.0
+    upper = min(max_k, n - 1)
+    for k in range(min_k, upper + 1):
+        s_cur = float(scores[k - 1])
+        s_next = float(scores[k])
+        if s_cur <= 1e-12:
+            gap = 0.0
+        else:
+            gap = (s_cur - s_next) / s_cur
+        if gap > best_gap:
+            best_gap = gap
+            best_k = k
+    return int(best_k)
+
+
 def gold_cover_budget(candidates: List[Dict[str, Any]], gold: Dict[str, float], cap: int = 2000) -> int:
     used = 0
     for c in candidates:
@@ -211,6 +249,16 @@ def evaluate_dataset(
     print("LangChain 500c...", flush=True)
     chunks_500 = split_corpus(500, 50)
     lc500, sims_500 = dense_hits(chunks_500, "emb_500.npy")
+
+    print("Adaptive-k on LC500 (Taguchi-style relative gap)...", flush=True)
+    adaptive_hits = []
+    adaptive_ks = []
+    for i in range(len(eval_q)):
+        top_idx = np.argsort(-sims_500[i])[: rank_k + 1]
+        top_scores = [float(sims_500[i][idx]) for idx in top_idx]
+        k_star = adaptive_k_from_scores(top_scores, min_k=1, max_k=rank_k)
+        adaptive_ks.append(k_star)
+        adaptive_hits.append([chunks_500[idx] for idx in top_idx[:k_star]])
 
     print("LangChain 1000c...", flush=True)
     chunks_1000 = split_corpus(1000, 100)
@@ -342,12 +390,31 @@ def evaluate_dataset(
                 })
         return rows
 
+    adaptive_rows = []
+    for i, q in enumerate(eval_q):
+        hits = adaptive_hits[i]
+        rank_ids = unique_docs(hits, rank_k)
+        adaptive_rows.append({
+            "ndcg": ndcg_at_k(rank_ids, q["gold"], rank_k),
+            "recall": recall_at_k(rank_ids, q["gold"], rank_k),
+            "tokens": prompt_tokens(hits, len(hits)),
+            "k_star": float(adaptive_ks[i]),
+        })
+    adaptive_summary = summarize(f"{name} Adaptive-k", adaptive_rows)
+    adaptive_summary["mean_k"] = round(float(np.mean(adaptive_ks)), 2)
+    adaptive_summary["note"] = (
+        "Taguchi Adaptive-k approximation: largest relative consecutive gap "
+        "on LC500 dense scores, k clamped to [1,10]. Tokens are whitespace "
+        "tokens of the selected units."
+    )
+
     report = {
         "LangChain Recursive 500c": summarize(f"{name} LC500", metric_rows(lc500, prompt_k)),
         "LangChain Recursive 1000c": summarize(f"{name} LC1000", metric_rows(lc1000, prompt_k)),
         "LangChain ParentDocument": summarize(f"{name} Parent", metric_rows(lc_parent, prompt_k)),
         "BM25": summarize(f"{name} BM25", metric_rows(bm25_hits, prompt_k)),
         "LangChain Hybrid RRF": summarize(f"{name} Hybrid", metric_rows(hybrid, prompt_k)),
+        "Adaptive-k (LC500 gap)": adaptive_summary,
         "QALS B=150": summarize(f"{name} QALS", metric_rows(qals_cands, prompt_k, packed=True, budget=qals_budget)),
     }
 
@@ -398,6 +465,7 @@ def evaluate_dataset(
         for label, kwargs in [
             ("B=50", {"budget": 50}),
             ("B=100", {"budget": 100}),
+            ("B=150", {"budget": 150}),
             ("B=200", {"budget": 200}),
             ("kappa=0.00", {"budget": 150, "kappa": 0.0}),
             ("M=20", {"budget": 150, "m": 20}),
@@ -413,7 +481,18 @@ def evaluate_dataset(
                 )
                 for i in range(len(eval_q))
             ]
-            ablations[label] = summarize(f"{name} {label}", metric_rows(hits, prompt_k, packed=True, budget=budget))
+            ablations[label] = summarize(
+                f"{name} {label}", metric_rows(hits, prompt_k, packed=True, budget=budget)
+            )
+            # Incremental append so a mid-run kill still leaves usable numbers.
+            abl_path = "benchmarks/ablation_results.json"
+            abl_existing = {}
+            if os.path.exists(abl_path):
+                with open(abl_path) as f:
+                    abl_existing = json.load(f)
+            abl_existing.setdefault(name, {})[label] = ablations[label]
+            with open(abl_path, "w") as f:
+                json.dump(abl_existing, f, indent=2)
     report["ablations"] = ablations
 
     out_file = "benchmarks/ipm_benchmark_results.json"
@@ -421,18 +500,54 @@ def evaluate_dataset(
     if os.path.exists(out_file):
         with open(out_file) as f:
             existing = json.load(f)
+    if not run_ablations and existing.get(name, {}).get("ablations"):
+        report["ablations"] = existing[name]["ablations"]
     existing[name] = report
     with open(out_file, "w") as f:
         json.dump(existing, f, indent=2)
+    if ablations:
+        abl_path = "benchmarks/ablation_results.json"
+        abl_existing = {}
+        if os.path.exists(abl_path):
+            with open(abl_path) as f:
+                abl_existing = json.load(f)
+        abl_existing[name] = ablations
+        with open(abl_path, "w") as f:
+            json.dump(abl_existing, f, indent=2)
     return report
 
 
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="IP&M retrieval benchmark runner")
+    parser.add_argument(
+        "--datasets",
+        nargs="+",
+        default=["scifact", "nfcorpus"],
+        help="BEIR folders under data/. Optional FiQA / TREC-COVID skipped if download is slow.",
+    )
+    parser.add_argument("--num-eval", type=int, default=None, help="Override test query count")
+    parser.add_argument("--num-calib", type=int, default=80)
+    parser.add_argument(
+        "--no-ablations",
+        action="store_true",
+        help="Skip SciFact QALS ablations (B in {50,100,150,200}, kappa=0, M=20).",
+    )
+    args = parser.parse_args()
+
+    defaults = {"scifact": 150, "nfcorpus": 100, "fiqa": 100, "trec-covid": 50}
     model = SentenceTransformer("all-MiniLM-L6-v2")
-    for name, n_test, n_calib, ablate in [
-        ("scifact", 150, 80, False),
-        ("nfcorpus", 100, 80, False),
-    ]:
+    for name in args.datasets:
+        if not os.path.isdir(f"data/{name}"):
+            print(
+                f"[SKIP] data/{name} missing. Optional FiQA/TREC-COVID: download BEIR if needed; "
+                "skip when too slow (see README note in this script header).",
+                flush=True,
+            )
+            continue
+        n_test = args.num_eval if args.num_eval is not None else defaults.get(name, 100)
+        ablate = (not args.no_ablations) and (name == "scifact")
         corpus, test_q = load_beir(name, "test")
         _, train_q = load_beir(name, "train")
         if not train_q:
@@ -440,7 +555,7 @@ def main():
             print(f"[{name}] no train qrels, using leftover test queries for calibration", flush=True)
         evaluate_dataset(
             name, corpus, test_q, train_q, model,
-            num_eval=n_test, num_calib=n_calib, run_ablations=ablate,
+            num_eval=n_test, num_calib=args.num_calib, run_ablations=ablate,
         )
     print("\n=== IPM BENCHMARK COMPLETE ===", flush=True)
     with open("benchmarks/ipm_benchmark_results.json") as f:

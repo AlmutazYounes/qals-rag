@@ -39,6 +39,37 @@
 \newcommand{\ConfCovA}{0.873}
 \newcommand{\ConfBhatB}{2000}
 \newcommand{\ConfCovB}{0.873}
+\newcommand{\ScifactAdaptkNdcg}{TBD}
+\newcommand{\ScifactAdaptkRec}{TBD}
+\newcommand{\ScifactAdaptkTok}{TBD}
+\newcommand{\NfAdaptkNdcg}{TBD}
+\newcommand{\NfAdaptkRec}{TBD}
+\newcommand{\NfAdaptkTok}{TBD}
+\newcommand{\AblatBfiftyNdcg}{TBD}
+\newcommand{\AblatBfiftyTok}{TBD}
+\newcommand{\AblatBhundredNdcg}{TBD}
+\newcommand{\AblatBhundredTok}{TBD}
+\newcommand{\AblatBtonefiftyNdcg}{TBD}
+\newcommand{\AblatBtonefiftyTok}{TBD}
+\newcommand{\AblatBtwohundredNdcg}{TBD}
+\newcommand{\AblatBtwohundredTok}{TBD}
+\newcommand{\AblatKappaZeroNdcg}{TBD}
+\newcommand{\AblatKappaZeroTok}{TBD}
+\newcommand{\AblatMtwentyNdcg}{TBD}
+\newcommand{\AblatMtwentyTok}{TBD}
+\newcommand{\RagBackendName}{TBD}
+\newcommand{\RagQalsAcc}{TBD}
+\newcommand{\RagQalsFaith}{TBD}
+\newcommand{\RagQalsTok}{TBD}
+\newcommand{\RagLcAcc}{TBD}
+\newcommand{\RagLcFaith}{TBD}
+\newcommand{\RagLcTok}{TBD}
+\newcommand{\RagParentAcc}{TBD}
+\newcommand{\RagParentFaith}{TBD}
+\newcommand{\RagParentTok}{TBD}
+\newcommand{\RagHybridAcc}{TBD}
+\newcommand{\RagHybridFaith}{TBD}
+\newcommand{\RagHybridTok}{TBD}
 
 \begin{document}
 \begin{frontmatter}
@@ -58,7 +89,7 @@ A retrieval-augmented generator fetches text, then conditions a language model o
 
 That design hard-wires two decisions that ought to depend on the query. Dual encoders pool tokens into one vector per indexed unit. A short slice can match a specific claim, and the surrounding discourse is gone. Pronouns lose antecedents, and hedge clauses sit in the neighbouring slice. A long slice or a full document mixes several claims, the vector is less specific, and the prompt inherits sentences the query never needed. \citet{qu2025semantic} measured semantic splitters against cheaper character splitters and found that extra index-time linguistics often fails to pay for itself. \citet{bhat2025rethinking} showed that useful window sizes move with the corpus and the encoder. There is no single static width that is right for SciFact abstracts and for longer medical articles at once.
 
-A fixed top-\(k\) concatenates \(k\) units on every query. Easy factual queries then carry padding. Harder queries are clipped at the same \(k\). \citet{taguchi2025efficient} select \(k\) from score distributions. Adaptive-RAG style routers send some questions to heavier retrieval \citep{jeong2024adaptive}. Compression systems such as RECOMP rewrite retrieved text down to a shorter string \citep{xu2024recomp}. Those methods still start from units whose boundaries were frozen at index time. \citet{liu2024lost} showed that language models use long concatenated contexts unevenly, with middle evidence underused. A shorter, query-matched prompt is a retrieval problem as well as a generation problem. This paper stays on the retrieval side of that line.
+A fixed top-\(k\) concatenates \(k\) units on every query. Easy factual queries then carry padding. Harder queries are clipped at the same \(k\). \citet{taguchi2025adaptivek} select \(k\) from score distributions. Adaptive-RAG style routers send some questions to heavier retrieval \citep{jeong2024adaptive}. Compression systems such as RECOMP rewrite retrieved text down to a shorter string \citep{xu2024recomp}. Those methods still start from units whose boundaries were frozen at index time. \citet{liu2024lost} showed that language models use long concatenated contexts unevenly, with middle evidence underused. A shorter, query-matched prompt is a retrieval problem as well as a generation problem. This paper stays on the retrieval side of that line.
 
 Late chunking runs transformer attention over a longer document, then pools at predetermined cuts \citep{gunther2024late}. Dense X indexes propositions \citep{chen2024dense}. RAPTOR builds a tree of summaries \citep{sarthi2024raptor}. ColBERT, ColBERTv2, and PLAID store a vector per token and score MaxSim alignments \citep{khattab2020colbert,santhanam2022colbertv2,santhanam2022plaid}. Those models are the right comparison class for fine-grained scoring. We do not evaluate against them. Sentence-level multi-vectors sit between a pooled passage vector and a token lattice. That is a modelling choice, stated as a limitation in Section~\ref{sec:limits}.
 
@@ -102,7 +133,7 @@ ColBERT \citep{khattab2020colbert} keeps a vector per token and scores a query-d
 QALS is multi-vector at a coarser grain. It stores one vector per sentence rather than one per token. Title prefixing supplies document identity. Coarse document vectors bound query-time work. After scoring, an online 1D program reconstructs spans. Late interaction ranks frozen passages. QALS builds the passage after the query.
 
 \subsection{Adaptive retrieval, compression, and conformal coverage}
-Fixed top-\(k\) is the other half of prompt bloat. \citet{jeong2024adaptive} classify query complexity and route among retrieval depths. \citet{asai2024self} train Self-RAG with reflection tokens. \citet{taguchi2025efficient} proposed Adaptive-\(k\): sorted similarities, a gap cutoff, and no extra language-model call. Adaptive-\(k\) answers how many passages to keep. It does not answer where those passages should begin or end.
+Fixed top-\(k\) is the other half of prompt bloat. \citet{jeong2024adaptive} classify query complexity and route among retrieval depths. \citet{asai2024self} train Self-RAG with reflection tokens. \citet{taguchi2025adaptivek} proposed Adaptive-\(k\): sorted similarities, a gap cutoff, and no extra language-model call. Adaptive-\(k\) answers how many passages to keep. It does not answer where those passages should begin or end.
 
 RECOMP \citep{xu2024recomp} summarizes retrieved documents. LLMLingua \citep{jiang2023llmlingua} and LongLLMLingua \citep{jiang2024longllmlingua} drop or reorder tokens after retrieval. These methods assume a retrieved blob already exists. They shrink it. They do not assemble it.
 
