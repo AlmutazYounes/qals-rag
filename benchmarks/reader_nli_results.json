@@ -1,0 +1,40 @@
+{
+  "num_eval": 80,
+  "budget": 150,
+  "n_labeled": 55,
+  "model": "cross-encoder/nli-deberta-v3-xsmall",
+  "systems": {
+    "Recursive500_k5": {
+      "label_accuracy": 0.1818,
+      "n_labeled": 55,
+      "neutral_rate": 0.6875,
+      "mean_prompt_tokens": 240.4,
+      "gold_snippet_inclusion": 0.55,
+      "note": "NLI reader proxy for generation. No paid LLM API key on this machine."
+    },
+    "AdaptiveK_Recursive500": {
+      "label_accuracy": 0.2727,
+      "n_labeled": 55,
+      "neutral_rate": 0.6625,
+      "mean_prompt_tokens": 96.6,
+      "gold_snippet_inclusion": 0.4625,
+      "note": "NLI reader proxy for generation. No paid LLM API key on this machine."
+    },
+    "Hybrid_docs_B150": {
+      "label_accuracy": 0.0545,
+      "n_labeled": 55,
+      "neutral_rate": 0.8625,
+      "mean_prompt_tokens": 250.9,
+      "gold_snippet_inclusion": 0.1,
+      "note": "NLI reader proxy for generation. No paid LLM API key on this machine."
+    },
+    "QALS_B150": {
+      "label_accuracy": 0.3091,
+      "n_labeled": 55,
+      "neutral_rate": 0.65,
+      "mean_prompt_tokens": 140.5,
+      "gold_snippet_inclusion": 0.0,
+      "note": "NLI reader proxy for generation. No paid LLM API key on this machine."
+    }
+  }
+}
