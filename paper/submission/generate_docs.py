@@ -1,4 +1,4 @@
-"""Emit TitlePage, Highlights, CoverLetter, CompetingInterests Word files."""
+"""Emit TitlePage, Highlights, CoverLetter, CompetingInterests Word files for ESWA."""
 
 from pathlib import Path
 from write_docx import write_docx
@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent
 def main():
     write_docx(ROOT / "TitlePage.docx", [
         ("h", "Title page"),
-        "Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting",
+        "Query-adaptive late segmentation: budgeted contiguous evidence assembly for retrieval-augmented generation",
         "",
         "Mohammad Bani Younes",
         "Faculty of Information Technology, Ajloun National University, P.O. Box 43, Ajloun 26810, Jordan",
@@ -22,8 +22,8 @@ def main():
         "Postal address: [ADD ALBANY STREET ADDRESS BEFORE UPLOAD]",
         "",
         ("h", "Author contributions (CRediT)"),
-        "Mohammad Bani Younes: Conceptualization, Methodology, Software, Validation, Investigation, Writing – original draft.",
-        "Mutaz Younes: Supervision, Formal analysis, Writing – review and editing, Project administration.",
+        "Mohammad Bani Younes: Conceptualization, Methodology, Software, Validation, Investigation, Writing - original draft.",
+        "Mutaz Younes: Supervision, Formal analysis, Writing - review and editing, Project administration.",
         "",
         ("h", "Funding"),
         "This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.",
@@ -37,22 +37,24 @@ def main():
 
     write_docx(ROOT / "Highlights.docx", [
         ("h", "Highlights"),
-        ("b", "Sentence multi-vectors postpone chunk cuts until the query is known."),
-        ("b", "A 1D program selects at most two non-overlapping spans under budget B."),
-        ("b", "Split-conformal B is the train quantile of gold-inclusion token depth."),
-        ("b", "Hybrid RRF often leads SciFact nDCG@10 at full-document token cost."),
-        ("b", "QALS stays competitive on nDCG@10 while using a much smaller prompt."),
+        ("b", "Query-time contiguous spans under token budget B for RAG."),
+        ("b", "Pair enumeration selects at most two non-overlapping spans."),
+        ("b", "Hybrid RRF leads SciFact nDCG; QALS is the low-token point."),
+        ("b", "Conformal B saturates at a 2000-word cap on SciFact."),
+        ("b", "Adaptive-k, late-chunk controls, and LLM eval protocol included."),
     ])
 
     write_docx(ROOT / "CoverLetter.docx", [
         ("h", "Cover letter"),
         "Dear Editor,",
         "",
-        "Please consider our research manuscript, Query-adaptive late segmentation: dynamic context assembly via sentence multi-vectors and split-conformal budgeting, for Information Processing & Management.",
+        "Please consider our research manuscript, Query-adaptive late segmentation: budgeted contiguous evidence assembly for retrieval-augmented generation, for Expert Systems with Applications.",
         "",
-        "Retrieval-augmented generation still cuts text into static windows and concatenates a fixed number of hits. We index title-prefixed sentence vectors, assemble at most two contiguous spans under a token budget at query time, and set that budget with split-conformal prediction on gold-inclusion depth. On BEIR SciFact and NFCorpus, with a shared MiniLM encoder, hybrid dense-lexical fusion remains a strong SciFact ranker while charging full-document prompts. QALS is a Pareto point: document nDCG@10 stays in range of character chunking, with a much smaller prompt.",
+        "An earlier version was desk-rejected at Information Processing and Management. The editor judged the contribution incremental relative to existing work on late chunking, contextual retrieval, and adaptive granularity, and asked for stronger SOTA and LLM-facing baselines.",
         "",
-        "The work sits at the intersection of information retrieval and computing, which matches the journal's research-manuscript scope. It is original, is not under review elsewhere, and has not been posted as a preprint. All authors approve this submission. We request subscription publication, not gold open access.",
+        "This rewrite answers that feedback directly. We claim only query-time contiguous span assembly under a calibrated token budget B, with a Pareto story against full-document prompts. We position against late chunking, Anthropic-style contextual retrieval, WADSeg, Adaptive-k, Mix-of-Granularity, LGMGC, LumberChunker, SmartChunk, and related 2025-2026 papers. We add Adaptive-k and late-chunking-style retrieval baselines, ablations that separate packing from multi-vector scoring, and a generation evaluation section with faithfulness and answer metrics under a shared small instruct model. Split-conformal budgeting is reported honestly, including saturation at a 2000-word cap on SciFact. Hybrid RRF remains the stronger SciFact nDCG@10 ranker in our MiniLM setup.",
+        "",
+        "The manuscript is written as a deployable evidence-assembly stage for expert RAG systems, which matches ESWA's applied scope. It is original, is not under review elsewhere, and has not been posted as a preprint. All authors approve this submission. We request subscription publication, not gold open access.",
         "",
         "Corresponding author: Mutaz Younes, mutazyounes@gmail.com, Albany, New York, USA. Phone: [ADD PHONE].",
         "",

@@ -215,12 +215,6 @@
   doi       = {10.1145/3511808.3557325}
 }
 
-@article{taguchi2025efficient,
-  title     = {Efficient Context Selection for Long-Context {QA}: No Tuning, No Iteration, Just Adaptive-{$k$}},
-  author    = {Taguchi, Chihiro and Maekawa, Seiji and Bhutani, Nikita},
-  journal   = {arXiv preprint arXiv:2506.08479},
-  year      = {2025}
-}
 
 @inproceedings{jeong2024adaptive,
   title     = {Adaptive-{RAG}: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity},
@@ -355,3 +349,211 @@
   url       = {https://github.com/beir-cellar/beir},
   note      = {[dataset]}
 }
+
+% --- Merged from references_upgrade.bib (+ WADSeg) ---
+
+@misc{anthropic2024contextual,
+  title        = {Introducing Contextual Retrieval},
+  author       = {{Anthropic}},
+  year         = {2024},
+  month        = sep,
+  howpublished = {\url{https://www.anthropic.com/engineering/contextual-retrieval}},
+  note         = {Engineering post, 19 Sep 2024. Contextual embeddings + Contextual BM25}
+}
+
+@inproceedings{merola2025reconstructing,
+  title     = {Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation},
+  author    = {Merola, Carlo and Singh, Jaspinder},
+  booktitle = {Knowledge-Enhanced Information Retrieval: Second International Workshop, {KEIR} 2025, Lucca, Italy, April 10, 2025, Revised Selected Papers},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {16086},
+  pages     = {3--18},
+  year      = {2025},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-032-02899-0_1}
+}
+
+@article{zhong2025mix,
+  title   = {Mix-of-Granularity: Optimize the Chunking Granularity for Retrieval-Augmented Generation},
+  author  = {Zhong, Zijie and Liu, Hanwen and Cui, Xiaoya and Zhang, Xiaofan and Qin, Zengchang},
+  journal = {arXiv preprint arXiv:2406.00456},
+  year    = {2025},
+  note    = {v2, 26 Jan 2025},
+  doi     = {10.48550/arXiv.2406.00456}
+}
+
+@inproceedings{zhang2026smartchunk,
+  title     = {{SmartChunk} Retrieval: Query-Aware Chunk Compression with Planning for Efficient Document {RAG}},
+  author    = {Zhang, Xuechen and Goswami, Koustava and Oymak, Samet and Chen, Jiasi and Lipka, Nedim},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2026},
+  note      = {{ICLR} 2026. OpenReview: \url{https://openreview.net/forum?id=Myti1QwL2t}}
+}
+
+@inproceedings{liu2025passage,
+  title     = {Passage Segmentation of Documents for Extractive Question Answering},
+  author    = {Liu, Zuhong and Simon, Charles-Elie and Caspani, Fabien},
+  booktitle = {Advances in Information Retrieval: 47th European Conference on {IR} Research ({ECIR} 2025)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {15574},
+  pages     = {345--352},
+  year      = {2025},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-031-88714-7_33},
+  note      = {Introduces {LGMGC} (logits-guided multi-granular / parent--child chunking)}
+}
+
+@inproceedings{duarte2024lumberchunker,
+  title     = {{LumberChunker}: Long-Form Narrative Document Segmentation},
+  author    = {Duarte, Andr{\'e} V. and Marques, Jo{\~a}o DS and Gra{\c{c}}a, Miguel
+               and Freire, Miguel and Li, Lei and Oliveira, Arlindo L.},
+  booktitle = {Findings of the Association for Computational Linguistics: {EMNLP} 2024},
+  pages     = {6473--6486},
+  year      = {2024},
+  address   = {Miami, Florida, USA},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2024.findings-emnlp.377}
+}
+
+@inproceedings{macavaney2024plaid,
+  title     = {A Reproducibility Study of {PLAID}},
+  author    = {MacAvaney, Sean and Tonellotto, Nicola},
+  booktitle = {Proceedings of the 47th International {ACM} {SIGIR} Conference on Research and Development in Information Retrieval},
+  pages     = {1411--1419},
+  year      = {2024},
+  publisher = {ACM},
+  doi       = {10.1145/3626772.3657856}
+}
+
+@inproceedings{scheerer2025warp,
+  title     = {{WARP}: An Efficient Engine for Multi-Vector Retrieval},
+  author    = {Scheerer, Jan Luca and Zaharia, Matei and Potts, Christopher
+               and Alonso, Gustavo and Khattab, Omar},
+  booktitle = {Proceedings of the 48th International {ACM} {SIGIR} Conference on Research and Development in Information Retrieval},
+  pages     = {2504--2512},
+  year      = {2025},
+  publisher = {ACM},
+  doi       = {10.1145/3726302.3729904}
+}
+
+@inproceedings{lee2023xtr,
+  title     = {Rethinking the Role of Token Retrieval in Multi-Vector Retrieval},
+  author    = {Lee, Jinhyuk and Dai, Zhuyun and Duddu, Sai Meher Karthik and Lei, Tao
+               and Naim, Iftekhar and Chang, Ming-Wei and Zhao, Vincent},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {36},
+  year      = {2023},
+  note      = {Introduces {XTR}; included as the training-side precursor to {WARP} (2025)},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2023/hash/31d997278ee9069d6721bc194174bb4c-Abstract-Conference.html}
+}
+
+@inproceedings{saadfalcon2024ares,
+  title     = {{ARES}: An Automated Evaluation Framework for Retrieval-Augmented Generation Systems},
+  author    = {Saad-Falcon, Jon and Khattab, Omar and Potts, Christopher and Zaharia, Matei},
+  booktitle = {Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)},
+  pages     = {338--354},
+  year      = {2024},
+  address   = {Mexico City, Mexico},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2024.naacl-long.20}
+}
+
+@inproceedings{taguchi2025adaptivek,
+  title     = {Efficient Context Selection for Long-Context {QA}: No Tuning, No Iteration, Just Adaptive-{$k$}},
+  author    = {Taguchi, Chihiro and Maekawa, Seiji and Bhutani, Nikita},
+  booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {20105--20130},
+  year      = {2025},
+  address   = {Suzhou, China},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2025.emnlp-main.1017},
+  note      = {Venue upgrade of the Adaptive-{$k$} preprint previously cited as arXiv:2506.08479}
+}
+
+@article{jiang2024longrag,
+  title   = {{LongRAG}: Enhancing Retrieval-Augmented Generation with Long-context {LLM}s},
+  author  = {Jiang, Ziyan and Ma, Xueguang and Chen, Wenhu},
+  journal = {arXiv preprint arXiv:2406.15319},
+  year    = {2024},
+  doi     = {10.48550/arXiv.2406.15319},
+  note    = {Long retrieval units ({$\approx$}4K tokens) + long-context reader}
+}
+
+@inproceedings{zhao2024longrag,
+  title     = {{LongRAG}: A Dual-Perspective Retrieval-Augmented Generation Paradigm for Long-Context Question Answering},
+  author    = {Zhao, Qingfei and Wang, Ruobing and Cen, Yukuo and Zha, Daren
+               and Tan, Shicheng and Dong, Yuxiao and Tang, Jie},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {22600--22632},
+  year      = {2024},
+  address   = {Miami, Florida, USA},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2024.emnlp-main.1259}
+}
+
+@article{yan2024corrective,
+  title   = {Corrective Retrieval Augmented Generation},
+  author  = {Yan, Shi-Qi and Gu, Jia-Chen and Zhu, Yun and Ling, Zhen-Hua},
+  journal = {arXiv preprint arXiv:2401.15884},
+  year    = {2024},
+  doi     = {10.48550/arXiv.2401.15884},
+  note    = {{CRAG}; widely used RAG robustness baseline. Cite as arXiv (ICLR 2025 submission withdrawn)}
+}
+
+@inproceedings{feng2025conformalrag,
+  title     = {Response Quality Assessment for Retrieval-Augmented Generation via Conditional Conformal Factuality},
+  author    = {Feng, Naihe and Sui, Yi and Hou, Shiyi and Cresswell, Jesse C. and Wu, Ga},
+  booktitle = {Proceedings of the 48th International {ACM} {SIGIR} Conference on Research and Development in Information Retrieval},
+  pages     = {2832--2836},
+  year      = {2025},
+  publisher = {ACM},
+  doi       = {10.1145/3726302.3730244},
+  note      = {Conformal-{RAG}; group-conditional factuality guarantees on generated sub-claims}
+}
+
+@article{xiong2025afrrank,
+  title   = {{AFR-Rank}: An Effective and Highly Efficient {LLM}-based Listwise Reranking Framework via Filtering Noise Documents},
+  author  = {Xiong, Yinghao and Tu, Xinhui and Zhao, Weizhong},
+  journal = {Information Processing \& Management},
+  volume  = {62},
+  number  = {6},
+  pages   = {104232},
+  year    = {2025},
+  doi     = {10.1016/j.ipm.2025.104232}
+}
+
+@article{li2026scrag,
+  title   = {Towards Evidence-Aware Retrieval-Augmented Generation via Self-Corrective Chain-of-Thought},
+  author  = {Li, Yining and Ke, Wenjun and Liu, Jiajun and Wang, Peng and Liu, Jianghan and He, Yao},
+  journal = {Information Processing \& Management},
+  volume  = {63},
+  number  = {2},
+  pages   = {104369},
+  year    = {2026},
+  doi     = {10.1016/j.ipm.2025.104369},
+  note    = {{SC-RAG}}
+}
+
+@article{chen2025medscalere,
+  title   = {{MedScaleRE-PF}: A Prompt-based Framework with Retrieval-Augmented Generation, Chain-of-Thought, and Self-Verification for Scale-Specific Relation Extraction in Chinese Medical Literature},
+  author  = {Chen, Zhenli and Hao, Jie and Sun, Haixia and Zhao, Liang and Li, Jiao
+               and Qian, Qing and Peng, Qinglong and Wang, Xuwen and Cong, Shan
+               and Shen, Liu and Guo, Zhen and Pu, Siyue and Lin, Yan},
+  journal = {Information Processing \& Management},
+  volume  = {62},
+  number  = {6},
+  pages   = {104278},
+  year    = {2025},
+  doi     = {10.1016/j.ipm.2025.104278}
+}
+
+@article{guo2026wadseg,
+  title   = {{WADSeg}: Exploiting Weak Attention Associations for Enhanced Knowledge Segmentation in {RAG}},
+  author  = {Guo, Tiezheng and Wang, Chen and Yang, Qingwen and Tang, Jiawei and Liu, Yanyi and Wen, Yingyou},
+  journal = {Expert Systems with Applications},
+  volume  = {297},
+  pages   = {129297},
+  year    = {2026},
+  doi     = {10.1016/j.eswa.2025.129297}
+}
+

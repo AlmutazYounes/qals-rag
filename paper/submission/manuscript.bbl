@@ -1,4 +1,4 @@
-\begin{thebibliography}{37}
+\begin{thebibliography}{53}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -19,6 +19,14 @@
 \newblock \bibinfo{journal}{Foundations and Trends in Machine Learning}
   \bibinfo{volume}{16}, \bibinfo{pages}{494--591}.
 \newblock \DOIprefix\doi{10.1561/2200000101}.
+%Type = Misc
+\bibitem[{{Anthropic}(2024)}]{anthropic2024contextual}
+\bibinfo{author}{{Anthropic}}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Introducing contextual retrieval}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.anthropic.com/engineering/contextual-retrieval}}.
+\newblock \bibinfo{note}{Engineering post, 19 Sep 2024. Contextual embeddings +
+  Contextual BM25}.
 %Type = Inproceedings
 \bibitem[{Asai et~al.(2024)Asai, Wu, Wang, Sil and Hajishirzi}]{asai2024self}
 \bibinfo{author}{Asai, A.}, \bibinfo{author}{Wu, Z.}, \bibinfo{author}{Wang,
@@ -60,6 +68,21 @@
   \bibinfo{publisher}{Association for Computational Linguistics}. pp.
   \bibinfo{pages}{15159--15177}.
 \newblock \DOIprefix\doi{10.18653/v1/2024.emnlp-main.845}.
+%Type = Article
+\bibitem[{Chen et~al.(2025)Chen, Hao, Sun, Zhao, Li, Qian, Peng, Wang, Cong,
+  Shen, Guo, Pu and Lin}]{chen2025medscalere}
+\bibinfo{author}{Chen, Z.}, \bibinfo{author}{Hao, J.}, \bibinfo{author}{Sun,
+  H.}, \bibinfo{author}{Zhao, L.}, \bibinfo{author}{Li, J.},
+  \bibinfo{author}{Qian, Q.}, \bibinfo{author}{Peng, Q.},
+  \bibinfo{author}{Wang, X.}, \bibinfo{author}{Cong, S.},
+  \bibinfo{author}{Shen, L.}, \bibinfo{author}{Guo, Z.}, \bibinfo{author}{Pu,
+  S.}, \bibinfo{author}{Lin, Y.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{MedScaleRE-PF}: A prompt-based framework with
+  retrieval-augmented generation, chain-of-thought, and self-verification for
+  scale-specific relation extraction in chinese medical literature}.
+\newblock \bibinfo{journal}{Information Processing \& Management}
+  \bibinfo{volume}{62}, \bibinfo{pages}{104278}.
+\newblock \DOIprefix\doi{10.1016/j.ipm.2025.104278}.
 %Type = Inproceedings
 \bibitem[{Cormack et~al.(2009)Cormack, Clarke and
   B{\"u}ttcher}]{cormack2009reciprocal}
@@ -72,6 +95,19 @@
   \bibinfo{pages}{758--759}.
 \newblock \DOIprefix\doi{10.1145/1571941.1572114}.
 %Type = Inproceedings
+\bibitem[{Duarte et~al.(2024)Duarte, Marques, Gra{\c{c}}a, Freire, Li and
+  Oliveira}]{duarte2024lumberchunker}
+\bibinfo{author}{Duarte, A.V.}, \bibinfo{author}{Marques, J.D.},
+  \bibinfo{author}{Gra{\c{c}}a, M.}, \bibinfo{author}{Freire, M.},
+  \bibinfo{author}{Li, L.}, \bibinfo{author}{Oliveira, A.L.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{LumberChunker}: Long-form narrative document
+  segmentation}, in: \bibinfo{booktitle}{Findings of the Association for
+  Computational Linguistics: {EMNLP} 2024}, \bibinfo{publisher}{Association for
+  Computational Linguistics}, \bibinfo{address}{Miami, Florida, USA}. pp.
+  \bibinfo{pages}{6473--6486}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.findings-emnlp.377}.
+%Type = Inproceedings
 \bibitem[{Es et~al.(2024)Es, James, Espinosa~Anke and Schockaert}]{es2024ragas}
 \bibinfo{author}{Es, S.}, \bibinfo{author}{James, J.},
   \bibinfo{author}{Espinosa~Anke, L.}, \bibinfo{author}{Schockaert, S.},
@@ -82,6 +118,20 @@
   Demonstrations}, \bibinfo{publisher}{Association for Computational
   Linguistics}. pp. \bibinfo{pages}{150--158}.
 \newblock \DOIprefix\doi{10.18653/v1/2024.eacl-demo.16}.
+%Type = Inproceedings
+\bibitem[{Feng et~al.(2025)Feng, Sui, Hou, Cresswell and
+  Wu}]{feng2025conformalrag}
+\bibinfo{author}{Feng, N.}, \bibinfo{author}{Sui, Y.}, \bibinfo{author}{Hou,
+  S.}, \bibinfo{author}{Cresswell, J.C.}, \bibinfo{author}{Wu, G.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Response quality assessment for retrieval-augmented
+  generation via conditional conformal factuality}, in:
+  \bibinfo{booktitle}{Proceedings of the 48th International {ACM} {SIGIR}
+  Conference on Research and Development in Information Retrieval},
+  \bibinfo{publisher}{ACM}. pp. \bibinfo{pages}{2832--2836}.
+\newblock \DOIprefix\doi{10.1145/3726302.3730244}.
+  \bibinfo{note}{conformal-{RAG}; group-conditional factuality guarantees on
+  generated sub-claims}.
 %Type = Article
 \bibitem[{Gao et~al.(2023)Gao, Xiong, Gao, Jia, Pan, Bi, Dai, Sun, Wang and
   Wang}]{gao2023retrieval}
@@ -102,6 +152,16 @@
 \newblock \bibinfo{title}{Late chunking: Contextual chunk embeddings using
   long-context embedding models}.
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2409.04701} .
+%Type = Article
+\bibitem[{Guo et~al.(2026)Guo, Wang, Yang, Tang, Liu and Wen}]{guo2026wadseg}
+\bibinfo{author}{Guo, T.}, \bibinfo{author}{Wang, C.}, \bibinfo{author}{Yang,
+  Q.}, \bibinfo{author}{Tang, J.}, \bibinfo{author}{Liu, Y.},
+  \bibinfo{author}{Wen, Y.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{{WADSeg}: Exploiting weak attention associations for
+  enhanced knowledge segmentation in {RAG}}.
+\newblock \bibinfo{journal}{Expert Systems with Applications}
+  \bibinfo{volume}{297}, \bibinfo{pages}{129297}.
+\newblock \DOIprefix\doi{10.1016/j.eswa.2025.129297}.
 %Type = Inproceedings
 \bibitem[{Hofst{\"a}tter et~al.(2021)Hofst{\"a}tter, Lin, Yang, Lin and
   Hanbury}]{hofstatter2021efficiently}
@@ -114,19 +174,6 @@
   in Information Retrieval}, \bibinfo{publisher}{ACM}. pp.
   \bibinfo{pages}{113--122}.
 \newblock \DOIprefix\doi{10.1145/3404835.3462891}.
-%Type = Inproceedings
-\bibitem[{Intrator et~al.(2024)Intrator, Cohen, Kelner, Goldenberg, Rivlin and
-  Freedman}]{intrator2024streamlining}
-\bibinfo{author}{Intrator, Y.}, \bibinfo{author}{Cohen, R.},
-  \bibinfo{author}{Kelner, O.}, \bibinfo{author}{Goldenberg, R.},
-  \bibinfo{author}{Rivlin, E.}, \bibinfo{author}{Freedman, D.},
-  \bibinfo{year}{2024}.
-\newblock \bibinfo{title}{Streamlining conformal information retrieval via
-  score refinement}, in: \bibinfo{booktitle}{Proceedings of the Seventh Fact
-  Extraction and {VER}ification Workshop ({FEVER})},
-  \bibinfo{publisher}{Association for Computational Linguistics}. pp.
-  \bibinfo{pages}{186--191}.
-\newblock \DOIprefix\doi{10.18653/v1/2024.fever-1.22}.
 %Type = Article
 \bibitem[{Izacard et~al.(2022)Izacard, Caron, Hosseini, Riedel, Bojanowski,
   Joulin and Grave}]{izacard2022unsupervised}
@@ -163,11 +210,11 @@
   \bibinfo{pages}{13358--13376}.
 \newblock \DOIprefix\doi{10.18653/v1/2023.emnlp-main.825}.
 %Type = Inproceedings
-\bibitem[{Jiang et~al.(2024)Jiang, Wu, Luo, Li, Lin, Yang and
+\bibitem[{Jiang et~al.(2024a)Jiang, Wu, Luo, Li, Lin, Yang and
   Qiu}]{jiang2024longllmlingua}
 \bibinfo{author}{Jiang, H.}, \bibinfo{author}{Wu, Q.}, \bibinfo{author}{Luo,
   X.}, \bibinfo{author}{Li, D.}, \bibinfo{author}{Lin, C.Y.},
-  \bibinfo{author}{Yang, Y.}, \bibinfo{author}{Qiu, L.}, \bibinfo{year}{2024}.
+  \bibinfo{author}{Yang, Y.}, \bibinfo{author}{Qiu, L.}, \bibinfo{year}{2024}a.
 \newblock \bibinfo{title}{{LongLLMLingua}: Accelerating and enhancing {LLM}s in
   long context scenarios via prompt compression}, in:
   \bibinfo{booktitle}{Proceedings of the 62nd Annual Meeting of the Association
@@ -175,6 +222,15 @@
   \bibinfo{publisher}{Association for Computational Linguistics}. pp.
   \bibinfo{pages}{1658--1677}.
 \newblock \DOIprefix\doi{10.18653/v1/2024.acl-long.91}.
+%Type = Article
+\bibitem[{Jiang et~al.(2024b)Jiang, Ma and Chen}]{jiang2024longrag}
+\bibinfo{author}{Jiang, Z.}, \bibinfo{author}{Ma, X.}, \bibinfo{author}{Chen,
+  W.}, \bibinfo{year}{2024}b.
+\newblock \bibinfo{title}{{LongRAG}: Enhancing retrieval-augmented generation
+  with long-context {LLM}s}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2406.15319}
+  \DOIprefix\doi{10.48550/arXiv.2406.15319}. \bibinfo{note}{long retrieval
+  units ({$\approx$}4K tokens) + long-context reader}.
 %Type = Inproceedings
 \bibitem[{Kang et~al.(2024)Kang, G{\"u}rel, Yu, Song and Li}]{kang2024crag}
 \bibinfo{author}{Kang, M.}, \bibinfo{author}{G{\"u}rel, N.M.},
@@ -207,6 +263,20 @@
   Conference on Research and Development in Information Retrieval},
   \bibinfo{publisher}{ACM}. pp. \bibinfo{pages}{39--48}.
 \newblock \DOIprefix\doi{10.1145/3397271.3401075}.
+%Type = Inproceedings
+\bibitem[{Lee et~al.(2023)Lee, Dai, Duddu, Lei, Naim, Chang and
+  Zhao}]{lee2023xtr}
+\bibinfo{author}{Lee, J.}, \bibinfo{author}{Dai, Z.}, \bibinfo{author}{Duddu,
+  S.M.K.}, \bibinfo{author}{Lei, T.}, \bibinfo{author}{Naim, I.},
+  \bibinfo{author}{Chang, M.W.}, \bibinfo{author}{Zhao, V.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Rethinking the role of token retrieval in
+  multi-vector retrieval}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems}.
+\newblock \URLprefix
+  \url{https://proceedings.neurips.cc/paper_files/paper/2023/hash/31d997278ee9069d6721bc194174bb4c-Abstract-Conference.html}.
+  \bibinfo{note}{introduces {XTR}; included as the training-side precursor to
+  {WARP} (2025)}.
 %Type = Article
 \bibitem[{Lei et~al.(2018)Lei, G'Sell, Rinaldo, Tibshirani and
   Wasserman}]{lei2018distribution}
@@ -244,6 +314,16 @@
   \bibinfo{pages}{3799--3821}.
 \newblock \DOIprefix\doi{10.18653/v1/2024.naacl-long.210}.
 %Type = Article
+\bibitem[{Li et~al.(2026)Li, Ke, Liu, Wang, Liu and He}]{li2026scrag}
+\bibinfo{author}{Li, Y.}, \bibinfo{author}{Ke, W.}, \bibinfo{author}{Liu, J.},
+  \bibinfo{author}{Wang, P.}, \bibinfo{author}{Liu, J.}, \bibinfo{author}{He,
+  Y.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Towards evidence-aware retrieval-augmented generation
+  via self-corrective chain-of-thought}.
+\newblock \bibinfo{journal}{Information Processing \& Management}
+  \bibinfo{volume}{63}, \bibinfo{pages}{104369}.
+\newblock \DOIprefix\doi{10.1016/j.ipm.2025.104369}. \bibinfo{note}{{SC-RAG}}.
+%Type = Article
 \bibitem[{Liu et~al.(2024)Liu, Lin, Hewitt, Paranjape, Bevilacqua, Petroni and
   Liang}]{liu2024lost}
 \bibinfo{author}{Liu, N.F.}, \bibinfo{author}{Lin, K.},
@@ -256,6 +336,36 @@
   Linguistics} \bibinfo{volume}{12}, \bibinfo{pages}{157--173}.
 \newblock \DOIprefix\doi{10.1162/tacl_a_00638}.
 %Type = Inproceedings
+\bibitem[{Liu et~al.(2025)Liu, Simon and Caspani}]{liu2025passage}
+\bibinfo{author}{Liu, Z.}, \bibinfo{author}{Simon, C.E.},
+  \bibinfo{author}{Caspani, F.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Passage segmentation of documents for extractive
+  question answering}, in: \bibinfo{booktitle}{Advances in Information
+  Retrieval: 47th European Conference on {IR} Research ({ECIR} 2025)},
+  \bibinfo{publisher}{Springer}. pp. \bibinfo{pages}{345--352}.
+\newblock \DOIprefix\doi{10.1007/978-3-031-88714-7_33}.
+  \bibinfo{note}{introduces {LGMGC} (logits-guided multi-granular /
+  parent--child chunking)}.
+%Type = Inproceedings
+\bibitem[{MacAvaney and Tonellotto(2024)}]{macavaney2024plaid}
+\bibinfo{author}{MacAvaney, S.}, \bibinfo{author}{Tonellotto, N.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{A reproducibility study of {PLAID}}, in:
+  \bibinfo{booktitle}{Proceedings of the 47th International {ACM} {SIGIR}
+  Conference on Research and Development in Information Retrieval},
+  \bibinfo{publisher}{ACM}. pp. \bibinfo{pages}{1411--1419}.
+\newblock \DOIprefix\doi{10.1145/3626772.3657856}.
+%Type = Inproceedings
+\bibitem[{Merola and Singh(2025)}]{merola2025reconstructing}
+\bibinfo{author}{Merola, C.}, \bibinfo{author}{Singh, J.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Reconstructing context: Evaluating advanced chunking
+  strategies for retrieval-augmented generation}, in:
+  \bibinfo{booktitle}{Knowledge-Enhanced Information Retrieval: Second
+  International Workshop, {KEIR} 2025, Lucca, Italy, April 10, 2025, Revised
+  Selected Papers}, \bibinfo{publisher}{Springer}. pp. \bibinfo{pages}{3--18}.
+\newblock \DOIprefix\doi{10.1007/978-3-032-02899-0_1}.
+%Type = Inproceedings
 \bibitem[{Qu et~al.(2025)Qu, Tu and Bao}]{qu2025semantic}
 \bibinfo{author}{Qu, R.}, \bibinfo{author}{Tu, R.}, \bibinfo{author}{Bao,
   F.S.}, \bibinfo{year}{2025}.
@@ -264,16 +374,6 @@
   Linguistics: {NAACL} 2025}, \bibinfo{publisher}{Association for Computational
   Linguistics}. pp. \bibinfo{pages}{2155--2177}.
 \newblock \DOIprefix\doi{10.18653/v1/2025.findings-naacl.114}.
-%Type = Inproceedings
-\bibitem[{Quach et~al.(2024)Quach, Fisch, Schuster, Yala, Sohn, Jaakkola and
-  Barzilay}]{quach2024conformal}
-\bibinfo{author}{Quach, V.}, \bibinfo{author}{Fisch, A.},
-  \bibinfo{author}{Schuster, T.}, \bibinfo{author}{Yala, A.},
-  \bibinfo{author}{Sohn, J.H.}, \bibinfo{author}{Jaakkola, T.S.},
-  \bibinfo{author}{Barzilay, R.}, \bibinfo{year}{2024}.
-\newblock \bibinfo{title}{Conformal language modeling}, in:
-  \bibinfo{booktitle}{The Twelfth International Conference on Learning
-  Representations}.
 %Type = Inproceedings
 \bibitem[{Reimers and Gurevych(2019)}]{reimers2019sentence}
 \bibinfo{author}{Reimers, N.}, \bibinfo{author}{Gurevych, I.},
@@ -303,6 +403,19 @@
 \newblock \bibinfo{title}{{CONFLARE}: {CONF}ormal {LA}rge language model
   {RE}trieval}.
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2404.04287} .
+%Type = Inproceedings
+\bibitem[{Saad-Falcon et~al.(2024)Saad-Falcon, Khattab, Potts and
+  Zaharia}]{saadfalcon2024ares}
+\bibinfo{author}{Saad-Falcon, J.}, \bibinfo{author}{Khattab, O.},
+  \bibinfo{author}{Potts, C.}, \bibinfo{author}{Zaharia, M.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{ARES}: An automated evaluation framework for
+  retrieval-augmented generation systems}, in: \bibinfo{booktitle}{Proceedings
+  of the 2024 Conference of the North American Chapter of the Association for
+  Computational Linguistics: Human Language Technologies (Volume 1: Long
+  Papers)}, \bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{address}{Mexico City, Mexico}. pp. \bibinfo{pages}{338--354}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.naacl-long.20}.
 %Type = Inproceedings
 \bibitem[{Santhanam et~al.(2022a)Santhanam, Khattab, Potts and
   Zaharia}]{santhanam2022plaid}
@@ -337,14 +450,31 @@
 \newblock \bibinfo{title}{{RAPTOR}: Recursive abstractive processing for
   tree-organized retrieval}, in: \bibinfo{booktitle}{The Twelfth International
   Conference on Learning Representations}.
-%Type = Article
+%Type = Inproceedings
+\bibitem[{Scheerer et~al.(2025)Scheerer, Zaharia, Potts, Alonso and
+  Khattab}]{scheerer2025warp}
+\bibinfo{author}{Scheerer, J.L.}, \bibinfo{author}{Zaharia, M.},
+  \bibinfo{author}{Potts, C.}, \bibinfo{author}{Alonso, G.},
+  \bibinfo{author}{Khattab, O.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{WARP}: An efficient engine for multi-vector
+  retrieval}, in: \bibinfo{booktitle}{Proceedings of the 48th International
+  {ACM} {SIGIR} Conference on Research and Development in Information
+  Retrieval}, \bibinfo{publisher}{ACM}. pp. \bibinfo{pages}{2504--2512}.
+\newblock \DOIprefix\doi{10.1145/3726302.3729904}.
+%Type = Inproceedings
 \bibitem[{Taguchi et~al.(2025)Taguchi, Maekawa and
-  Bhutani}]{taguchi2025efficient}
+  Bhutani}]{taguchi2025adaptivek}
 \bibinfo{author}{Taguchi, C.}, \bibinfo{author}{Maekawa, S.},
   \bibinfo{author}{Bhutani, N.}, \bibinfo{year}{2025}.
 \newblock \bibinfo{title}{Efficient context selection for long-context {QA}: No
-  tuning, no iteration, just adaptive-{$k$}}.
-\newblock \bibinfo{journal}{arXiv preprint arXiv:2506.08479} .
+  tuning, no iteration, just adaptive-{$k$}}, in:
+  \bibinfo{booktitle}{Proceedings of the 2025 Conference on Empirical Methods
+  in Natural Language Processing}, \bibinfo{publisher}{Association for
+  Computational Linguistics}, \bibinfo{address}{Suzhou, China}. pp.
+  \bibinfo{pages}{20105--20130}.
+\newblock \DOIprefix\doi{10.18653/v1/2025.emnlp-main.1017}.
+  \bibinfo{note}{venue upgrade of the Adaptive-{$k$} preprint previously cited
+  as arXiv:2506.08479}.
 %Type = Inproceedings
 \bibitem[{Thakur et~al.(2021a)Thakur, Reimers, R{\"u}ckl{\'e}, Srivastava and
   Gurevych}]{thakur2021beir}
@@ -394,6 +524,15 @@
 \newblock \bibinfo{title}{Text embeddings by weakly-supervised contrastive
   pre-training}.
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2212.03533} .
+%Type = Article
+\bibitem[{Xiong et~al.(2025)Xiong, Tu and Zhao}]{xiong2025afrrank}
+\bibinfo{author}{Xiong, Y.}, \bibinfo{author}{Tu, X.}, \bibinfo{author}{Zhao,
+  W.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{AFR-Rank}: An effective and highly efficient
+  {LLM}-based listwise reranking framework via filtering noise documents}.
+\newblock \bibinfo{journal}{Information Processing \& Management}
+  \bibinfo{volume}{62}, \bibinfo{pages}{104232}.
+\newblock \DOIprefix\doi{10.1016/j.ipm.2025.104232}.
 %Type = Inproceedings
 \bibitem[{Xu et~al.(2024)Xu, Shi and Choi}]{xu2024recomp}
 \bibinfo{author}{Xu, F.}, \bibinfo{author}{Shi, W.}, \bibinfo{author}{Choi,
@@ -401,5 +540,46 @@
 \newblock \bibinfo{title}{{RECOMP}: Improving retrieval-augmented {LM}s with
   context compression and selective augmentation}, in: \bibinfo{booktitle}{The
   Twelfth International Conference on Learning Representations}.
+%Type = Article
+\bibitem[{Yan et~al.(2024)Yan, Gu, Zhu and Ling}]{yan2024corrective}
+\bibinfo{author}{Yan, S.Q.}, \bibinfo{author}{Gu, J.C.}, \bibinfo{author}{Zhu,
+  Y.}, \bibinfo{author}{Ling, Z.H.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Corrective retrieval augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2401.15884}
+  \DOIprefix\doi{10.48550/arXiv.2401.15884}. \bibinfo{note}{{CRAG}; widely used
+  RAG robustness baseline. Cite as arXiv (ICLR 2025 submission withdrawn)}.
+%Type = Inproceedings
+\bibitem[{Zhang et~al.(2026)Zhang, Goswami, Oymak, Chen and
+  Lipka}]{zhang2026smartchunk}
+\bibinfo{author}{Zhang, X.}, \bibinfo{author}{Goswami, K.},
+  \bibinfo{author}{Oymak, S.}, \bibinfo{author}{Chen, J.},
+  \bibinfo{author}{Lipka, N.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{{SmartChunk} retrieval: Query-aware chunk compression
+  with planning for efficient document {RAG}}, in:
+  \bibinfo{booktitle}{International Conference on Learning Representations}.
+\newblock \bibinfo{note}{{ICLR} 2026. OpenReview:
+  \url{https://openreview.net/forum?id=Myti1QwL2t}}.
+%Type = Inproceedings
+\bibitem[{Zhao et~al.(2024)Zhao, Wang, Cen, Zha, Tan, Dong and
+  Tang}]{zhao2024longrag}
+\bibinfo{author}{Zhao, Q.}, \bibinfo{author}{Wang, R.}, \bibinfo{author}{Cen,
+  Y.}, \bibinfo{author}{Zha, D.}, \bibinfo{author}{Tan, S.},
+  \bibinfo{author}{Dong, Y.}, \bibinfo{author}{Tang, J.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{LongRAG}: A dual-perspective retrieval-augmented
+  generation paradigm for long-context question answering}, in:
+  \bibinfo{booktitle}{Proceedings of the 2024 Conference on Empirical Methods
+  in Natural Language Processing}, \bibinfo{publisher}{Association for
+  Computational Linguistics}, \bibinfo{address}{Miami, Florida, USA}. pp.
+  \bibinfo{pages}{22600--22632}.
+\newblock \DOIprefix\doi{10.18653/v1/2024.emnlp-main.1259}.
+%Type = Article
+\bibitem[{Zhong et~al.(2025)Zhong, Liu, Cui, Zhang and Qin}]{zhong2025mix}
+\bibinfo{author}{Zhong, Z.}, \bibinfo{author}{Liu, H.}, \bibinfo{author}{Cui,
+  X.}, \bibinfo{author}{Zhang, X.}, \bibinfo{author}{Qin, Z.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Mix-of-granularity: Optimize the chunking granularity
+  for retrieval-augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2406.00456}
+  \DOIprefix\doi{10.48550/arXiv.2406.00456}. \bibinfo{note}{v2, 26 Jan 2025}.
 
 \end{thebibliography}

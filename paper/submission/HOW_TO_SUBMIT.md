@@ -1,21 +1,23 @@
-# Submit to IP&M without paying
+# Submit to ESWA without paying gold OA
 
-Target: Elsevier Information Processing & Management.
-Portal: https://www.editorialmanager.com/ipm/
-Article type: Research manuscript.
+Target: Elsevier Expert Systems with Applications (ESWA).
+Portal: https://www.editorialmanager.com/eswa/
+Article type: Research paper / full-length article (match the EM dropdown).
+Review: double-anonymized. Authors appear only on the title page.
 
-Gold open access at this journal is billed at USD 3,720 plus tax. Do not pick it.
+ESWA offers gold open access for a fee. Do not pick it for this submission.
+Choose subscription / no gold OA so the author charge stays at USD 0.
 
 ## Clicks that keep the fee at zero
 
 1. Publishing option: Subscription. Not gold OA. Not "publish open access."
-2. Funder: No.
-3. Data in Brief / MethodsX co-submission: decline.
-4. Graphical abstract: skip.
+2. Funder: No, unless a funder later requires OA.
+3. Optional co-submissions (Data in Brief, MethodsX, and similar): decline unless you intend to pay and prepare those files.
+4. Graphical abstract: skip unless you already have one.
 5. After acceptance, Rights and Access: subscription again.
 6. Print color email: web color only. Color on ScienceDirect is free. Print color is not.
 
-Do not post this manuscript to arXiv or any preprint server before a decision. IP&M is double-anonymized and the current Guide for Authors forbids a preprint until then.
+Do not post this manuscript to arXiv or any preprint server before a decision while the journal's Guide for Authors still treats preprints as a conflict with double-anonymized review. Re-check the live Guide before upload.
 
 ## Files to upload
 
@@ -40,6 +42,12 @@ Title page: corresponding-author phone. Street address in Albany if you have one
 
 CRediT lists no funding role. That matches the no-grant sentence.
 
+Macros still marked TBD in manuscript.tex need numbers from:
+- benchmarks/eswa_baseline_results.json (Adaptive-k, title-prefix, MaxSim, late-encoding-style)
+- benchmarks/eswa_generation_results.json (small-LLM faithfulness / accuracy)
+
+Run `python fill_numbers.py` after those JSON files exist.
+
 ## Compile locally
 
 ```bash
@@ -53,3 +61,7 @@ Upload the .tex, .bib, .bbl, figures. Not the PDF as the manuscript source.
 
 BEIR SciFact and NFCorpus are public. Cite Thakur et al. (2021).
 Do not put github.com/AlmutazYounes in the blinded manuscript. After acceptance, point data availability at https://github.com/AlmutazYounes/qals-rag.
+
+## Prior submission note
+
+An earlier version was desk-rejected at Information Processing & Management for incremental contribution and missing SOTA / LLM baselines. This ESWA rewrite narrows the claim to query-time contiguous span assembly under calibrated B with a Pareto token story, adds Adaptive-k and late-chunking-style baselines, adds a generation evaluation section, and cites 2025--2026 related work. Do not submit until TBD macros are filled or explicitly accepted as pending by the submitting agent.
