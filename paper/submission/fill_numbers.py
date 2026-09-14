@@ -54,8 +54,25 @@ ABLATION_MACROS = {
 RAG_SYSTEM_MACROS = {
     "QALS": ("RagQalsAcc", "RagQalsFaith", "RagQalsTok"),
     "Recursive500": ("RagLcAcc", "RagLcFaith", "RagLcTok"),
+    "ParentDocument": ("RagParentDocAcc", "RagParentDocFaith", "RagParentDocTok"),
     "HybridRRF": ("RagHybridAcc", "RagHybridFaith", "RagHybridTok"),
-    "AdaptiveK": ("RagParentAcc", "RagParentFaith", "RagParentTok"),  # reuse Parent macros for Adaptive-k reader row
+}
+
+# Manuscript Table tab:reader currently cites DeBERTa NLI numbers.
+NLI_READER_JSON = ROOT / "benchmarks" / "reader_nli_results.json"
+NLI_SYSTEM_MACROS = {
+    "Recursive500_k5": ("RagLcAcc", "RagLcFaith", "RagLcTok"),
+    "AdaptiveK_Recursive500": ("RagParentAcc", "RagParentFaith", "RagParentTok"),
+    "Hybrid_docs_B150": ("RagHybridAcc", "RagHybridFaith", "RagHybridTok"),
+    "QALS_B150": ("RagQalsAcc", "RagQalsFaith", "RagQalsTok"),
+}
+
+# Separate macros for the HF / oracle generation eval JSON.
+HF_SYSTEM_MACROS = {
+    "QALS": ("RagHfQalsAcc", "RagHfQalsFaith", "RagHfQalsTok"),
+    "Recursive500": ("RagHfLcAcc", "RagHfLcFaith", "RagHfLcTok"),
+    "ParentDocument": ("RagHfParentAcc", "RagHfParentFaith", "RagHfParentTok"),
+    "HybridRRF": ("RagHfHybridAcc", "RagHfHybridFaith", "RagHfHybridTok"),
 }
 
 
@@ -179,6 +196,45 @@ def main():
         tex = patch_macro(tex, macros[1], fmt(row["tokens"], 1))
 
     if RAG_JSON.exists():
+        rag = json.loads(RAG_JSON.read_text())
+        scifact = rag.get("scifact") or {}
+        backend_name, backend = pick_rag_backend(scifact)
+        if backend_name:
+            tex = patch_macro(tex, "RagHfBackendName", backend_name.replace("_", "\\_"))
+            for sysname, macros in HF_SYSTEM_MACROS.items():
+                summary = (backend.get(sysname) or {}).get("summary") or {}
+                if not summary:
+                    continue
+                acc = summary.get("accuracy")
+                if acc is not None:
+                    tex = patch_macro(tex, macros[0], fmt(acc, 4))
+                faith = summary.get("mean_faithfulness")
+                if faith is not None:
+                    tex = patch_macro(tex, macros[1], fmt(faith, 4))
+                tok = summary.get("mean_prompt_tokens")
+                if tok is not None:
+                    tex = patch_macro(tex, macros[2], fmt(tok, 1))
+
+    # Prefer the DeBERTa NLI reader JSON for the manuscript Rag* table when present.
+    if NLI_READER_JSON.exists():
+        nli = json.loads(NLI_READER_JSON.read_text())
+        tex = patch_macro(tex, "RagBackendName", "nli\\_deberta\\_v3\\_xsmall")
+        systems = nli.get("systems") or {}
+        for sysname, macros in NLI_SYSTEM_MACROS.items():
+            row = systems.get(sysname) or {}
+            if not row:
+                continue
+            if row.get("label_accuracy") is not None:
+                tex = patch_macro(tex, macros[0], fmt(row["label_accuracy"], 4))
+            # Manuscript "Faith" column is non-neutral rate for the NLI reader.
+            faith = row.get("non_neutral_rate")
+            if faith is None and row.get("neutral_rate") is not None:
+                faith = 1.0 - float(row["neutral_rate"])
+            if faith is not None:
+                tex = patch_macro(tex, macros[1], fmt(faith, 4))
+            if row.get("mean_prompt_tokens") is not None:
+                tex = patch_macro(tex, macros[2], fmt(row["mean_prompt_tokens"], 1))
+    elif RAG_JSON.exists():
         rag = json.loads(RAG_JSON.read_text())
         scifact = rag.get("scifact") or {}
         backend_name, backend = pick_rag_backend(scifact)
